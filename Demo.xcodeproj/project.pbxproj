@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6D4227E81A48009500770A08 /* NSString+HMAC_SHA1.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D4227E71A48009500770A08 /* NSString+HMAC_SHA1.m */; };
+		6D4227ED1A48013400770A08 /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D4227EC1A48013400770A08 /* Base64.m */; };
 		6D7418701A43F97D00300435 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D74186F1A43F97D00300435 /* main.m */; };
 		6D7418731A43F97D00300435 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D7418721A43F97D00300435 /* AppDelegate.m */; };
 		6D7418761A43F97D00300435 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D7418751A43F97D00300435 /* ViewController.m */; };
@@ -37,6 +39,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6D4227E71A48009500770A08 /* NSString+HMAC_SHA1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HMAC_SHA1.m"; sourceTree = "<group>"; };
+		6D4227E91A4800AE00770A08 /* NSString+HMAC_SHA1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+HMAC_SHA1.h"; sourceTree = "<group>"; };
+		6D4227EA1A48011400770A08 /* Base64.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
+		6D4227EC1A48013400770A08 /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
 		6D74186A1A43F97D00300435 /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D74186E1A43F97D00300435 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6D74186F1A43F97D00300435 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -90,6 +96,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6D4227E61A48005D00770A08 /* HMAC_SHA1 */ = {
+			isa = PBXGroup;
+			children = (
+				6D4227E71A48009500770A08 /* NSString+HMAC_SHA1.m */,
+				6D4227E91A4800AE00770A08 /* NSString+HMAC_SHA1.h */,
+			);
+			name = HMAC_SHA1;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		6D4227EB1A48012000770A08 /* Base64 */ = {
+			isa = PBXGroup;
+			children = (
+				6D4227EA1A48011400770A08 /* Base64.h */,
+				6D4227EC1A48013400770A08 /* Base64.m */,
+			);
+			name = Base64;
+			path = ..;
+			sourceTree = "<group>";
+		};
 		6D7418611A43F97D00300435 = {
 			isa = PBXGroup;
 			children = (
@@ -164,6 +190,8 @@
 		6D7418B81A442A6F00300435 /* ViSearchAPISource */ = {
 			isa = PBXGroup;
 			children = (
+				6D4227E61A48005D00770A08 /* HMAC_SHA1 */,
+				6D4227EB1A48012000770A08 /* Base64 */,
 				6D7418B91A442A6F00300435 /* BaseSearchParams.h */,
 				6D7418BA1A442A6F00300435 /* BaseSearchParams.m */,
 				6D7418BB1A442A6F00300435 /* Box.h */,
@@ -294,6 +322,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				6D7418CB1A442A6F00300435 /* BaseSearchParams.m in Sources */,
+				6D4227ED1A48013400770A08 /* Base64.m in Sources */,
+				6D4227E81A48009500770A08 /* NSString+HMAC_SHA1.m in Sources */,
 				6D7418D11A442A6F00300435 /* ViSearchError.m in Sources */,
 				6D7418761A43F97D00300435 /* ViewController.m in Sources */,
 				6D7418731A43F97D00300435 /* AppDelegate.m in Sources */,
@@ -498,6 +528,7 @@
 				6D74188F1A43F97D00300435 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6D7418901A43F97D00300435 /* Build configuration list for PBXNativeTarget "DemoTests" */ = {
 			isa = XCConfigurationList;
@@ -506,6 +537,7 @@
 				6D7418921A43F97D00300435 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

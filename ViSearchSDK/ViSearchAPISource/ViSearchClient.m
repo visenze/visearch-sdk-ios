@@ -7,19 +7,23 @@
 //
 
 #import "ViSearchClient.h"
+#import "NSString+HMAC_SHA1.h"
+#import "Base64.h"
+
+#define NONCE_LENGTH 8
 
 static bool initilized = false;
 static NSString *NOT_INIT_ERROR_MSG = @"ViSearch client has not been initialized yet, please use [ViSearchAPI initWithApiKey: andApiSecret] first";
-static NSString *ViSearch_API_KEY = @"";
-static NSString *ViSearch_API_SECRET = @"";
-
+static NSString *ViSearch_ACCESS_KEY = @"";
+static NSString *ViSearch_SECRET_KEY = @"";
 static NSString *SERVER_ADDRESS = @"http://visearch.visenze.com";
+
 @implementation ViSearchClient
 
 +(void) initWithApiKey:(NSString *)apiKey andApiSecret:(NSString *)apiSecret{
     
-    ViSearch_API_KEY = [NSString stringWithFormat: @"%@", apiKey];
-    ViSearch_API_SECRET = [NSString stringWithFormat: @"%@", apiSecret];
+    ViSearch_ACCESS_KEY = [NSString stringWithFormat: @"%@", apiKey];
+    ViSearch_SECRET_KEY = [NSString stringWithFormat: @"%@", apiSecret];
     initilized = true;
 }
 
@@ -42,20 +46,23 @@ static NSString *SERVER_ADDRESS = @"http://visearch.visenze.com";
     return result;
 }
 
-+(NSString*) generateRequestUrlPrefix: (NSString*) method params: (NSArray*) params {
-    assert(method != NULL);
++(NSString*) generateRequestUrlPrefix: (NSString*) method params: (NSDictionary*) params {
+    assert(method != nil);
     
-    NSMutableString *urlString = [NSMutableString stringWithFormat:@"%@%@?api_key=%@&api_secret=%@", SERVER_ADDRESS, method, ViSearch_API_KEY, ViSearch_API_SECRET];
-    if (params != NULL) {
-        assert((params.count%2)==0);
-        for (size_t i=0; i<params.count; i+=2) {
-            [urlString appendFormat:@"&%@=%@", [params objectAtIndex:i], [params objectAtIndex:i+1]];
+    NSMutableString *urlString = [NSMutableString stringWithFormat:@"%@/%@?access_key=%@", SERVER_ADDRESS, method, ViSearch_ACCESS_KEY];
+    NSDictionary* authParams = [self getAuthParams];
+    for (NSString* key in authParams.allKeys) {
+        [urlString appendFormat:@"&%@=%@", key, [authParams objectForKey:key]];
+    }
+    if (params != nil) {
+        for (NSString* key in params.allKeys) {
+            [urlString appendFormat:@"&%@=%@", key, [params objectForKey:key]];
         }
     }
     return [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 }
 
-+(ViSearchResult*) requestWithMethod: (NSString*) method params: (NSArray*) params {
++(ViSearchResult*) requestWithMethod: (NSString*) method params: (NSDictionary*) params {
     if (!initilized)
         return [ViSearchResult resultWithSuccess:false withError:[ViSearchError errorWithErrorMsg:NOT_INIT_ERROR_MSG andHttpStatusCode:0 andErrorCode:0]];
     
@@ -75,7 +82,7 @@ static NSString *SERVER_ADDRESS = @"http://visearch.visenze.com";
     return [ViSearchClient generateResultWithResponseData:responseData error:error httpStatusCode:(int)statusCode];
 }
 
-+(ViSearchResult*) requestWithMethod: (NSString*)method image: (NSData*) imageData params: (NSArray*)params {
++(ViSearchResult*) requestWithMethod: (NSString*)method image: (NSData*) imageData params: (NSDictionary*)params {
     if (!initilized)
         return [ViSearchResult resultWithSuccess:false withError:[ViSearchError errorWithErrorMsg:NOT_INIT_ERROR_MSG andHttpStatusCode:0 andErrorCode:0]];
     
@@ -152,4 +159,24 @@ static NSString *SERVER_ADDRESS = @"http://visearch.visenze.com";
     return result;
 }
 
++ (NSDictionary*) getAuthParams{
+    NSMutableDictionary* dict = [NSMutableDictionary dictionary];
+    NSString* nonce = [self generateNonce: NONCE_LENGTH];
+    NSString* date = [NSString stringWithFormat:@"%d",(int)round([[NSDate date] timeIntervalSince1970])];
+    NSString* sigStr = [NSString stringWithFormat:@"%@%@%@", ViSearch_SECRET_KEY, nonce, date];
+    [dict setObject:nonce forKey:@"nonce"];
+    [dict setObject:date forKey:@"date"];
+    [dict setObject:[sigStr HmacSha1WithSecret:ViSearch_SECRET_KEY] forKey:@"sig"];
+    return dict;
+}
+
++ (NSString *)generateNonce:(int)len {
+    static NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    NSMutableString *randomString = [NSMutableString stringWithCapacity: len];
+    for (int i=0; i<len; i++) {
+        [randomString appendFormat: @"%C", [letters characterAtIndex: arc4random() % [letters length]]];
+    }
+    NSData *data = [randomString dataUsingEncoding:NSUTF8StringEncoding];
+    return [data base64EncodedString];
+}
 @end

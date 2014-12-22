@@ -30,18 +30,18 @@
 }
 
 - (NSDictionary *)toDict{
-    NSDictionary * dict = [[NSDictionary alloc] init];
+    NSMutableDictionary * dict = [NSMutableDictionary dictionary];
     if (limit > 0) {
-        [dict setValue:[NSString stringWithFormat:@"%ld", (long)limit] forKey:@"limit"];
+        [dict setValue:[NSString stringWithFormat:@"%d", limit] forKey:@"limit"];
     }
     
     if (page> 0) {
-        [dict setValue:[NSString stringWithFormat:@"%ld", (long)page] forKey:@"page"];
+        [dict setValue:[NSString stringWithFormat:@"%d", page] forKey:@"page"];
     }
     
     if (facet && facetSize > 0) {
         [dict setValue:facet? @"true":@"false" forKey:@"facet"];
-        [dict setValue:[NSString stringWithFormat:@"%ld", (long)facetSize] forKey:@"facetSize"];
+        [dict setValue:[NSString stringWithFormat:@"%d", facetSize] forKey:@"facetSize"];
     }
     
     if (score > 0) {

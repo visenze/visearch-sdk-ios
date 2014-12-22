@@ -1,6 +1,6 @@
 //
 //  SearchOperation.h
-//  Demo
+//  ViSearch-iOS-SDK
 //
 //  Created by Shaohuan on 12/19/14.
 //  Copyright (c) 2014 ViSenze. All rights reserved.

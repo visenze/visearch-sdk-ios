@@ -19,6 +19,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [ViSenzeAPI initWithApiKey: @"" andApiSecret:@""];
+    SearchParams *searchParams = [[SearchParams alloc] init];
+    searchParams.imName = @"";
+    ViSearchResult *visenzeResult = [[ViSenzeAPI search] search:searchParams];
     return YES;
 }
 
