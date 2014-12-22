@@ -6,7 +6,7 @@
 //
 //
 
-#import <BaseSearchParams.h>
+#import "BaseSearchParams.h"
 
 @interface SearchParams : BaseSearchParams
 
