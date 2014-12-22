@@ -60,7 +60,7 @@
         for (int i=0; i<[fl count]; i++) {
             [builder appendString:[fl objectAtIndex: i]];
             if(i < [fl count]-1)
-               [builder appendString:@","];
+                [builder appendString:@","];
         }
         [dict setValue:builder forKey:@"fl"];
     }
@@ -77,4 +77,3 @@
 }
 
 @end
-

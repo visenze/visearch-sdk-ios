@@ -121,7 +121,7 @@ static NSString *SERVER_ADDRESS = @"http://visearch.visenze.com";
 }
 
 +(ViSearchResult*) generateResultWithResponseData:(NSData*) responseData error:(NSError*) error httpStatusCode:(int)httpStatusCode {
-
+    
     ViSearchResult *result;
     
     if (responseData == nil) {

@@ -13,4 +13,3 @@
 @property (atomic) NSString *color;
 
 @end
-
