@@ -13,7 +13,7 @@ static NSString *NOT_INIT_ERROR_MSG = @"ViSearch client has not been initialized
 static NSString *ViSearch_API_KEY = @"";
 static NSString *ViSearch_API_SECRET = @"";
 
-static NSString *SERVER_ADDRESS = @"http://visearch.ViSearch.com";
+static NSString *SERVER_ADDRESS = @"http://visearch.visenze.com";
 @implementation ViSearchClient
 
 +(void) initWithApiKey:(NSString *)apiKey andApiSecret:(NSString *)apiSecret{
@@ -72,7 +72,7 @@ static NSString *SERVER_ADDRESS = @"http://visearch.ViSearch.com";
     NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&error];
     statusCode = urlResponse.statusCode;
     
-    return [ViSearchClient generateResultWithResponseData:responseData error:error httpStatusCode:statusCode];
+    return [ViSearchClient generateResultWithResponseData:responseData error:error httpStatusCode:(int)statusCode];
 }
 
 +(ViSearchResult*) requestWithMethod: (NSString*)method image: (NSData*) imageData params: (NSArray*)params {
@@ -117,7 +117,7 @@ static NSString *SERVER_ADDRESS = @"http://visearch.ViSearch.com";
     NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&error];
     statusCode = urlResponse.statusCode;
     
-    return [ViSearchClient generateResultWithResponseData:responseData error:error httpStatusCode:statusCode];
+    return [ViSearchClient generateResultWithResponseData:responseData error:error httpStatusCode:(int)statusCode];
 }
 
 +(ViSearchResult*) generateResultWithResponseData:(NSData*) responseData error:(NSError*) error httpStatusCode:(int)httpStatusCode {

@@ -12,5 +12,12 @@
 
 @synthesize color;
 
+
+- (NSDictionary *)toDict{
+    NSDictionary * dict = [super toDict];
+    [dict setValue:color forKey:@"color"];
+    return dict;
+}
+
 @end
 

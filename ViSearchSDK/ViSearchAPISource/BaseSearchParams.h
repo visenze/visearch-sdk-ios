@@ -20,5 +20,5 @@
 @property (atomic) NSDictionary *custom;
 
 -(id) init;
-
+-(NSDictionary*) toDict;
 @end

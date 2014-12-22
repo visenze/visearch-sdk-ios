@@ -12,10 +12,16 @@
 @implementation SearchOperation
 
 -(ViSearchResult*) search: (SearchParams*) params{
+    return [ViSearchClient requestWithMethod:@"search" params:params.toDict];
 }
 -(ViSearchResult*) colorSearch: (ColorSearchParams*) params{
+    return [ViSearchClient requestWithMethod:@"colorsearch" params:params.toDict];
 }
 -(ViSearchResult*) uploadSearch: (UploadSearchParams*) params{
+    if (params.imageFile!=nil)
+        return [ViSearchClient requestWithMethod:@"uploadsearch" image:params.imageFile params:params.toDict];
+    else
+        return [ViSearchClient requestWithMethod:@"uploadsearch" params:params.toDict];
 }
 
 @end

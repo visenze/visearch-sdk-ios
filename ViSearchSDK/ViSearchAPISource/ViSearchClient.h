@@ -16,7 +16,7 @@
 
 +(void) initWithApiKey: (NSString*)apiKey andApiSecret:(NSString*) apiSecret;
 
-+(ViSearchResult*) requestWithMethod: (NSString*)method params: (NSArray*)params;
-+(ViSearchResult*) requestWithMethod: (NSString*)method image: (NSData*)imageData params: (NSArray*)params;
++(ViSearchResult*) requestWithMethod: (NSString*)method params: (NSDictionary*)params;
++(ViSearchResult*) requestWithMethod: (NSString*)method image: (NSData*)imageData params: (NSDictionary*)params;
 
 @end

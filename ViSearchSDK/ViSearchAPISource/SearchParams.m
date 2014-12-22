@@ -12,4 +12,10 @@
 
 @synthesize imName;
 
+- (NSDictionary *)toDict{
+    NSDictionary * dict = [super toDict];
+    [dict setValue:imName forKey:@"im_name"];
+    return dict;
+}
+
 @end
