@@ -20,10 +20,10 @@ static NSString *SERVER_ADDRESS = @"http://visearch.visenze.com";
 
 @implementation ViSearchClient
 
-+(void) initWithApiKey:(NSString *)apiKey andApiSecret:(NSString *)apiSecret{
++(void) initWithAccessKey:(NSString *)accessKey andSecretKey:(NSString *)secretKey{
     
-    ViSearch_ACCESS_KEY = [NSString stringWithFormat: @"%@", apiKey];
-    ViSearch_SECRET_KEY = [NSString stringWithFormat: @"%@", apiSecret];
+    ViSearch_ACCESS_KEY = [NSString stringWithFormat: @"%@", accessKey];
+    ViSearch_SECRET_KEY = [NSString stringWithFormat: @"%@", secretKey];
     initilized = true;
 }
 
@@ -177,6 +177,18 @@ static NSString *SERVER_ADDRESS = @"http://visearch.visenze.com";
         [randomString appendFormat: @"%C", [letters characterAtIndex: arc4random() % [letters length]]];
     }
     NSData *data = [randomString dataUsingEncoding:NSUTF8StringEncoding];
-    return [data base64EncodedString];
+    NSString *nonce = [data base64EncodedString];
+    return [self hexFromStr:nonce];
 }
+
++ (NSString*)hexFromStr:(NSString*)str
+{
+    NSData* nsData = [str dataUsingEncoding:NSUTF8StringEncoding];
+    const char* data = [nsData bytes];
+    NSUInteger len = nsData.length;
+    NSMutableString* hex = [NSMutableString string];
+    for(int i = 0; i < len; ++i)[hex appendFormat:@"%02X", data[i]];
+    return hex;
+}
+
 @end

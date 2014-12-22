@@ -14,7 +14,7 @@
 
 @interface ViSearchClient : NSObject
 
-+(void) initWithApiKey: (NSString*)apiKey andApiSecret:(NSString*) apiSecret;
++(void) initWithAccessKey: (NSString*)accessKey andSecretKey:(NSString*) secretKey;
 
 +(ViSearchResult*) requestWithMethod: (NSString*)method params: (NSDictionary*)params;
 +(ViSearchResult*) requestWithMethod: (NSString*)method image: (NSData*)imageData params: (NSDictionary*)params;

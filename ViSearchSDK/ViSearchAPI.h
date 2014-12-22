@@ -14,7 +14,7 @@
 
 @interface ViSenzeAPI : NSObject
 
-+(void)initWithApiKey:(NSString*) apiKey andApiSecret:(NSString*)apiSecret;
++(void)initWithAccessKey:(NSString*) accessKey andSecretKey:(NSString*)secretSecret;
 
 +(SearchOperation*) search;
 

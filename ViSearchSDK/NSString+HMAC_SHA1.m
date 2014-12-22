@@ -15,29 +15,22 @@
 
 - (NSString *)HmacSha1WithSecret:(NSString *)key {
     
-    const char *cKey  = [key cStringUsingEncoding:NSASCIIStringEncoding];
-    const char *cData = [self cStringUsingEncoding:NSASCIIStringEncoding];
+    const char *cKey  = [key cStringUsingEncoding:NSUTF8StringEncoding];
+    const char *cData = [self cStringUsingEncoding:NSUTF8StringEncoding];
     
     unsigned char cHMAC[CC_SHA1_DIGEST_LENGTH];
     
     CCHmac(kCCHmacAlgSHA1, cKey, strlen(cKey), cData, strlen(cData), cHMAC);
     
-    NSData *HMAC = [[NSData alloc] initWithBytes:cHMAC length:sizeof(cHMAC)];
+    NSData *HMACData = [[NSData alloc] initWithBytes:cHMAC length:sizeof(cHMAC)];
     
-    NSString *hash = [HMAC base64EncodedString];
+    const unsigned char *buffer = (const unsigned char *)[HMACData bytes];
+    NSString *HMAC = [NSMutableString stringWithCapacity:HMACData.length * 2];
     
-    return hash;
-}
-
-
-+(NSString*)hexFromStr:(NSString*)str
-{
-    NSData* nsData = [str dataUsingEncoding:NSUTF8StringEncoding];
-    const char* data = [nsData bytes];
-    NSUInteger len = nsData.length;
-    NSMutableString* hex = [NSMutableString string];
-    for(int i = 0; i < len; ++i)[hex appendFormat:@"%02X", data[i]];
-    return hex;
+    for (int i = 0; i < HMACData.length; ++i)
+        HMAC = [HMAC stringByAppendingFormat:@"%02lx", (unsigned long)buffer[i]];
+    
+    return HMAC;
 }
 
 @end
