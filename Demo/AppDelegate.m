@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "ViSearchAPI.h"
 
 @interface AppDelegate ()
 
@@ -18,10 +17,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    [ViSenzeAPI initWithAccessKey: @"" andSecretKey:@""];
-    SearchParams *searchParams = [[SearchParams alloc] init];
-    searchParams.imName = @"";
-    ViSearchResult *visenzeResult = [[ViSenzeAPI search] search:searchParams];
     return YES;
 }
 

@@ -177,18 +177,11 @@ static NSString *SERVER_ADDRESS = @"http://visearch.visenze.com";
         [randomString appendFormat: @"%C", [letters characterAtIndex: arc4random() % [letters length]]];
     }
     NSData *data = [randomString dataUsingEncoding:NSUTF8StringEncoding];
-    NSString *nonce = [data base64EncodedString];
-    return [self hexFromStr:nonce];
+    const unsigned char *buffer = (const unsigned char *)[data bytes];
+    NSString *nonce = [NSMutableString stringWithCapacity:data.length * 2];
+    
+    for (int i = 0; i < data.length; ++i)
+        nonce = [nonce stringByAppendingFormat:@"%02lx", (unsigned long)buffer[i]];
+    return nonce;    
 }
-
-+ (NSString*)hexFromStr:(NSString*)str
-{
-    NSData* nsData = [str dataUsingEncoding:NSUTF8StringEncoding];
-    const char* data = [nsData bytes];
-    NSUInteger len = nsData.length;
-    NSMutableString* hex = [NSMutableString string];
-    for(int i = 0; i < len; ++i)[hex appendFormat:@"%02X", data[i]];
-    return hex;
-}
-
 @end

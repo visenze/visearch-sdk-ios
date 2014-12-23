@@ -11,7 +11,7 @@
 
 static SearchOperation* searchSharedInstance = nil;
 
-@implementation ViSenzeAPI
+@implementation ViSearchAPI
 
 +(void)initWithAccessKey:(NSString*) accessKey andSecretKey:(NSString*)secretKey{
     [ViSearchClient initWithAccessKey: accessKey andSecretKey: secretKey];

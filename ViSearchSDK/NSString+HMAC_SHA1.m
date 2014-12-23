@@ -29,7 +29,7 @@
     
     for (int i = 0; i < HMACData.length; ++i)
         HMAC = [HMAC stringByAppendingFormat:@"%02lx", (unsigned long)buffer[i]];
-    
+
     return HMAC;
 }
 

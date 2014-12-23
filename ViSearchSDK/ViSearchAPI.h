@@ -12,7 +12,7 @@
 #import "UploadSearchParams.h"
 #import "SearchOperation.h"
 
-@interface ViSenzeAPI : NSObject
+@interface ViSearchAPI : NSObject
 
 +(void)initWithAccessKey:(NSString*) accessKey andSecretKey:(NSString*)secretSecret;
 
