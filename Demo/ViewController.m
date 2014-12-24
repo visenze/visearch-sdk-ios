@@ -29,7 +29,9 @@
     if(([visenzeResult.content objectForKey:@"status"]!=nil)&&([[visenzeResult.content objectForKey:@"status"] isEqualToString:@"OK"])){
         NSArray *imageList = [visenzeResult.content objectForKey:@"result"];
         NSString * result = [[imageList valueForKey:@"im_name"] componentsJoinedByString:@" "];
-        returnedText.text = result;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            returnedText.text = result;
+        });
     // for (NSDictionary *obj in imageList){
     //     NSLog(@"im_name: %@", [obj objectForKey:@"im_name"]);
     //     NSLog(@"value_map: %@", [[obj objectForKey:@"value_map"] objectForKey:@"im_url"]);
@@ -51,7 +53,9 @@
     if(([visenzeResult.content objectForKey:@"status"]!=nil)&&([[visenzeResult.content objectForKey:@"status"] isEqualToString:@"OK"])){
         NSArray *imageList = [visenzeResult.content objectForKey:@"result"];
         NSString * result = [[imageList valueForKey:@"im_name"] componentsJoinedByString:@" "];
-        returnedText.text = result;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            returnedText.text = result;
+        });
     }else{
         UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Result"
                                                          message: @"Not Found"
@@ -69,7 +73,9 @@
     if(([visenzeResult.content objectForKey:@"status"]!=nil)&&([[visenzeResult.content objectForKey:@"status"] isEqualToString:@"OK"])){
         NSArray *imageList = [visenzeResult.content objectForKey:@"result"];
         NSString * result = [[imageList valueForKey:@"im_name"] componentsJoinedByString:@" "];
-        returnedText.text = result;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            returnedText.text = result;
+        });
     }else{
         UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Result"
                                                          message: @"Not Found"
@@ -115,7 +121,7 @@
     }
 }
 
-// Use facepp SDK to detect faces
+// Use ViSearch SDK to find similar images
 -(void) detectWithImage: (UIImage*) image {
     UploadSearchParams *uploadSearchParams = [[UploadSearchParams alloc] init];
     uploadSearchParams.imageFile = UIImageJPEGRepresentation(image, 0.5);
@@ -123,8 +129,12 @@
     if(([visenzeResult.content objectForKey:@"status"]!=nil)&&([[visenzeResult.content objectForKey:@"status"] isEqualToString:@"OK"])){
         NSArray *imageList = [visenzeResult.content objectForKey:@"result"];
         NSString * result = [[imageList valueForKey:@"im_name"] componentsJoinedByString:@" "];
-        returnedText.text = result;
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            returnedText.text = result;
+        });
     }else{
+        
         UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Result"
                                                          message: @"Not Found"
                                                         delegate:self
