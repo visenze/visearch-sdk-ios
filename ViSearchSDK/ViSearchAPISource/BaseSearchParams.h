@@ -13,6 +13,7 @@
 @property (atomic) int page;
 @property (atomic) BOOL facet;
 @property (atomic) int facetSize;
+@property (atomic) NSArray *facetField;
 @property (atomic) BOOL score;
 @property (atomic) NSDictionary *fq;
 @property (atomic) NSArray *fl;
