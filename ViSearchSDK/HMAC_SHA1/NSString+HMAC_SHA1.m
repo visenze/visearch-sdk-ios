@@ -7,7 +7,6 @@
 //
 
 #import "NSString+HMAC_SHA1.h"
-#import "Base64.h"
 #include <CommonCrypto/CommonDigest.h>
 #include <CommonCrypto/CommonHMAC.h>
 

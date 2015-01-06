@@ -16,7 +16,7 @@
 @property int httpStatusCode;
 
 /*!
- *  @brief error code which defined by FacePlusPlus
+ *  @brief error code which defined by ViSearch API
  */
 @property int errorCode;
 

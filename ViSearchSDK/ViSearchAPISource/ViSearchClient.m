@@ -8,7 +8,6 @@
 
 #import "ViSearchClient.h"
 #import "NSString+HMAC_SHA1.h"
-#import "Base64.h"
 
 #define NONCE_LENGTH 8
 

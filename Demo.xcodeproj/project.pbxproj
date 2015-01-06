@@ -25,7 +25,6 @@
 		6D7418D21A442A6F00300435 /* ViSearchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D7418C91A442A6F00300435 /* ViSearchResult.m */; };
 		6D7418D51A44375900300435 /* SearchOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D7418D41A44375900300435 /* SearchOperation.m */; };
 		6D7954D81A4A91A000F099C7 /* NSString+HMAC_SHA1.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D7954D71A4A91A000F099C7 /* NSString+HMAC_SHA1.m */; };
-		6D7954DB1A4A91AF00F099C7 /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D7954DA1A4A91AF00F099C7 /* Base64.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,8 +73,6 @@
 		6D7418D41A44375900300435 /* SearchOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchOperation.m; sourceTree = "<group>"; };
 		6D7954D61A4A91A000F099C7 /* NSString+HMAC_SHA1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+HMAC_SHA1.h"; path = "HMAC_SHA1/NSString+HMAC_SHA1.h"; sourceTree = "<group>"; };
 		6D7954D71A4A91A000F099C7 /* NSString+HMAC_SHA1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+HMAC_SHA1.m"; path = "HMAC_SHA1/NSString+HMAC_SHA1.m"; sourceTree = "<group>"; };
-		6D7954D91A4A91AF00F099C7 /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Base64.h; path = Base64/Base64.h; sourceTree = "<group>"; };
-		6D7954DA1A4A91AF00F099C7 /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Base64.m; path = Base64/Base64.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,16 +100,6 @@
 				6D7954D71A4A91A000F099C7 /* NSString+HMAC_SHA1.m */,
 			);
 			name = HMAC_SHA1;
-			path = ..;
-			sourceTree = "<group>";
-		};
-		6D4227EB1A48012000770A08 /* Base64 */ = {
-			isa = PBXGroup;
-			children = (
-				6D7954D91A4A91AF00F099C7 /* Base64.h */,
-				6D7954DA1A4A91AF00F099C7 /* Base64.m */,
-			);
-			name = Base64;
 			path = ..;
 			sourceTree = "<group>";
 		};
@@ -191,7 +178,6 @@
 			isa = PBXGroup;
 			children = (
 				6D4227E61A48005D00770A08 /* HMAC_SHA1 */,
-				6D4227EB1A48012000770A08 /* Base64 */,
 				6D7418B91A442A6F00300435 /* BaseSearchParams.h */,
 				6D7418BA1A442A6F00300435 /* BaseSearchParams.m */,
 				6D7418BB1A442A6F00300435 /* Box.h */,
@@ -328,7 +314,6 @@
 				6D7418CF1A442A6F00300435 /* UploadSearchParams.m in Sources */,
 				6D7954D81A4A91A000F099C7 /* NSString+HMAC_SHA1.m in Sources */,
 				6D7418D51A44375900300435 /* SearchOperation.m in Sources */,
-				6D7954DB1A4A91AF00F099C7 /* Base64.m in Sources */,
 				6D7418CE1A442A6F00300435 /* SearchParams.m in Sources */,
 				6D7418D01A442A6F00300435 /* ViSearchClient.m in Sources */,
 				6D7418CD1A442A6F00300435 /* ColorSearchParams.m in Sources */,
