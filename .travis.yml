@@ -1,6 +1,11 @@
 language: objective-c
-xcode_workspace: Demo.xcworkspace
-xcode_scheme: DemoTests
-xcode_sdk: iphonesimulator
-script: 
-  - xctool -workspace Demo.xcworkspace -scheme DemoTests -sdk iphonesimulator 
+# cache: cocoapods
+# podfile: Example/Podfile
+# before_install:
+# - gem install cocoapods # Since Travis is not always on latest version
+# - pod install --project-directory=Example
+install:
+- gem install xcpretty --no-rdoc --no-ri --no-document --quiet
+script:
+- set -o pipefail && xcodebuild test -workspace Example/ViSearch.xcworkspace -scheme ViSearch-Example -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO | xcpretty -c
+- pod lib lint --quick objective-c
