@@ -81,7 +81,7 @@ static NSString *SERVER_ADDRESS = @"http://visearch.visenze.com";
     return [ViSearchClient generateResultWithResponseData:responseData error:error httpStatusCode:(int)statusCode];
 }
 
-+(ViSearchResult*) requestWithMethod: (NSString*)method image: (NSData*) imageData params: (NSDictionary*)params {
++(ViSearchResult*) requestWithMethod: (NSString*)method image: (NSData*) imageData params: (NSDictionary*)params{
     if (!initilized)
         return [ViSearchResult resultWithSuccess:false withError:[ViSearchError errorWithErrorMsg:NOT_INIT_ERROR_MSG andHttpStatusCode:0 andErrorCode:0]];
     
@@ -105,8 +105,9 @@ static NSString *SERVER_ADDRESS = @"http://visearch.visenze.com";
         [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
         [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"image\"; filename=\"image.jpeg\"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
         [body appendData:[@"Content-Type: image/jpeg\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-        [body appendData:imageData];
+        [body appendData: imageData];
         [body appendData:[[NSString stringWithFormat:@"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+        
     }
     
     [body appendData:[[NSString stringWithFormat:@"--%@--\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];

@@ -125,7 +125,9 @@
 // Use ViSearch SDK to find similar images
 -(void) detectWithImage: (UIImage*) image {
     UploadSearchParams *uploadSearchParams = [[UploadSearchParams alloc] init];
-    uploadSearchParams.imageFile = UIImageJPEGRepresentation(image, 0.5);
+    uploadSearchParams.imageFile = image;
+    uploadSearchParams.maxWidth = 800;
+    uploadSearchParams.quality = 0.9;
     ViSearchResult *visenzeResult = [[ViSearchAPI search] uploadSearch:uploadSearchParams];
     if(([visenzeResult.content objectForKey:@"status"]!=nil)&&([[visenzeResult.content objectForKey:@"status"] isEqualToString:@"OK"])){
         NSArray *imageList = [visenzeResult.content objectForKey:@"result"];

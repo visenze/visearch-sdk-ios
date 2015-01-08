@@ -12,7 +12,10 @@
 @interface UploadSearchParams : BaseSearchParams
 
 @property (atomic) NSString *imageUrl;
-@property (atomic) NSData *imageFile;
+@property (atomic) UIImage *imageFile;
 @property (atomic) Box *box;
+@property (atomic) float maxWidth;
+@property (atomic) float quality;
+@property (atomic) UIImage *compressedImage;
 
 @end
