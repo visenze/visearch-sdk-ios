@@ -23,7 +23,7 @@
         self.score = false;
         self.fq = nil;
         self.fl = nil;
-        self.queryInfo = nil;
+        self.queryInfo = false;
         self.custom = nil;
         
     }
