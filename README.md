@@ -1,6 +1,6 @@
 ViSearch iOS SDK
 ================
-[![Build Status](https://api.travis-ci.org/Lincolnnus/visearch-sdk-iOS.svg?branch=master)](https://travis-ci.org/Lincolnnus/visearch-sdk-iOS)
+[![Build Status](https://api.travis-ci.org/Lincolnnus/visearch-sdk-ios.svg?branch=master)](https://travis-ci.org/Lincolnnus/visearch-sdk-ios)
 This is the ViSearch Software Development Kit (SDK) for iOS. Version: 1.0.0
 ##Overview
 The SDK provides the following Search APIs for your ViSearch Apps:
