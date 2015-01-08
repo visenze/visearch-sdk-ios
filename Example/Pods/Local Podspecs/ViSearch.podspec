@@ -9,30 +9,21 @@
 
 Pod::Spec.new do |s|
   s.name             = "ViSearch"
-  s.version          = "0.1.0"
-  s.summary          = "A short description of ViSearch."
+  s.version          = "0.0.2"
+  s.summary          = "A Visual Search API solution."
   s.description      = <<-DESC
-                       An optional longer description of ViSearch
-
-                       * Markdown format.
-                       * Don't worry about the indent, we strip it!
+                        ViSearch is a Visual Recognition Service API developed by ViSenze Pte. Ltd.
+                        This iOS SDK provides a quick way to integrate with the ViSearch API.
                        DESC
-  s.homepage         = "https://github.com/<GITHUB_USERNAME>/ViSearch"
-  # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
+  s.homepage         = "https://github.com/visenze/visearch-sdk-ios"
   s.license          = 'MIT'
   s.author           = { "Shaohuan Li" => "shaohuan.li@gmail.com" }
-  s.source           = { :git => "https://github.com/<GITHUB_USERNAME>/ViSearch.git", :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.source           = { :git => "https://github.com/Lincolnnus/visearch-sdk-ios.git", :tag => s.version.to_s }
+  s.social_media_url = 'https://facebook.com/Lincolnnus'
 
   s.platform     = :ios, '7.0'
   s.requires_arc = true
 
-  s.source_files = 'Pod/Classes'
-  s.resource_bundles = {
-    'ViSearch' => ['Pod/Assets/*.png']
-  }
+  s.source_files = 'ViSearch/ViSearchSDK/**/*.{h,m}'
 
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
 end
