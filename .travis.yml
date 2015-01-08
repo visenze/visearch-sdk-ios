@@ -1,4 +1,4 @@
 language: objective-c
 xcode_workspace: Demo.xcworkspace
 xcode_scheme: DemoTests
-
+script: xctool -workspace Demo.xcworkspace -scheme DemoTests -sdk iphonesimulator 
