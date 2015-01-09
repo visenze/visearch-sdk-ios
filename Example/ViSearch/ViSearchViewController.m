@@ -14,21 +14,28 @@
 
 @implementation ViSearchViewController
 
+static NSString* ACCESS_KEY=  @"";
+static NSString* SECRET_KEY=  @"";
+static int IMAGE_CELL_TAG = 1234;
+static int LABEL_CELL_TAG = 2345;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     imagePicker = [[UIImagePickerController alloc] init];
     // Do any additional setup after loading the view, typically from a nib.
-    [ViSearchAPI initWithAccessKey: @"" andSecretKey:@""];
+    [ViSearchAPI initWithAccessKey: ACCESS_KEY andSecretKey: SECRET_KEY];
+    imageCollectionView.delegate = self;
+    imageCollectionView.dataSource = self;
 }
 - (IBAction)idSearch:(id)sender {
     SearchParams *searchParams = [[SearchParams alloc] init];
     searchParams.imName = idSearchTextField.text;
-    // searchParams.fl = @[@"price",@"brand",@"im_url"];
+    searchParams.fl = @[@"price",@"brand",@"im_url"];
     ViSearchResult *visenzeResult = [[ViSearchAPI search] search:searchParams];
     if(([visenzeResult.content objectForKey:@"status"]!=nil)&&([[visenzeResult.content objectForKey:@"status"] isEqualToString:@"OK"])){
-        NSArray *imageList = [visenzeResult.content objectForKey:@"result"];
+        imageList = [visenzeResult.content objectForKey:@"result"];
+        [imageCollectionView reloadData];
         NSString * result = [[imageList valueForKey:@"im_name"] componentsJoinedByString:@" "];
         dispatch_async(dispatch_get_main_queue(), ^{
             returnedText.text = result;
@@ -50,9 +57,11 @@
 - (IBAction)colorSearch:(id)sender {
     ColorSearchParams *colorSearchParams = [[ColorSearchParams alloc] init];
     colorSearchParams.color = colorSearchTextField.text;
+    colorSearchParams.fl = @[@"price",@"brand",@"im_url"];
     ViSearchResult *visenzeResult = [[ViSearchAPI search] colorSearch:colorSearchParams];
     if(([visenzeResult.content objectForKey:@"status"]!=nil)&&([[visenzeResult.content objectForKey:@"status"] isEqualToString:@"OK"])){
-        NSArray *imageList = [visenzeResult.content objectForKey:@"result"];
+        imageList = [visenzeResult.content objectForKey:@"result"];
+        [imageCollectionView reloadData];
         NSString * result = [[imageList valueForKey:@"im_name"] componentsJoinedByString:@" "];
         dispatch_async(dispatch_get_main_queue(), ^{
             returnedText.text = result;
@@ -70,9 +79,11 @@
 - (IBAction)uploadSearchURL:(id)sender {
     UploadSearchParams *uploadSearchParams = [[UploadSearchParams alloc] init];
     uploadSearchParams.imageUrl = uploadSearchUrlTextField.text;
+    uploadSearchParams.fl = @[@"price",@"brand",@"im_url"];
     ViSearchResult *visenzeResult = [[ViSearchAPI search] uploadSearch:uploadSearchParams];
     if(([visenzeResult.content objectForKey:@"status"]!=nil)&&([[visenzeResult.content objectForKey:@"status"] isEqualToString:@"OK"])){
-        NSArray *imageList = [visenzeResult.content objectForKey:@"result"];
+        imageList = [visenzeResult.content objectForKey:@"result"];
+        [imageCollectionView reloadData];
         NSString * result = [[imageList valueForKey:@"im_name"] componentsJoinedByString:@" "];
         dispatch_async(dispatch_get_main_queue(), ^{
             returnedText.text = result;
@@ -125,16 +136,15 @@
 // Use ViSearch SDK to find similar images
 -(void) detectWithImage: (UIImage*) image {
     UploadSearchParams *uploadSearchParams = [[UploadSearchParams alloc] init];
+    uploadSearchParams.fl = @[@"price",@"brand",@"im_url"];
     uploadSearchParams.imageFile = image;
     uploadSearchParams.maxWidth = 800;
     uploadSearchParams.quality = 0.9;
     ViSearchResult *visenzeResult = [[ViSearchAPI search] uploadSearch:uploadSearchParams];
     if(([visenzeResult.content objectForKey:@"status"]!=nil)&&([[visenzeResult.content objectForKey:@"status"] isEqualToString:@"OK"])){
-        NSArray *imageList = [visenzeResult.content objectForKey:@"result"];
-        NSString * result = [[imageList valueForKey:@"im_name"] componentsJoinedByString:@" "];
-        
+        imageList = [visenzeResult.content objectForKey:@"result"];
         dispatch_async(dispatch_get_main_queue(), ^{
-            returnedText.text = result;
+            [imageCollectionView reloadData];
         });
     }else{
         
@@ -237,6 +247,24 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return imageList.count;
+}
+
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *identifier = @"Cell";
+    
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
+    UIImageView *resultImageView = (UIImageView *)[cell viewWithTag:IMAGE_CELL_TAG];
+    NSURL *imageURL = [NSURL URLWithString:[[[imageList objectAtIndex:indexPath.row] objectForKey:@"value_map"] objectForKey:@"im_url"]];
+    NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+    resultImageView.image = [UIImage imageWithData:imageData];
+    UILabel *label = (UILabel *)[cell viewWithTag:LABEL_CELL_TAG];
+    label.text = [[imageList objectAtIndex:indexPath.row] valueForKey:@"im_name"];
+    return cell;
 }
 
 @end

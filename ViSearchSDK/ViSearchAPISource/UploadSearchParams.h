@@ -5,7 +5,7 @@
 //  Created by Shaohuan on 12/18/14.
 //
 //
-
+#import <UIKit/UIKit.h>
 #import "BaseSearchParams.h"
 #import "Box.h"
 

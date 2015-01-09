@@ -9,12 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "ViSearchAPI.h"
 
-@interface ViSearchViewController : UIViewController<UINavigationControllerDelegate, UIImagePickerControllerDelegate>{
+@interface ViSearchViewController : UIViewController<UINavigationControllerDelegate, UIImagePickerControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate>{
     IBOutlet UITextField *idSearchTextField;
     IBOutlet UITextField *colorSearchTextField;
     IBOutlet UITextField *uploadSearchUrlTextField;
     IBOutlet UITextView *returnedText;
+    IBOutlet UICollectionView *imageCollectionView;
     UIImagePickerController *imagePicker;
+    NSArray *imageList;
 }
 
 @end
