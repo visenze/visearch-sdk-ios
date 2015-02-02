@@ -10,7 +10,7 @@
 
 @implementation BaseSearchParams
 
-@synthesize limit, page, facet, facetSize, facetField, score, fq, fl, queryInfo, custom;
+@synthesize limit, page, facet, facetSize, facetField, score, fq, fl, queryInfo, custom, scoreMax, scoreMin;
 - (id)init
 {
     if( self = [super init] )
@@ -25,6 +25,8 @@
         self.fl = nil;
         self.queryInfo = false;
         self.custom = nil;
+        self.scoreMin = 0;
+        self.scoreMax = 1;
         
     }
     return self;
@@ -59,6 +61,8 @@
         [dict setValue:[NSString stringWithFormat:@"%d", score] forKey:@"score"];
     }
     
+    [dict setValue: [NSString stringWithFormat:@"%f", scoreMax] forKey: @"score_max"];
+    [dict setValue: [NSString stringWithFormat:@"%f", scoreMin] forKey: @"score_min"];
     if (fq!= nil) {
         NSMutableString* builder = [@"" mutableCopy];
         NSArray *keys=[fq allKeys];
