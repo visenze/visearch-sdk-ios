@@ -55,6 +55,11 @@ static NSString *SERVER_ADDRESS = @"http://visearch.visenze.com";
     }
     if (params != nil) {
         for (NSString* key in params.allKeys) {
+            if([[params objectForKey:key] isKindOfClass:[NSArray class]]){
+                for (NSString* value in [params objectForKey:key]) {
+                    [urlString appendFormat:@"&%@=%@", key, value];
+                }
+            }
             [urlString appendFormat:@"&%@=%@", key, [params objectForKey:key]];
         }
     }
@@ -182,6 +187,6 @@ static NSString *SERVER_ADDRESS = @"http://visearch.visenze.com";
     
     for (int i = 0; i < data.length; ++i)
         nonce = [nonce stringByAppendingFormat:@"%02lx", (unsigned long)buffer[i]];
-    return nonce;    
+    return nonce;
 }
 @end

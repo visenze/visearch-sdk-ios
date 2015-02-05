@@ -46,14 +46,7 @@
         [dict setValue:facet? @"true":@"false" forKey:@"facet"];
         [dict setValue:[NSString stringWithFormat:@"%d", facetSize] forKey:@"facet_size"];
         if (facetField!= nil) {
-            NSMutableString* builder = [@"" mutableCopy];
-            
-            for (int i=0; i<[facetField count]; i++) {
-                [builder appendString:[facetField objectAtIndex: i]];
-                if(i < [facetField count]-1)
-                    [builder appendString:@","];
-            }
-            [dict setValue:builder forKey:@"facet_field"];
+            [dict setValue:facetField forKey:@"facet_field"];
         }
     }
     
@@ -63,13 +56,12 @@
     
     [dict setValue: [NSString stringWithFormat:@"%f", scoreMax] forKey: @"score_max"];
     [dict setValue: [NSString stringWithFormat:@"%f", scoreMin] forKey: @"score_min"];
+    
     if (fq!= nil) {
-        NSMutableString* builder = [@"" mutableCopy];
+        NSMutableArray* builder = [[NSMutableArray alloc]init];
         NSArray *keys=[fq allKeys];
         for (int i=0; i<[keys count]; i++) {
-            [builder appendString:[NSMutableString stringWithFormat: @"%@:%@",[keys objectAtIndex:i], [fq objectForKey:[keys objectAtIndex:i]]] ];
-            if(i < [fq count]-1)
-                [builder appendString:@","];
+            [builder addObject:[NSMutableString stringWithFormat: @"%@:%@",[keys objectAtIndex:i], [fq objectForKey:[keys objectAtIndex:i]]]];
         }
         [dict setValue:builder forKey:@"fq"];
     }
