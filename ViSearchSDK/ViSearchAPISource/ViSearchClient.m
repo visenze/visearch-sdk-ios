@@ -66,12 +66,9 @@ static NSString *SERVER_ADDRESS = @"http://visearch.visenze.com";
     return [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 }
 
-+(ViSearchResult*) requestWithMethod: (NSString*) method params: (NSDictionary*) params {
-    if (!initilized)
-        return [ViSearchResult resultWithSuccess:false withError:[ViSearchError errorWithErrorMsg:NOT_INIT_ERROR_MSG andHttpStatusCode:0 andErrorCode:0]];
-    
-    NSError *error = nil;
-    NSInteger statusCode = 0;
++(void) requestWithMethod: (NSString*) method params: (NSDictionary*) params Completed: (void (^)(NSURLResponse *response, NSData *data, NSError *connectionError)) handler {
+    //if (!initilized)
+    //    return [ViSearchResult resultWithSuccess:false withError:[ViSearchError errorWithErrorMsg:NOT_INIT_ERROR_MSG andHttpStatusCode:0 andErrorCode:0]];
     
     // create request
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init] ;
@@ -79,11 +76,13 @@ static NSString *SERVER_ADDRESS = @"http://visearch.visenze.com";
     NSString *urlString = [ViSearchClient generateRequestUrlPrefix: method params: params];
     [request setURL: [NSURL URLWithString:urlString]];
     
-    NSHTTPURLResponse* urlResponse = nil;
-    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&error];
-    statusCode = urlResponse.statusCode;
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     
-    return [ViSearchClient generateResultWithResponseData:responseData error:error httpStatusCode:(int)statusCode];
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:queue
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error){
+                               handler(response, data, error);
+                           }];
 }
 
 +(ViSearchResult*) requestWithMethod: (NSString*)method image: (NSData*) imageData params: (NSDictionary*)params{
