@@ -19,6 +19,8 @@
 @property (atomic) NSArray *fl;
 @property (atomic) BOOL queryInfo;
 @property (atomic) NSDictionary *custom;
+@property (atomic) float scoreMin;
+@property (atomic) float scoreMax;
 
 -(id) init;
 -(NSDictionary*) toDict;
