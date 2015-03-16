@@ -6,7 +6,7 @@
 //
 //
 
-#import "ViSearchClient.h"
+#import "ViSearchClient2.h"
 #import "NSString+HMAC_SHA1.h"
 
 #define NONCE_LENGTH 8
@@ -17,7 +17,7 @@ static NSString *ViSearch_ACCESS_KEY = @"";
 static NSString *ViSearch_SECRET_KEY = @"";
 static NSString *SERVER_ADDRESS = @"http://visearch.visenze.com";
 
-@implementation ViSearchClient
+@implementation ViSearchClient2
 
 +(void) initWithAccessKey:(NSString *)accessKey andSecretKey:(NSString *)secretKey{
     
@@ -73,7 +73,7 @@ static NSString *SERVER_ADDRESS = @"http://visearch.visenze.com";
     // create request
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init] ;
     
-    NSString *urlString = [ViSearchClient generateRequestUrlPrefix: method params: params];
+    NSString *urlString = [ViSearchClient2 generateRequestUrlPrefix: method params: params];
     [request setURL: [NSURL URLWithString:urlString]];
     
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
@@ -119,7 +119,7 @@ static NSString *SERVER_ADDRESS = @"http://visearch.visenze.com";
     // setting the body of the post to the reqeust
     [request setHTTPBody:body];
     
-    NSString *urlString = [ViSearchClient generateRequestUrlPrefix:method params: params];
+    NSString *urlString = [ViSearchClient2 generateRequestUrlPrefix:method params: params];
     
     // set URL
     [request setURL: [NSURL URLWithString:urlString]];
@@ -128,7 +128,7 @@ static NSString *SERVER_ADDRESS = @"http://visearch.visenze.com";
     NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&error];
     statusCode = urlResponse.statusCode;
     
-    return [ViSearchClient generateResultWithResponseData:responseData error:error httpStatusCode:(int)statusCode];
+    return [ViSearchClient2 generateResultWithResponseData:responseData error:error httpStatusCode:(int)statusCode];
 }
 
 +(ViSearchResult*) generateResultWithResponseData:(NSData*) responseData error:(NSError*) error httpStatusCode:(int)httpStatusCode {

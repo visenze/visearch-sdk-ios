@@ -7,15 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SearchParams.h"
-#import "ColorSearchParams.h"
-#import "UploadSearchParams.h"
 #import "SearchOperation.h"
+#import "ViSearchClient.h"
+
 
 @interface ViSearchAPI : NSObject
 
-+(void)initWithAccessKey:(NSString*) accessKey andSecretKey:(NSString*)secretSecret;
++ (void)initWithAccessKey:(NSString*) accessKey andSecretKey:(NSString*)secretSecret;
 
-+(SearchOperation*) search;
++ (SearchOperation*) search;
+
++ (void)setupAccessKey:(NSString*) accessKey andSecretKey:(NSString*)secretKey;
++ (ViSearchClient *) defaultClient;
 
 @end

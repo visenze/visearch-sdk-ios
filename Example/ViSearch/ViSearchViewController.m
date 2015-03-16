@@ -75,6 +75,7 @@ static int LABEL_CELL_TAG = 2345;
         [alert addButtonWithTitle:@"OK"];
         [alert show];
     }
+    
 }
 - (IBAction)uploadSearchURL:(id)sender {
     UploadSearchParams *uploadSearchParams = [[UploadSearchParams alloc] init];
@@ -138,8 +139,7 @@ static int LABEL_CELL_TAG = 2345;
     UploadSearchParams *uploadSearchParams = [[UploadSearchParams alloc] init];
     uploadSearchParams.fl = @[@"price",@"brand",@"im_url"];
     uploadSearchParams.imageFile = image;
-    uploadSearchParams.maxWidth = 800;
-    uploadSearchParams.quality = 0.9;
+    uploadSearchParams.settings = [ImageSettings highqualitySettings];
     ViSearchResult *visenzeResult = [[ViSearchAPI search] uploadSearch:uploadSearchParams];
     if(([visenzeResult.content objectForKey:@"status"]!=nil)&&([[visenzeResult.content objectForKey:@"status"] isEqualToString:@"OK"])){
         imageList = [visenzeResult.content objectForKey:@"result"];

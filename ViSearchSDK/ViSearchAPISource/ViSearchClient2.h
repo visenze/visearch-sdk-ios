@@ -12,7 +12,7 @@
 #import "ViSearchAPI.h"
 #import "ViSearchError.h"
 
-@interface ViSearchClient : NSObject
+@interface ViSearchClient2 : NSObject
 
 +(void) initWithAccessKey: (NSString*)accessKey andSecretKey:(NSString*) secretKey;
 
