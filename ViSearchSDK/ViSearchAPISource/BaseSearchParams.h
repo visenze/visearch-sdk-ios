@@ -15,13 +15,14 @@
 @property (atomic) int facetSize;
 @property (atomic) NSArray *facetField;
 @property (atomic) BOOL score;
-@property (atomic) NSDictionary *fq;
+@property (atomic) NSMutableDictionary *fq;
 @property (atomic) NSArray *fl;
 @property (atomic) BOOL queryInfo;
 @property (atomic) NSDictionary *custom;
 @property (atomic) float scoreMin;
 @property (atomic) float scoreMax;
 
--(id) init;
--(NSDictionary*) toDict;
+- (id)init;
+- (NSDictionary*)toDict;
+- (NSData*)httpPostBodyWithObject:(id)object;
 @end

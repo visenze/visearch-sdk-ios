@@ -7,20 +7,17 @@
 //
 
 #import "ViSearchAPI.h"
-#import "ViSearchClient.h"
 
-static SearchOperation* searchSharedInstance = nil;
 
 @implementation ViSearchAPI
 
-+(void)initWithAccessKey:(NSString*) accessKey andSecretKey:(NSString*)secretKey{
-    [ViSearchClient initWithAccessKey: accessKey andSecretKey: secretKey];
++ (void)setupAccessKey:(NSString *)accessKey andSecretKey:(NSString *)secretKey {
+    [ViSearchClient sharedInstance].accessKey = accessKey;
+    [ViSearchClient sharedInstance].secretKey = secretKey;
 }
 
-+(SearchOperation*) search{
-    if(searchSharedInstance == nil)
-        searchSharedInstance = [[SearchOperation alloc]init];
-    return searchSharedInstance;
++ (ViSearchClient *)defaultClient {
+    return [ViSearchClient sharedInstance];
 }
 
 @end

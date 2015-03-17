@@ -8,14 +8,14 @@
 #import <UIKit/UIKit.h>
 #import "BaseSearchParams.h"
 #import "Box.h"
+#import "ImageSettings.h"
 
 @interface UploadSearchParams : BaseSearchParams
 
 @property (atomic) NSString *imageUrl;
 @property (atomic) UIImage *imageFile;
 @property (atomic) Box *box;
-@property (atomic) float maxWidth;
-@property (atomic) float quality;
 @property (atomic) UIImage *compressedImage;
+@property (atomic) ImageSettings *settings;
 
 @end

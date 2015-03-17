@@ -21,13 +21,12 @@
         self.facetSize = 10;
         self.facetField = nil;
         self.score = false;
-        self.fq = nil;
+        self.fq = [NSMutableDictionary dictionary];
         self.fl = nil;
         self.queryInfo = false;
         self.custom = nil;
         self.scoreMin = 0;
         self.scoreMax = 1;
-        
     }
     return self;
 }
@@ -51,19 +50,23 @@
     }
     
     if (score > 0) {
-        [dict setValue:[NSString stringWithFormat:@"%d", score] forKey:@"score"];
+        [dict setValue:@"true" forKey:@"score"];
     }
     
     [dict setValue: [NSString stringWithFormat:@"%f", scoreMax] forKey: @"score_max"];
     [dict setValue: [NSString stringWithFormat:@"%f", scoreMin] forKey: @"score_min"];
     
-    if (fq!= nil) {
+    if (fq) {
         NSMutableArray* builder = [[NSMutableArray alloc]init];
         NSArray *keys=[fq allKeys];
+        
         for (int i=0; i<[keys count]; i++) {
             [builder addObject:[NSMutableString stringWithFormat: @"%@:%@",[keys objectAtIndex:i], [fq objectForKey:[keys objectAtIndex:i]]]];
         }
-        [dict setValue:builder forKey:@"fq"];
+        
+        if (builder.count > 0) {
+            [dict setValue:builder forKey:@"fq"];
+        }
     }
     if (fl!= nil) {
         NSMutableString* builder = [@"" mutableCopy];
@@ -86,5 +89,7 @@
     
     return dict;
 }
+
+- (NSData *)httpPostBodyWithObject:(id)object {return nil;}
 
 @end

@@ -12,92 +12,151 @@
 
 @end
 
-@implementation ViSearchViewController
+@implementation ViSearchViewController {
+    NSMutableDictionary *imageCache;
+    dispatch_queue_t concurrerntQ;
+    UIActivityIndicatorView *spinner;
+}
 
 static NSString* ACCESS_KEY=  @"";
 static NSString* SECRET_KEY=  @"";
 static int IMAGE_CELL_TAG = 1234;
 static int LABEL_CELL_TAG = 2345;
 
+#pragma mark LifeCycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     imagePicker = [[UIImagePickerController alloc] init];
     // Do any additional setup after loading the view, typically from a nib.
-    [ViSearchAPI initWithAccessKey: ACCESS_KEY andSecretKey: SECRET_KEY];
+    [ViSearchAPI setupAccessKey:@"" andSecretKey:@""];
+    
     imageCollectionView.delegate = self;
     imageCollectionView.dataSource = self;
+    imageList = [NSMutableArray array];
+    imageCache = [NSMutableDictionary dictionary];
+    
+    concurrerntQ = dispatch_queue_create("concurrentQ", DISPATCH_QUEUE_CONCURRENT);
+    
+    spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    spinner.frame = CGRectMake(0, 0, 24, 24);
+    spinner.center = self.view.center;
+    [self.view addSubview:spinner];
 }
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark Search Example
+
+// Image Id Search Example
 - (IBAction)idSearch:(id)sender {
+    [spinner startAnimating];
+    
     SearchParams *searchParams = [[SearchParams alloc] init];
     searchParams.imName = idSearchTextField.text;
     searchParams.fl = @[@"price",@"brand",@"im_url"];
-    ViSearchResult *visenzeResult = [[ViSearchAPI search] search:searchParams];
-    if(([visenzeResult.content objectForKey:@"status"]!=nil)&&([[visenzeResult.content objectForKey:@"status"] isEqualToString:@"OK"])){
-        imageList = [visenzeResult.content objectForKey:@"result"];
-        [imageCollectionView reloadData];
-        NSString * result = [[imageList valueForKey:@"im_name"] componentsJoinedByString:@" "];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            returnedText.text = result;
-        });
-        // for (NSDictionary *obj in imageList){
-        //     NSLog(@"im_name: %@", [obj objectForKey:@"im_name"]);
-        //     NSLog(@"value_map: %@", [[obj objectForKey:@"value_map"] objectForKey:@"im_url"]);
-        // }
-    }else{
-        UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Result"
-                                                         message: @"Not Found"
-                                                        delegate:self
-                                               cancelButtonTitle:@"Cancel"
-                                               otherButtonTitles: nil];
-        [alert addButtonWithTitle:@"OK"];
-        [alert show];
-    }
+    
+    [[ViSearchAPI defaultClient] searchWithImageId:searchParams success:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
+        imageList = data.imageResultsArray;
+        [imageCollectionView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
+    } failure:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
+                UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Result"
+                                                                 message: @"Not Found"
+                                                                delegate:self
+                                                       cancelButtonTitle:@"Cancel"
+                                                       otherButtonTitles: nil];
+                [alert addButtonWithTitle:@"OK"];
+                [alert show];
+        [spinner performSelectorOnMainThread:@selector(stopAnimating) withObject:nil waitUntilDone:YES];
+
+    }];
 }
+
+// Color Search Example
 - (IBAction)colorSearch:(id)sender {
+    [spinner startAnimating];
+    
     ColorSearchParams *colorSearchParams = [[ColorSearchParams alloc] init];
     colorSearchParams.color = colorSearchTextField.text;
     colorSearchParams.fl = @[@"price",@"brand",@"im_url"];
-    ViSearchResult *visenzeResult = [[ViSearchAPI search] colorSearch:colorSearchParams];
-    if(([visenzeResult.content objectForKey:@"status"]!=nil)&&([[visenzeResult.content objectForKey:@"status"] isEqualToString:@"OK"])){
-        imageList = [visenzeResult.content objectForKey:@"result"];
-        [imageCollectionView reloadData];
-        NSString * result = [[imageList valueForKey:@"im_name"] componentsJoinedByString:@" "];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            returnedText.text = result;
-        });
-    }else{
-        UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Result"
-                                                         message: @"Not Found"
-                                                        delegate:self
-                                               cancelButtonTitle:@"Cancel"
-                                               otherButtonTitles: nil];
-        [alert addButtonWithTitle:@"OK"];
-        [alert show];
-    }
+    
+    [[ViSearchAPI defaultClient]
+        searchWithColor:colorSearchParams
+        success:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
+            imageList = data.imageResultsArray;
+            [imageCollectionView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
+            [spinner performSelectorOnMainThread:@selector(stopAnimating) withObject:nil waitUntilDone:YES];
+        } failure:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
+            UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Result"
+                                                             message: @"Not Found"
+                                                            delegate:self
+                                                   cancelButtonTitle:@"Cancel"
+                                                   otherButtonTitles: nil];
+            [alert addButtonWithTitle:@"OK"];
+            [alert show];
+            [spinner performSelectorOnMainThread:@selector(stopAnimating) withObject:nil waitUntilDone:YES];
+
+        }];
 }
+
+// Image url Search Example
 - (IBAction)uploadSearchURL:(id)sender {
+    [spinner startAnimating];
+    
     UploadSearchParams *uploadSearchParams = [[UploadSearchParams alloc] init];
     uploadSearchParams.imageUrl = uploadSearchUrlTextField.text;
     uploadSearchParams.fl = @[@"price",@"brand",@"im_url"];
-    ViSearchResult *visenzeResult = [[ViSearchAPI search] uploadSearch:uploadSearchParams];
-    if(([visenzeResult.content objectForKey:@"status"]!=nil)&&([[visenzeResult.content objectForKey:@"status"] isEqualToString:@"OK"])){
-        imageList = [visenzeResult.content objectForKey:@"result"];
-        [imageCollectionView reloadData];
-        NSString * result = [[imageList valueForKey:@"im_name"] componentsJoinedByString:@" "];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            returnedText.text = result;
-        });
-    }else{
-        UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Result"
-                                                         message: @"Not Found"
-                                                        delegate:self
-                                               cancelButtonTitle:@"Cancel"
-                                               otherButtonTitles: nil];
-        [alert addButtonWithTitle:@"OK"];
-        [alert show];
-    }
+    
+    [[ViSearchAPI defaultClient]
+        searchWithImageUrl:uploadSearchParams
+        success:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
+            imageList = data.imageResultsArray;
+            [imageCollectionView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
+            [spinner performSelectorOnMainThread:@selector(stopAnimating) withObject:nil waitUntilDone:YES];
+        } failure:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
+            UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Result"
+                                                             message: @"Not Found"
+                                                            delegate:self
+                                                   cancelButtonTitle:@"Cancel"
+                                                   otherButtonTitles: nil];
+            [alert addButtonWithTitle:@"OK"];
+            [alert show];
+            [spinner performSelectorOnMainThread:@selector(stopAnimating) withObject:nil waitUntilDone:YES];
+        }];
 }
+
+// Image search Example
+-(void) detectWithImage: (UIImage*) image {
+    [spinner startAnimating];
+    
+    UploadSearchParams *uploadSearchParams = [[UploadSearchParams alloc] init];
+    uploadSearchParams.fl = @[@"price",@"brand",@"im_url"];
+    uploadSearchParams.imageFile = image;
+    uploadSearchParams.settings = [ImageSettings highqualitySettings];
+    
+    [[ViSearchAPI defaultClient]
+     searchWithImageData:uploadSearchParams
+     success:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
+         imageList = data.imageResultsArray;
+         [imageCollectionView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
+         [spinner performSelectorOnMainThread:@selector(stopAnimating) withObject:nil waitUntilDone:YES];
+     } failure:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
+         UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Result"
+                                                          message: @"Not Found"
+                                                         delegate:self
+                                                cancelButtonTitle:@"Cancel"
+                                                otherButtonTitles: nil];
+         [alert addButtonWithTitle:@"OK"];
+         [alert show];
+         [spinner performSelectorOnMainThread:@selector(stopAnimating) withObject:nil waitUntilDone:YES];
+     }];
+}
+
+#pragma mark Others
 
 -(IBAction)pickFromCameraButtonPressed:(id)sender {
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
@@ -133,30 +192,7 @@ static int LABEL_CELL_TAG = 2345;
     }
 }
 
-// Use ViSearch SDK to find similar images
--(void) detectWithImage: (UIImage*) image {
-    UploadSearchParams *uploadSearchParams = [[UploadSearchParams alloc] init];
-    uploadSearchParams.fl = @[@"price",@"brand",@"im_url"];
-    uploadSearchParams.imageFile = image;
-    uploadSearchParams.maxWidth = 800;
-    uploadSearchParams.quality = 0.9;
-    ViSearchResult *visenzeResult = [[ViSearchAPI search] uploadSearch:uploadSearchParams];
-    if(([visenzeResult.content objectForKey:@"status"]!=nil)&&([[visenzeResult.content objectForKey:@"status"] isEqualToString:@"OK"])){
-        imageList = [visenzeResult.content objectForKey:@"result"];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [imageCollectionView reloadData];
-        });
-    }else{
-        
-        UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Result"
-                                                         message: @"Not Found"
-                                                        delegate:self
-                                               cancelButtonTitle:@"Cancel"
-                                               otherButtonTitles: nil];
-        [alert addButtonWithTitle:@"OK"];
-        [alert show];
-    }
-}
+
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     UIImage *sourceImage = info[UIImagePickerControllerOriginalImage];
@@ -244,10 +280,8 @@ static int LABEL_CELL_TAG = 2345;
     CGImageRelease(cgimg);
     return img;
 }
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
+#pragma mark collectionview delegate
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return imageList.count;
@@ -256,14 +290,33 @@ static int LABEL_CELL_TAG = 2345;
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *identifier = @"Cell";
-    
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
+    
+    ImageResult *r = [imageList objectAtIndex:indexPath.row];
+    
     UIImageView *resultImageView = (UIImageView *)[cell viewWithTag:IMAGE_CELL_TAG];
-    NSURL *imageURL = [NSURL URLWithString:[[[imageList objectAtIndex:indexPath.row] objectForKey:@"value_map"] objectForKey:@"im_url"]];
-    NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
-    resultImageView.image = [UIImage imageWithData:imageData];
+    
+    UIImage *img = [imageCache objectForKey:r.url];
+    if (img) { // image is cached
+        resultImageView.image = img;
+    }else {
+        NSURL *imageURL = [NSURL URLWithString:r.url];
+        resultImageView.image = nil;
+        
+        dispatch_async(concurrerntQ, ^{
+            NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                UIImage *im = [UIImage imageWithData:imageData];
+                resultImageView.image = im;
+                [imageCache setObject:im forKey:r.url];
+            });
+        });
+    }
+    
     UILabel *label = (UILabel *)[cell viewWithTag:LABEL_CELL_TAG];
-    label.text = [[imageList objectAtIndex:indexPath.row] valueForKey:@"im_name"];
+    label.text = r.im_name;
+    
     return cell;
 }
 

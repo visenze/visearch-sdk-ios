@@ -31,19 +31,20 @@
 		6D5C7C291A5E65F70088F642 /* Box.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5C7C121A5E65F70088F642 /* Box.m */; };
 		6D5C7C2A1A5E65F70088F642 /* ColorSearchParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5C7C141A5E65F70088F642 /* ColorSearchParams.m */; };
 		6D5C7C2B1A5E65F70088F642 /* ColorSearchParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5C7C141A5E65F70088F642 /* ColorSearchParams.m */; };
-		6D5C7C2C1A5E65F70088F642 /* SearchOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5C7C161A5E65F70088F642 /* SearchOperation.m */; };
-		6D5C7C2D1A5E65F70088F642 /* SearchOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5C7C161A5E65F70088F642 /* SearchOperation.m */; };
 		6D5C7C2E1A5E65F70088F642 /* SearchParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5C7C181A5E65F70088F642 /* SearchParams.m */; };
 		6D5C7C2F1A5E65F70088F642 /* SearchParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5C7C181A5E65F70088F642 /* SearchParams.m */; };
 		6D5C7C301A5E65F70088F642 /* UploadSearchParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5C7C1A1A5E65F70088F642 /* UploadSearchParams.m */; };
 		6D5C7C311A5E65F70088F642 /* UploadSearchParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5C7C1A1A5E65F70088F642 /* UploadSearchParams.m */; };
-		6D5C7C321A5E65F70088F642 /* ViSearchClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5C7C1C1A5E65F70088F642 /* ViSearchClient.m */; };
-		6D5C7C331A5E65F70088F642 /* ViSearchClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5C7C1C1A5E65F70088F642 /* ViSearchClient.m */; };
 		6D5C7C341A5E65F70088F642 /* ViSearchError.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5C7C1F1A5E65F70088F642 /* ViSearchError.m */; };
 		6D5C7C351A5E65F70088F642 /* ViSearchError.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5C7C1F1A5E65F70088F642 /* ViSearchError.m */; };
 		6D5C7C361A5E65F70088F642 /* ViSearchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5C7C211A5E65F70088F642 /* ViSearchResult.m */; };
 		6D5C7C371A5E65F70088F642 /* ViSearchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5C7C211A5E65F70088F642 /* ViSearchResult.m */; };
-		6DDD889D1A5F892F0062CEAB /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6DDD889B1A5F892F0062CEAB /* Main_iPad.storyboard */; };
+		A90A7D181AAEBDF200D2DD65 /* ViSearchHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = A90A7D171AAEBDF200D2DD65 /* ViSearchHandler.m */; };
+		A90A7D1C1AAEC00100D2DD65 /* ViSearchBasicHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = A90A7D1B1AAEC00100D2DD65 /* ViSearchBasicHandler.m */; };
+		A90A7D1F1AAEC02000D2DD65 /* ViSearchImageUploadHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = A90A7D1E1AAEC02000D2DD65 /* ViSearchImageUploadHandler.m */; };
+		A966E6351AB8115600415026 /* ViSearchClient.m in Sources */ = {isa = PBXBuildFile; fileRef = A966E6341AB8115600415026 /* ViSearchClient.m */; };
+		A97FA24A1AB6DDEE00C78633 /* ImageSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = A97FA2491AB6DDEE00C78633 /* ImageSettings.m */; };
+		A97FA24D1AB6DDFE00C78633 /* ImageResult.m in Sources */ = {isa = PBXBuildFile; fileRef = A97FA24C1AB6DDFE00C78633 /* ImageResult.m */; };
 		B31C5696F17BA8D686811EEB /* libPods-Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E62AA2800F3F2C1777A9EF3F /* libPods-Tests.a */; };
 		E859A44C39AEC79551F6A0F8 /* libPods-ViSearch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F096AB773CF30920C2B30F4 /* libPods-ViSearch.a */; };
 /* End PBXBuildFile section */
@@ -91,20 +92,27 @@
 		6D5C7C121A5E65F70088F642 /* Box.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Box.m; sourceTree = "<group>"; };
 		6D5C7C131A5E65F70088F642 /* ColorSearchParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorSearchParams.h; sourceTree = "<group>"; };
 		6D5C7C141A5E65F70088F642 /* ColorSearchParams.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorSearchParams.m; sourceTree = "<group>"; };
-		6D5C7C151A5E65F70088F642 /* SearchOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchOperation.h; sourceTree = "<group>"; };
-		6D5C7C161A5E65F70088F642 /* SearchOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchOperation.m; sourceTree = "<group>"; };
 		6D5C7C171A5E65F70088F642 /* SearchParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchParams.h; sourceTree = "<group>"; };
 		6D5C7C181A5E65F70088F642 /* SearchParams.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchParams.m; sourceTree = "<group>"; };
 		6D5C7C191A5E65F70088F642 /* UploadSearchParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadSearchParams.h; sourceTree = "<group>"; };
 		6D5C7C1A1A5E65F70088F642 /* UploadSearchParams.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadSearchParams.m; sourceTree = "<group>"; };
-		6D5C7C1B1A5E65F70088F642 /* ViSearchClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViSearchClient.h; sourceTree = "<group>"; };
-		6D5C7C1C1A5E65F70088F642 /* ViSearchClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViSearchClient.m; sourceTree = "<group>"; };
 		6D5C7C1E1A5E65F70088F642 /* ViSearchError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViSearchError.h; sourceTree = "<group>"; };
 		6D5C7C1F1A5E65F70088F642 /* ViSearchError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViSearchError.m; sourceTree = "<group>"; };
 		6D5C7C201A5E65F70088F642 /* ViSearchResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViSearchResult.h; sourceTree = "<group>"; };
 		6D5C7C211A5E65F70088F642 /* ViSearchResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViSearchResult.m; sourceTree = "<group>"; };
-		6DDD889C1A5F892F0062CEAB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
 		9F096AB773CF30920C2B30F4 /* libPods-ViSearch.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ViSearch.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A90A7D161AAEBDF200D2DD65 /* ViSearchHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViSearchHandler.h; sourceTree = "<group>"; };
+		A90A7D171AAEBDF200D2DD65 /* ViSearchHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViSearchHandler.m; sourceTree = "<group>"; };
+		A90A7D1A1AAEC00100D2DD65 /* ViSearchBasicHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViSearchBasicHandler.h; sourceTree = "<group>"; };
+		A90A7D1B1AAEC00100D2DD65 /* ViSearchBasicHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViSearchBasicHandler.m; sourceTree = "<group>"; };
+		A90A7D1D1AAEC02000D2DD65 /* ViSearchImageUploadHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViSearchImageUploadHandler.h; sourceTree = "<group>"; };
+		A90A7D1E1AAEC02000D2DD65 /* ViSearchImageUploadHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViSearchImageUploadHandler.m; sourceTree = "<group>"; };
+		A966E6331AB8115600415026 /* ViSearchClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViSearchClient.h; sourceTree = "<group>"; };
+		A966E6341AB8115600415026 /* ViSearchClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViSearchClient.m; sourceTree = "<group>"; };
+		A97FA2481AB6DDEE00C78633 /* ImageSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageSettings.h; sourceTree = "<group>"; };
+		A97FA2491AB6DDEE00C78633 /* ImageSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageSettings.m; sourceTree = "<group>"; };
+		A97FA24B1AB6DDFE00C78633 /* ImageResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageResult.h; sourceTree = "<group>"; };
+		A97FA24C1AB6DDFE00C78633 /* ImageResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageResult.m; sourceTree = "<group>"; };
 		ABCD188998CA4915B4FF851F /* Pods-Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tests/Pods-Tests.release.xcconfig"; sourceTree = "<group>"; };
 		CDF5EB6A84E898BF8C1FF540 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		D570927AAF7E79322025CD79 /* ViSearch.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = ViSearch.podspec; path = ../ViSearch.podspec; sourceTree = "<group>"; };
@@ -191,7 +199,6 @@
 				6003F59C195388D20070C39A /* ViSearchAppDelegate.h */,
 				6003F59D195388D20070C39A /* ViSearchAppDelegate.m */,
 				6003F59F195388D20070C39A /* Main_iPhone.storyboard */,
-				6DDD889B1A5F892F0062CEAB /* Main_iPad.storyboard */,
 				6003F5A5195388D20070C39A /* ViSearchViewController.h */,
 				6003F5A6195388D20070C39A /* ViSearchViewController.m */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
@@ -247,7 +254,6 @@
 				6D5C7C0C1A5E65F70088F642 /* ViSearchAPI.h */,
 				6D5C7C0D1A5E65F70088F642 /* ViSearchAPI.m */,
 				6D5C7C0E1A5E65F70088F642 /* ViSearchAPISource */,
-				6D5C7C1D1A5E65F70088F642 /* ViSearchResult */,
 			);
 			name = ViSearchSDK;
 			path = ../../ViSearchSDK;
@@ -265,20 +271,10 @@
 		6D5C7C0E1A5E65F70088F642 /* ViSearchAPISource */ = {
 			isa = PBXGroup;
 			children = (
-				6D5C7C0F1A5E65F70088F642 /* BaseSearchParams.h */,
-				6D5C7C101A5E65F70088F642 /* BaseSearchParams.m */,
-				6D5C7C111A5E65F70088F642 /* Box.h */,
-				6D5C7C121A5E65F70088F642 /* Box.m */,
-				6D5C7C131A5E65F70088F642 /* ColorSearchParams.h */,
-				6D5C7C141A5E65F70088F642 /* ColorSearchParams.m */,
-				6D5C7C151A5E65F70088F642 /* SearchOperation.h */,
-				6D5C7C161A5E65F70088F642 /* SearchOperation.m */,
-				6D5C7C171A5E65F70088F642 /* SearchParams.h */,
-				6D5C7C181A5E65F70088F642 /* SearchParams.m */,
-				6D5C7C191A5E65F70088F642 /* UploadSearchParams.h */,
-				6D5C7C1A1A5E65F70088F642 /* UploadSearchParams.m */,
-				6D5C7C1B1A5E65F70088F642 /* ViSearchClient.h */,
-				6D5C7C1C1A5E65F70088F642 /* ViSearchClient.m */,
+				6D5C7C1D1A5E65F70088F642 /* ViSearchResult */,
+				A90A7D151AAEBDC200D2DD65 /* SearchHandler */,
+				A90A7CFC1AAEB3F500D2DD65 /* ViSearchClient */,
+				A90A7D001AAEB95900D2DD65 /* Params */,
 			);
 			path = ViSearchAPISource;
 			sourceTree = "<group>";
@@ -286,12 +282,81 @@
 		6D5C7C1D1A5E65F70088F642 /* ViSearchResult */ = {
 			isa = PBXGroup;
 			children = (
+				A97FA24B1AB6DDFE00C78633 /* ImageResult.h */,
+				A97FA24C1AB6DDFE00C78633 /* ImageResult.m */,
 				6D5C7C1E1A5E65F70088F642 /* ViSearchError.h */,
 				6D5C7C1F1A5E65F70088F642 /* ViSearchError.m */,
 				6D5C7C201A5E65F70088F642 /* ViSearchResult.h */,
 				6D5C7C211A5E65F70088F642 /* ViSearchResult.m */,
 			);
-			path = ViSearchResult;
+			name = ViSearchResult;
+			path = ../ViSearchResult;
+			sourceTree = "<group>";
+		};
+		A90A7CFC1AAEB3F500D2DD65 /* ViSearchClient */ = {
+			isa = PBXGroup;
+			children = (
+				A966E6331AB8115600415026 /* ViSearchClient.h */,
+				A966E6341AB8115600415026 /* ViSearchClient.m */,
+			);
+			name = ViSearchClient;
+			path = ../../Example/ViSearch;
+			sourceTree = "<group>";
+		};
+		A90A7D001AAEB95900D2DD65 /* Params */ = {
+			isa = PBXGroup;
+			children = (
+				6D5C7C0F1A5E65F70088F642 /* BaseSearchParams.h */,
+				6D5C7C101A5E65F70088F642 /* BaseSearchParams.m */,
+				A90A7D011AAEB96B00D2DD65 /* ConcreteParams */,
+				A90A7D021AAEB9E000D2DD65 /* misc */,
+			);
+			name = Params;
+			sourceTree = "<group>";
+		};
+		A90A7D011AAEB96B00D2DD65 /* ConcreteParams */ = {
+			isa = PBXGroup;
+			children = (
+				6D5C7C171A5E65F70088F642 /* SearchParams.h */,
+				6D5C7C181A5E65F70088F642 /* SearchParams.m */,
+				6D5C7C191A5E65F70088F642 /* UploadSearchParams.h */,
+				6D5C7C1A1A5E65F70088F642 /* UploadSearchParams.m */,
+				6D5C7C131A5E65F70088F642 /* ColorSearchParams.h */,
+				6D5C7C141A5E65F70088F642 /* ColorSearchParams.m */,
+			);
+			name = ConcreteParams;
+			sourceTree = "<group>";
+		};
+		A90A7D021AAEB9E000D2DD65 /* misc */ = {
+			isa = PBXGroup;
+			children = (
+				6D5C7C111A5E65F70088F642 /* Box.h */,
+				6D5C7C121A5E65F70088F642 /* Box.m */,
+				A97FA2481AB6DDEE00C78633 /* ImageSettings.h */,
+				A97FA2491AB6DDEE00C78633 /* ImageSettings.m */,
+			);
+			name = misc;
+			sourceTree = "<group>";
+		};
+		A90A7D151AAEBDC200D2DD65 /* SearchHandler */ = {
+			isa = PBXGroup;
+			children = (
+				A90A7D191AAEBE5B00D2DD65 /* ConcreteHandler */,
+				A90A7D161AAEBDF200D2DD65 /* ViSearchHandler.h */,
+				A90A7D171AAEBDF200D2DD65 /* ViSearchHandler.m */,
+			);
+			name = SearchHandler;
+			sourceTree = "<group>";
+		};
+		A90A7D191AAEBE5B00D2DD65 /* ConcreteHandler */ = {
+			isa = PBXGroup;
+			children = (
+				A90A7D1A1AAEC00100D2DD65 /* ViSearchBasicHandler.h */,
+				A90A7D1B1AAEC00100D2DD65 /* ViSearchBasicHandler.m */,
+				A90A7D1D1AAEC02000D2DD65 /* ViSearchImageUploadHandler.h */,
+				A90A7D1E1AAEC02000D2DD65 /* ViSearchImageUploadHandler.m */,
+			);
+			name = ConcreteHandler;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -347,7 +412,7 @@
 				ORGANIZATIONNAME = "Shaohuan Li";
 				TargetAttributes = {
 					6003F589195388D20070C39A = {
-						DevelopmentTeam = 345PN8HV64;
+						DevelopmentTeam = Y532GX4NWP;
 					};
 					6003F5AD195388D20070C39A = {
 						TestTargetID = 6003F589195388D20070C39A;
@@ -379,7 +444,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
-				6DDD889D1A5F892F0062CEAB /* Main_iPad.storyboard in Resources */,
 				6003F5A1195388D20070C39A /* Main_iPhone.storyboard in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
 			);
@@ -464,19 +528,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				6D5C7C241A5E65F70088F642 /* ViSearchAPI.m in Sources */,
+				A90A7D1F1AAEC02000D2DD65 /* ViSearchImageUploadHandler.m in Sources */,
 				6003F59E195388D20070C39A /* ViSearchAppDelegate.m in Sources */,
 				6D5C7C281A5E65F70088F642 /* Box.m in Sources */,
 				6D5C7C261A5E65F70088F642 /* BaseSearchParams.m in Sources */,
 				6003F5A7195388D20070C39A /* ViSearchViewController.m in Sources */,
+				A97FA24D1AB6DDFE00C78633 /* ImageResult.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 				6D5C7C341A5E65F70088F642 /* ViSearchError.m in Sources */,
 				6D5C7C221A5E65F70088F642 /* NSString+HMAC_SHA1.m in Sources */,
+				A97FA24A1AB6DDEE00C78633 /* ImageSettings.m in Sources */,
 				6D5C7C2E1A5E65F70088F642 /* SearchParams.m in Sources */,
-				6D5C7C2C1A5E65F70088F642 /* SearchOperation.m in Sources */,
 				6D5C7C2A1A5E65F70088F642 /* ColorSearchParams.m in Sources */,
+				A90A7D1C1AAEC00100D2DD65 /* ViSearchBasicHandler.m in Sources */,
 				6D5C7C361A5E65F70088F642 /* ViSearchResult.m in Sources */,
 				6D5C7C301A5E65F70088F642 /* UploadSearchParams.m in Sources */,
-				6D5C7C321A5E65F70088F642 /* ViSearchClient.m in Sources */,
+				A90A7D181AAEBDF200D2DD65 /* ViSearchHandler.m in Sources */,
+				A966E6351AB8115600415026 /* ViSearchClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -484,13 +552,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6D5C7C2D1A5E65F70088F642 /* SearchOperation.m in Sources */,
 				6D5C7C351A5E65F70088F642 /* ViSearchError.m in Sources */,
 				6D5C7C291A5E65F70088F642 /* Box.m in Sources */,
 				6D5C7C2B1A5E65F70088F642 /* ColorSearchParams.m in Sources */,
 				6D5C7C311A5E65F70088F642 /* UploadSearchParams.m in Sources */,
 				6D5C7C2F1A5E65F70088F642 /* SearchParams.m in Sources */,
-				6D5C7C331A5E65F70088F642 /* ViSearchClient.m in Sources */,
 				6D5C7C251A5E65F70088F642 /* ViSearchAPI.m in Sources */,
 				6003F5BC195388D20070C39A /* Tests.m in Sources */,
 				6D5C7C271A5E65F70088F642 /* BaseSearchParams.m in Sources */,
@@ -534,19 +600,12 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		6DDD889B1A5F892F0062CEAB /* Main_iPad.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6DDD889C1A5F892F0062CEAB /* Base */,
-			);
-			name = Main_iPad.storyboard;
-			sourceTree = "<group>";
-		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		6003F5BD195388D20070C39A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D9A011956FD6A0A8995EF708 /* Pods-ViSearch.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -581,11 +640,13 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Debug;
 		};
 		6003F5BE195388D20070C39A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1CC08F4030C278330D558073 /* Pods-ViSearch.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -624,10 +685,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ViSearch/ViSearch-Prefix.pch";
 				INFOPLIST_FILE = "ViSearch/ViSearch-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -639,10 +704,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ViSearch/ViSearch-Prefix.pch";
 				INFOPLIST_FILE = "ViSearch/ViSearch-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
