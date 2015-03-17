@@ -18,8 +18,6 @@
     
     NSString *urlString = [self generateRequestUrlPrefixWithParams: params.toDict];
     [request setURL: [NSURL URLWithString:urlString]];
-    
-    NSLog(@"%@", urlString);
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     
     [NSURLConnection sendAsynchronousRequest:request queue:queue

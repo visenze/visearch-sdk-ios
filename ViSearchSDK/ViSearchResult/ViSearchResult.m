@@ -38,7 +38,6 @@
         NSArray *values = [self.content objectForKey:@"result"];
         for (NSDictionary *data in values) {
             NSDictionary *values_map = [data objectForKey:@"value_map"];
-            NSLog(@"%@", values_map);
             
             ImageResult *imgResult = [ImageResult new];
             imgResult.url = [values_map objectForKey:@"im_url"];

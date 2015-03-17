@@ -37,7 +37,6 @@
     
     // set URL
     [request setURL: [NSURL URLWithString:urlString]];
-    NSLog(@"%@", urlString);
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     
     [NSURLConnection sendAsynchronousRequest:request queue:queue
