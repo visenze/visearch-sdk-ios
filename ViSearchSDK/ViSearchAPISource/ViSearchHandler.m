@@ -19,6 +19,10 @@ static NSInteger const NonceLength = 8;
 
 @implementation ViSearchHandler
 
+#pragma mark abstract method
+
+- (void)handleWithParams:(BaseSearchParams *)params success:(void (^)(NSInteger, id, NSError *))success failure:(void (^)(NSInteger, id, NSError *))failure {}
+
 #pragma mark Preprocess Network Help Functions
 - (ViSearchResult*)generateResultWithResponseData:(NSData*)responseData error:(NSError*)error httpStatusCode:(int)httpStatusCode {
     

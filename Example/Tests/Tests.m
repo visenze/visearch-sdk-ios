@@ -53,13 +53,13 @@
     while (flag);
 }
 
-- (void)testProductIdTest {
+- (void)testImageIdTest {
     SearchParams *searchParams = [[SearchParams alloc] init];
     searchParams.imName = @"nordstrom-86782956";
     searchParams.fl = @[@"price",@"brand",@"im_url"];
     
     __block int flag = 1;
-    [[ViSearchAPI defaultClient] searchWithProductId:searchParams success:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
+    [[ViSearchAPI defaultClient] searchWithImageId:searchParams success:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
         NSLog(@"product search test success");
         NSLog(@"%@",data.imageResultsArray);
         flag = 0;

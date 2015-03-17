@@ -36,8 +36,8 @@
 #pragma mark Search API
 
 - (void)searchWithColor:(ColorSearchParams *)params
-                success:(void (^)(NSInteger, id, NSError *))success
-                failure:(void (^)(NSInteger, id, NSError *))failure
+                success:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error)) success
+                failure:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error)) failure
 {
     ViSearchHandler *handler = [ViSearchBasicHandler new];
     handler.searchType = @"colorsearch";
@@ -47,8 +47,8 @@
 }
 
 - (void)searchWithImageData:(UploadSearchParams *)params
-                success:(void (^)(NSInteger, id, NSError *))success
-                failure:(void (^)(NSInteger, id, NSError *))failure
+                    success:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error)) success
+                    failure:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error)) failure;
 {
     ViSearchHandler *handler = [ViSearchImageUploadHandler new];
     handler.searchType = @"uploadsearch";
@@ -58,8 +58,8 @@
 }
 
 - (void)searchWithImageUrl:(UploadSearchParams *)params
-                   success:(void (^)(NSInteger, id, NSError *))success
-                   failure:(void (^)(NSInteger, id, NSError *))failure
+                   success:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error))success
+                   failure:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error))failure
 {
     ViSearchHandler *handler = [ViSearchBasicHandler new];
     handler.searchType = @"uploadsearch";
@@ -68,9 +68,9 @@
     [handler handleWithParams:params success:success failure:failure];
 }
 
-- (void)searchWithProductId:(SearchParams *)params
-                    success:(void (^)(NSInteger, id, NSError *))success
-                    failure:(void (^)(NSInteger, id, NSError *))failure
+- (void)searchWithImageId:(SearchParams *)params
+                  success:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error)) success
+                  failure:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error)) failure
 {
     ViSearchHandler *handler = [ViSearchBasicHandler new];
     handler.searchType = @"search";

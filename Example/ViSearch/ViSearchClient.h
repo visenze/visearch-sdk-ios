@@ -10,6 +10,7 @@
 #import "SearchParams.h"
 #import "ColorSearchParams.h"
 #import "UploadSearchParams.h"
+#import "ViSearchResult.h"
 
 @class ViSearchClient;
 
@@ -21,16 +22,16 @@
 
 + (ViSearchClient *)sharedInstance;
 
-- (void)searchWithProductId:(SearchParams *)params
-                    success:(void (^)(NSInteger, id, NSError *)) success
-                    failure:(void (^)(NSInteger, id, NSError *)) failure;
+- (void)searchWithImageId:(SearchParams *)params
+                    success:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error)) success
+                    failure:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error)) failure;
 - (void)searchWithColor:(ColorSearchParams *)params
-                    success:(void (^)(NSInteger, id, NSError *)) success
-                    failure:(void (^)(NSInteger, id, NSError *)) failure;
+                    success:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error)) success
+                    failure:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error)) failure;
 - (void)searchWithImageData:(UploadSearchParams *)params
-                    success:(void (^)(NSInteger, id, NSError *)) success
-                    failure:(void (^)(NSInteger, id, NSError *)) failure;
+                    success:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error)) success
+                    failure:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error)) failure;
 - (void)searchWithImageUrl:(UploadSearchParams *)params
-                   success:(void (^)(NSInteger, id, NSError *))success
-                   failure:(void (^)(NSInteger, id, NSError *))failure;
+                   success:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error))success
+                   failure:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error))failure;
 @end

@@ -90,4 +90,6 @@
     return dict;
 }
 
+- (NSData *)httpPostBodyWithObject:(id)object {return nil;}
+
 @end

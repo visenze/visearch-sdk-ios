@@ -8,8 +8,6 @@
 
 #import "UploadSearchParams.h"
 
-static CGFloat const Quality = 1.0;
-static CGFloat const Max_Width = 512;
 
 @implementation UploadSearchParams
 
