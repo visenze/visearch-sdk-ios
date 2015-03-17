@@ -69,7 +69,7 @@ Edit the Podfile as follow:
 ```
 platform :ios
 target "Demo" do
-pod 'ViSearch', '~>{current version number}'
+pod 'ViSearch', '~>1.0.0'
 end
 ```
 
