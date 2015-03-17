@@ -39,10 +39,10 @@
 		6D5C7C351A5E65F70088F642 /* ViSearchError.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5C7C1F1A5E65F70088F642 /* ViSearchError.m */; };
 		6D5C7C361A5E65F70088F642 /* ViSearchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5C7C211A5E65F70088F642 /* ViSearchResult.m */; };
 		6D5C7C371A5E65F70088F642 /* ViSearchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5C7C211A5E65F70088F642 /* ViSearchResult.m */; };
-		A90A7CFF1AAEB43400D2DD65 /* ViSearchClient.m in Sources */ = {isa = PBXBuildFile; fileRef = A90A7CFE1AAEB43400D2DD65 /* ViSearchClient.m */; };
 		A90A7D181AAEBDF200D2DD65 /* ViSearchHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = A90A7D171AAEBDF200D2DD65 /* ViSearchHandler.m */; };
 		A90A7D1C1AAEC00100D2DD65 /* ViSearchBasicHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = A90A7D1B1AAEC00100D2DD65 /* ViSearchBasicHandler.m */; };
 		A90A7D1F1AAEC02000D2DD65 /* ViSearchImageUploadHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = A90A7D1E1AAEC02000D2DD65 /* ViSearchImageUploadHandler.m */; };
+		A966E6351AB8115600415026 /* ViSearchClient.m in Sources */ = {isa = PBXBuildFile; fileRef = A966E6341AB8115600415026 /* ViSearchClient.m */; };
 		A97FA24A1AB6DDEE00C78633 /* ImageSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = A97FA2491AB6DDEE00C78633 /* ImageSettings.m */; };
 		A97FA24D1AB6DDFE00C78633 /* ImageResult.m in Sources */ = {isa = PBXBuildFile; fileRef = A97FA24C1AB6DDFE00C78633 /* ImageResult.m */; };
 		B31C5696F17BA8D686811EEB /* libPods-Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E62AA2800F3F2C1777A9EF3F /* libPods-Tests.a */; };
@@ -101,14 +101,14 @@
 		6D5C7C201A5E65F70088F642 /* ViSearchResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViSearchResult.h; sourceTree = "<group>"; };
 		6D5C7C211A5E65F70088F642 /* ViSearchResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViSearchResult.m; sourceTree = "<group>"; };
 		9F096AB773CF30920C2B30F4 /* libPods-ViSearch.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ViSearch.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A90A7CFD1AAEB43300D2DD65 /* ViSearchClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViSearchClient.h; sourceTree = "<group>"; };
-		A90A7CFE1AAEB43400D2DD65 /* ViSearchClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViSearchClient.m; sourceTree = "<group>"; };
 		A90A7D161AAEBDF200D2DD65 /* ViSearchHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViSearchHandler.h; sourceTree = "<group>"; };
 		A90A7D171AAEBDF200D2DD65 /* ViSearchHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViSearchHandler.m; sourceTree = "<group>"; };
 		A90A7D1A1AAEC00100D2DD65 /* ViSearchBasicHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViSearchBasicHandler.h; sourceTree = "<group>"; };
 		A90A7D1B1AAEC00100D2DD65 /* ViSearchBasicHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViSearchBasicHandler.m; sourceTree = "<group>"; };
 		A90A7D1D1AAEC02000D2DD65 /* ViSearchImageUploadHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViSearchImageUploadHandler.h; sourceTree = "<group>"; };
 		A90A7D1E1AAEC02000D2DD65 /* ViSearchImageUploadHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViSearchImageUploadHandler.m; sourceTree = "<group>"; };
+		A966E6331AB8115600415026 /* ViSearchClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViSearchClient.h; sourceTree = "<group>"; };
+		A966E6341AB8115600415026 /* ViSearchClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViSearchClient.m; sourceTree = "<group>"; };
 		A97FA2481AB6DDEE00C78633 /* ImageSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageSettings.h; sourceTree = "<group>"; };
 		A97FA2491AB6DDEE00C78633 /* ImageSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageSettings.m; sourceTree = "<group>"; };
 		A97FA24B1AB6DDFE00C78633 /* ImageResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageResult.h; sourceTree = "<group>"; };
@@ -296,8 +296,8 @@
 		A90A7CFC1AAEB3F500D2DD65 /* ViSearchClient */ = {
 			isa = PBXGroup;
 			children = (
-				A90A7CFD1AAEB43300D2DD65 /* ViSearchClient.h */,
-				A90A7CFE1AAEB43400D2DD65 /* ViSearchClient.m */,
+				A966E6331AB8115600415026 /* ViSearchClient.h */,
+				A966E6341AB8115600415026 /* ViSearchClient.m */,
 			);
 			name = ViSearchClient;
 			path = ../../Example/ViSearch;
@@ -534,7 +534,6 @@
 				6D5C7C261A5E65F70088F642 /* BaseSearchParams.m in Sources */,
 				6003F5A7195388D20070C39A /* ViSearchViewController.m in Sources */,
 				A97FA24D1AB6DDFE00C78633 /* ImageResult.m in Sources */,
-				A90A7CFF1AAEB43400D2DD65 /* ViSearchClient.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 				6D5C7C341A5E65F70088F642 /* ViSearchError.m in Sources */,
 				6D5C7C221A5E65F70088F642 /* NSString+HMAC_SHA1.m in Sources */,
@@ -545,6 +544,7 @@
 				6D5C7C361A5E65F70088F642 /* ViSearchResult.m in Sources */,
 				6D5C7C301A5E65F70088F642 /* UploadSearchParams.m in Sources */,
 				A90A7D181AAEBDF200D2DD65 /* ViSearchHandler.m in Sources */,
+				A966E6351AB8115600415026 /* ViSearchClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -605,6 +605,7 @@
 /* Begin XCBuildConfiguration section */
 		6003F5BD195388D20070C39A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D9A011956FD6A0A8995EF708 /* Pods-ViSearch.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -639,11 +640,13 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Debug;
 		};
 		6003F5BE195388D20070C39A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1CC08F4030C278330D558073 /* Pods-ViSearch.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
