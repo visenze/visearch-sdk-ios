@@ -13,8 +13,6 @@ static NSInteger const NonceLength = 8;
 
 @interface ViSearchHandler()
 
-- (NSDictionary*)getAuthParams;
-
 @end
 
 @implementation ViSearchHandler
@@ -65,11 +63,9 @@ static NSInteger const NonceLength = 8;
 - (NSString*)generateRequestUrlPrefixWithParams:(NSDictionary*)params {
     //assert(method != nil);
     
-    NSMutableString *urlString = [NSMutableString stringWithFormat:@"%@/%@?access_key=%@", [self.delegate getHost], self.searchType, [self.delegate getAccessKey]];
-    NSDictionary* authParams = [self getAuthParams];
-    for (NSString* key in authParams.allKeys) {
-        [urlString appendFormat:@"&%@=%@", key, [authParams objectForKey:key]];
-    }
+    //NSMutableString *urlString = [NSMutableString stringWithFormat:@"%@/%@?access_key=%@", [self.delegate getHost], self.searchType, [self.delegate getAccessKey]];
+    NSMutableString *urlString = [NSMutableString stringWithFormat:@"%@/%@?", [self.delegate getHost], self.searchType];
+    
     if (params != nil) {
         for (NSString* key in params.allKeys) {
             if([[params objectForKey:key] isKindOfClass:[NSArray class]]){
@@ -83,30 +79,36 @@ static NSInteger const NonceLength = 8;
     return [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 }
 
-- (NSDictionary*)getAuthParams {
-    NSMutableDictionary* dict = [NSMutableDictionary dictionary];
-    NSString* nonce = [self generateNonce: NonceLength];
-    NSString* date = [NSString stringWithFormat:@"%d",(int)round([[NSDate date] timeIntervalSince1970])];
-    NSString* sigStr = [NSString stringWithFormat:@"%@%@%@", [self.delegate getSecretKey], nonce, date];
-    [dict setObject:nonce forKey:@"nonce"];
-    [dict setObject:date forKey:@"date"];
-    [dict setObject:[sigStr HmacSha1WithSecret:[self.delegate getSecretKey]] forKey:@"sig"];
-    return dict;
+- (NSString *)getAuthParams {
+    NSString *authStr = [NSString stringWithFormat:@"%@:%@", [self.delegate getAccessKey], [self.delegate getSecretKey]];
+    
+    NSData *encodeData = [authStr dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *encodeString = [encodeData base64EncodedStringWithOptions:0];
+    NSString *authEncodeString = [@"Basic " stringByAppendingString:encodeString];
+    
+    return authEncodeString;
+//    NSString* nonce = [self generateNonce: NonceLength];
+//    NSString* date = [NSString stringWithFormat:@"%d",(int)round([[NSDate date] timeIntervalSince1970])];
+//    NSString* sigStr = [NSString stringWithFormat:@"%@%@%@", [self.delegate getSecretKey], nonce, date];
+//    [dict setObject:nonce forKey:@"nonce"];
+//    [dict setObject:date forKey:@"date"];
+//    [dict setObject:[sigStr HmacSha1WithSecret:[self.delegate getSecretKey]] forKey:@"sig"];
+//    return dict;
 }
 
-- (NSString *)generateNonce:(int)len {
-    static NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    NSMutableString *randomString = [NSMutableString stringWithCapacity: len];
-    for (int i=0; i<len; i++) {
-        [randomString appendFormat: @"%C", [letters characterAtIndex: arc4random() % [letters length]]];
-    }
-    NSData *data = [randomString dataUsingEncoding:NSUTF8StringEncoding];
-    const unsigned char *buffer = (const unsigned char *)[data bytes];
-    NSString *nonce = [NSMutableString stringWithCapacity:data.length * 2];
-    
-    for (int i = 0; i < data.length; ++i)
-        nonce = [nonce stringByAppendingFormat:@"%02lx", (unsigned long)buffer[i]];
-    return nonce;
-}
+//- (NSString *)generateNonce:(int)len {
+//    static NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+//    NSMutableString *randomString = [NSMutableString stringWithCapacity: len];
+//    for (int i=0; i<len; i++) {
+//        [randomString appendFormat: @"%C", [letters characterAtIndex: arc4random() % [letters length]]];
+//    }
+//    NSData *data = [randomString dataUsingEncoding:NSUTF8StringEncoding];
+//    const unsigned char *buffer = (const unsigned char *)[data bytes];
+//    NSString *nonce = [NSMutableString stringWithCapacity:data.length * 2];
+//    
+//    for (int i = 0; i < data.length; ++i)
+//        nonce = [nonce stringByAppendingFormat:@"%02lx", (unsigned long)buffer[i]];
+//    return nonce;
+//}
 
 @end

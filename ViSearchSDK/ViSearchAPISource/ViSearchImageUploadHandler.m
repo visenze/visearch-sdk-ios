@@ -26,6 +26,7 @@
     // create request
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setHTTPMethod:@"POST"];
+    [request addValue:self.getAuthParams forHTTPHeaderField:@"Authorization"];
     
     // set Content-Type in HTTP header
     NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundary];
@@ -37,7 +38,7 @@
     
     // set URL
     [request setURL: [NSURL URLWithString:urlString]];
-    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    NSOperationQueue *queue = [self.delegate getOperationQ];
     
     [NSURLConnection sendAsynchronousRequest:request queue:queue
         completionHandler:^(NSURLResponse *response, NSData *data, NSError *error){
