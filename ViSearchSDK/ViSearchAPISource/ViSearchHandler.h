@@ -15,6 +15,7 @@
 - (NSString *)getAccessKey;
 - (NSString *)getSecretKey;
 - (NSString *)getHost;
+- (NSOperationQueue *)getOperationQ;
 
 @end
 
@@ -36,4 +37,5 @@
                  failure:(void (^)(NSInteger, id, NSError *)) failure;
 - (ViSearchResult*)generateResultWithResponseData:(NSData*)responseData error:(NSError*)error httpStatusCode:(int)httpStatusCode;
 - (NSString*)generateRequestUrlPrefixWithParams:(NSDictionary*)params;
+- (NSString *)getAuthParams;
 @end

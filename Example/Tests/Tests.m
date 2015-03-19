@@ -12,13 +12,19 @@
 
 @interface ViSearchTests : XCTestCase
 
+@property ViSearchClient *client;
+
 @end
 
 @implementation ViSearchTests
 
 - (void)setUp {
     [super setUp];
-    [ViSearchAPI setupAccessKey:@"" andSecretKey:@""];
+    //[ViSearchAPI setupAccessKey:@"" andSecretKey:@""];
+    //self.client = [ViSearchAPI defaultClient];
+    
+    self.client = [[ViSearchClient alloc] initWithBaseUrl:@""
+        accessKey:@"" secretKey:@""];
     // Put setup code here. This method is called before the invocation of each test method in the class.
 }
 
@@ -38,7 +44,7 @@
     
     __block int flag = 1;
     
-    [[ViSearchAPI defaultClient] searchWithColor:colorSearchParams success:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
+    [self.client searchWithColor:colorSearchParams success:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
         NSLog(@"color search test success");
         NSLog(@"%@",data.content);
         flag = 0;
@@ -55,13 +61,13 @@
 
 - (void)testImageIdTest {
     SearchParams *searchParams = [[SearchParams alloc] init];
-    searchParams.imName = @"nordstrom-86782956";
+    searchParams.imName = @"yoox-34301262";
     searchParams.fl = @[@"price",@"brand",@"im_url"];
     
     __block int flag = 1;
-    [[ViSearchAPI defaultClient] searchWithImageId:searchParams success:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
+    [self.client searchWithImageId:searchParams success:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
         NSLog(@"product search test success");
-        NSLog(@"%@",data.imageResultsArray);
+        NSLog(@"%@",data.content);
         flag = 0;
     } failure:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
         NSLog(@"product search test fail");
@@ -78,9 +84,9 @@
     uploadSearchParams.settings = [[ImageSettings alloc] initWithSize:CGSizeMake(800, 800) Quality:1.0];
     
     __block int flag = 1;
-    [[ViSearchAPI defaultClient] searchWithImageUrl:uploadSearchParams success:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
+    [self.client searchWithImageUrl:uploadSearchParams success:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
         NSLog(@"image url search test success");
-        NSLog(@"%@",data.imageResultsArray);
+        NSLog(@"%@",data.content);
         flag = 0;
     } failure:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
         NSLog(@"image url search test fail");
@@ -102,7 +108,7 @@
     [uploadSearchParams.fq setObject:@"price" forKey:@"0.0, 199.0"];
 
     __block int flag = 1;
-    [[ViSearchAPI defaultClient] searchWithImageData:uploadSearchParams success:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
+    [self.client searchWithImageData:uploadSearchParams success:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
         NSLog(@"image data search test success");
         NSLog(@"%@",data.content);
         flag = 0;

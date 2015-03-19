@@ -18,7 +18,9 @@
     
     NSString *urlString = [self generateRequestUrlPrefixWithParams: params.toDict];
     [request setURL: [NSURL URLWithString:urlString]];
-    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    [request addValue:self.getAuthParams forHTTPHeaderField:@"Authorization"];
+
+    NSOperationQueue *queue = [self.delegate getOperationQ];
     
     [NSURLConnection sendAsynchronousRequest:request queue:queue
         completionHandler:^(NSURLResponse *response, NSData *data, NSError *error){
