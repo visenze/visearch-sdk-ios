@@ -42,9 +42,9 @@
 		A90A7D181AAEBDF200D2DD65 /* ViSearchHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = A90A7D171AAEBDF200D2DD65 /* ViSearchHandler.m */; };
 		A90A7D1C1AAEC00100D2DD65 /* ViSearchBasicHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = A90A7D1B1AAEC00100D2DD65 /* ViSearchBasicHandler.m */; };
 		A90A7D1F1AAEC02000D2DD65 /* ViSearchImageUploadHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = A90A7D1E1AAEC02000D2DD65 /* ViSearchImageUploadHandler.m */; };
-		A966E6351AB8115600415026 /* ViSearchClient.m in Sources */ = {isa = PBXBuildFile; fileRef = A966E6341AB8115600415026 /* ViSearchClient.m */; };
 		A97FA24A1AB6DDEE00C78633 /* ImageSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = A97FA2491AB6DDEE00C78633 /* ImageSettings.m */; };
 		A97FA24D1AB6DDFE00C78633 /* ImageResult.m in Sources */ = {isa = PBXBuildFile; fileRef = A97FA24C1AB6DDFE00C78633 /* ImageResult.m */; };
+		A9F979431ABAC7C300BE85F4 /* ViSearchClient.m in Sources */ = {isa = PBXBuildFile; fileRef = A9F979421ABAC7C300BE85F4 /* ViSearchClient.m */; };
 		B31C5696F17BA8D686811EEB /* libPods-Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E62AA2800F3F2C1777A9EF3F /* libPods-Tests.a */; };
 		E859A44C39AEC79551F6A0F8 /* libPods-ViSearch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F096AB773CF30920C2B30F4 /* libPods-ViSearch.a */; };
 /* End PBXBuildFile section */
@@ -107,12 +107,12 @@
 		A90A7D1B1AAEC00100D2DD65 /* ViSearchBasicHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViSearchBasicHandler.m; sourceTree = "<group>"; };
 		A90A7D1D1AAEC02000D2DD65 /* ViSearchImageUploadHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViSearchImageUploadHandler.h; sourceTree = "<group>"; };
 		A90A7D1E1AAEC02000D2DD65 /* ViSearchImageUploadHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViSearchImageUploadHandler.m; sourceTree = "<group>"; };
-		A966E6331AB8115600415026 /* ViSearchClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViSearchClient.h; sourceTree = "<group>"; };
-		A966E6341AB8115600415026 /* ViSearchClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViSearchClient.m; sourceTree = "<group>"; };
 		A97FA2481AB6DDEE00C78633 /* ImageSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageSettings.h; sourceTree = "<group>"; };
 		A97FA2491AB6DDEE00C78633 /* ImageSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageSettings.m; sourceTree = "<group>"; };
 		A97FA24B1AB6DDFE00C78633 /* ImageResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageResult.h; sourceTree = "<group>"; };
 		A97FA24C1AB6DDFE00C78633 /* ImageResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageResult.m; sourceTree = "<group>"; };
+		A9F979411ABAC7C300BE85F4 /* ViSearchClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViSearchClient.h; sourceTree = "<group>"; };
+		A9F979421ABAC7C300BE85F4 /* ViSearchClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViSearchClient.m; sourceTree = "<group>"; };
 		ABCD188998CA4915B4FF851F /* Pods-Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tests/Pods-Tests.release.xcconfig"; sourceTree = "<group>"; };
 		CDF5EB6A84E898BF8C1FF540 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		D570927AAF7E79322025CD79 /* ViSearch.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = ViSearch.podspec; path = ../ViSearch.podspec; sourceTree = "<group>"; };
@@ -296,8 +296,8 @@
 		A90A7CFC1AAEB3F500D2DD65 /* ViSearchClient */ = {
 			isa = PBXGroup;
 			children = (
-				A966E6331AB8115600415026 /* ViSearchClient.h */,
-				A966E6341AB8115600415026 /* ViSearchClient.m */,
+				A9F979411ABAC7C300BE85F4 /* ViSearchClient.h */,
+				A9F979421ABAC7C300BE85F4 /* ViSearchClient.m */,
 			);
 			name = ViSearchClient;
 			path = ../../Example/ViSearch;
@@ -544,7 +544,7 @@
 				6D5C7C361A5E65F70088F642 /* ViSearchResult.m in Sources */,
 				6D5C7C301A5E65F70088F642 /* UploadSearchParams.m in Sources */,
 				A90A7D181AAEBDF200D2DD65 /* ViSearchHandler.m in Sources */,
-				A966E6351AB8115600415026 /* ViSearchClient.m in Sources */,
+				A9F979431ABAC7C300BE85F4 /* ViSearchClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

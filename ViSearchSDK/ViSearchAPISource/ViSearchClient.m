@@ -12,9 +12,15 @@
 
 @interface ViSearchClient()<ViSearchNetWorkDelegate>
 
+@property (nonatomic) NSString *host;
+@property NSOperationQueue *operationQ;
+
 @end
 
 @implementation ViSearchClient
+@synthesize host = _host;
+
+#pragma mark LifeCycle
 
 + (ViSearchClient *)sharedInstance {
     static ViSearchClient *sharedInstance = nil;
@@ -29,8 +35,29 @@
     return sharedInstance;
 }
 
-- (NSString *)host {
-    return @"http://visearch.visenze.com";
+- (ViSearchClient *)initWithBaseUrl:(NSString *)baseUrl accessKey:(NSString *)accessKey secretKey:(NSString *)secretKey {
+    if (self = [super init]) {
+        self.host = baseUrl;
+        self.accessKey = accessKey;
+        self.secretKey = secretKey;
+        self.operationQ = [NSOperationQueue new];
+    }
+    
+    return self;
+}
+
+#pragma mark Customized Accessors
+
+- (NSString *)host{
+    if (_host) {
+        return _host;
+    }else {
+        return @"http://visearch.visenze.com";
+    }
+}
+
+- (void)setHost:(NSString *)host {
+    _host = host;
 }
 
 #pragma mark Search API
@@ -93,4 +120,7 @@
     return self.host;
 }
 
+- (NSOperationQueue *)getOperationQ {
+    return self.operationQ;
+}
 @end
