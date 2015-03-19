@@ -22,6 +22,8 @@
 
 + (ViSearchClient *)sharedInstance;
 
+- (ViSearchClient *)initWithBaseUrl:(NSString *)baseUrl accessKey:(NSString *)accessKey secretKey:(NSString *) secretKey;
+
 - (void)searchWithImageId:(SearchParams *)params
                     success:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error)) success
                     failure:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error)) failure;
