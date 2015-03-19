@@ -12,7 +12,7 @@
 
 @interface ViSearchClient()<ViSearchNetWorkDelegate>
 
-@property (nonatomic)NSString *host;
+@property (nonatomic) NSString *host;
 @property NSOperationQueue *operationQ;
 
 @end
@@ -54,6 +54,10 @@
     }else {
         return @"http://visearch.visenze.com";
     }
+}
+
+- (void)setHost:(NSString *)host {
+    _host = host;
 }
 
 #pragma mark Search API

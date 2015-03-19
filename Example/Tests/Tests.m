@@ -21,10 +21,10 @@
 - (void)setUp {
     [super setUp];
     //[ViSearchAPI setupAccessKey:@"" andSecretKey:@""];
+    //self.client = [ViSearchAPI defaultClient];
     
     self.client = [[ViSearchClient alloc] initWithBaseUrl:@""
         accessKey:@"" secretKey:@""];
-    //self.client = [ViSearchAPI defaultClient];
     // Put setup code here. This method is called before the invocation of each test method in the class.
 }
 
