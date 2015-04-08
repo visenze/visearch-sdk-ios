@@ -1,6 +1,6 @@
 # ViSearch iOS SDK
 
-[![Build Status](https://api.travis-ci.org/visenze/visearch-sdk-android.svg?branch=master)](https://travis-ci.org/visenze/visearch-sdk-ios)
+[![Build Status](https://travis-ci.org/visenze/visearch-sdk-ios.svg)](https://travis-ci.org/visenze/visearch-sdk-ios)
 
 ---
 
