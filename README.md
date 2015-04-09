@@ -67,10 +67,11 @@ pod init
 
 Edit the Podfile as follow:
 ```
-platform :ios
-target "Demo" do
-pod 'ViSearch', '~>1.0.0'
-end
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '7.0' 
+...
+pod 'ViSearch', '~>1.0.1'
+...
 ```
 
 Install the ViSearch SDK:
@@ -97,10 +98,18 @@ Then add it to your project
 ```objectivec
 #import <ViSearch/VisearchAPI.h>
 ...
+// using default ViSearch client. The client, by default,
+// connects to Visenze's server
 static NSString * const accessKey = @"your_access_key";
 static NSString * const privateKey = @"your_secret_key";
 
-[ViSearchAPI setupAccessKey:(NSString *)accessKey andSecretKey:(NSString *)secretKey];
+[ViSearchAPI setupAccessKey:accessKey andSecretKey:secretKey];
+ViSearchClient *client = [ViSearch defaultClient];
+...
+// or using customized client, which connects to your own server
+static NSString * const privateKey = @"your_url";
+ViSearchClient *client = [[ViSearchClient alloc] initWithBaseUrl:url
+	accessKey:accessKey secretKey:secretKey];
 ...
 ```
 
