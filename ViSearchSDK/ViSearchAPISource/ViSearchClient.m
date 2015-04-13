@@ -40,7 +40,6 @@
         self.host = baseUrl;
         self.accessKey = accessKey;
         self.secretKey = secretKey;
-        self.operationQ = [NSOperationQueue new];
     }
     
     return self;
@@ -121,6 +120,9 @@
 }
 
 - (NSOperationQueue *)getOperationQ {
+    if (!self.operationQ) {
+        self.operationQ = [NSOperationQueue new];
+    }
     return self.operationQ;
 }
 @end

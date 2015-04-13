@@ -26,6 +26,7 @@
     // create request
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setHTTPMethod:@"POST"];
+    [request setTimeoutInterval:10];
     [request addValue:self.getAuthParams forHTTPHeaderField:@"Authorization"];
     
     // set Content-Type in HTTP header
