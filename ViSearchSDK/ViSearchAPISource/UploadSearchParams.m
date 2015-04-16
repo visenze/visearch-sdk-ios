@@ -27,10 +27,12 @@
     NSDictionary * dict = [super toDict];
     if (imageFile != nil){
         if (box) {
-            if (compressedImage != nil)
-                [dict setValue: [NSString stringWithFormat:@"%d,%d,%d,%d", (int)(box.x1*compressedImage.size.width/imageFile.size.width), (int)(box.y1*compressedImage.size.height/imageFile.size.height), (int)(box.x2*compressedImage.size.width/imageFile.size.width), (int)(box.y2*compressedImage.size.height/imageFile.size.height)]  forKey:@"box"];
-            else
+            if (compressedImage) {
+                CGFloat scale = (compressedImage.size.height > compressedImage.size.width) ? compressedImage.size.height * compressedImage.scale / (self.imageFile.size.height * self.imageFile.scale) : compressedImage.size.width * compressedImage.scale / (self.imageFile.size.width * self.imageFile.scale);
+                [dict setValue: [NSString stringWithFormat:@"%d,%d,%d,%d", (int)(scale * box.x1), (int)(scale * box.y1), (int)(scale * box.x2), (int)(scale * box.y2)]  forKey:@"box"];
+            } else {
                 [dict setValue: [NSString stringWithFormat:@"%d,%d,%d,%d", box.x1, box.y1, box.x2, box.y2]  forKey:@"box"];
+            }
         }
     }else if (imageUrl != nil) {
         [dict setValue:imageUrl forKey:@"im_url"];
@@ -42,7 +44,7 @@
     NSString *boundary = [object objectForKey:@"boundary"];
     
     float myQuality = self.settings.quality;
-    float myMaxWidth = (self.settings.maxWidth > 1024) ? 1024 : self.settings.maxWidth; // maxWidth should not larger than 1024
+    float myMaxWidth = (self.settings.maxWidth > 1024) ? 1024: self.settings.maxWidth; // maxWidth should not larger than 1024pixel
     
     //compress uiimage into nsdata
     NSData *imageData = [self compressImage:self.imageFile maxWidth:myMaxWidth quality:myQuality];
@@ -50,7 +52,6 @@
     
     // post body
     NSMutableData *body = [[NSMutableData alloc] init];
-    
     // add image data
     if (imageData) {
         [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
@@ -67,9 +68,10 @@
 
 #pragma mark Private
 
+// all calculated in pixel not in point
 - (NSData *)compressImage:(UIImage *)image maxWidth:(float)mWidth quality:(float)myQuality{
-    float actualHeight = image.size.height;
-    float actualWidth = image.size.width;
+    float actualHeight = image.size.height * image.scale;
+    float actualWidth = image.size.width * image.scale;
     float maxHeight = mWidth;
     float imgRatio = actualWidth/actualHeight;
     float maxRatio = mWidth/maxHeight;
@@ -91,8 +93,9 @@
             actualWidth = mWidth;
         }
     }
+    
     CGRect rect = CGRectMake(0.0, 0.0, actualWidth, actualHeight);
-    UIGraphicsBeginImageContext(rect.size);
+    UIGraphicsBeginImageContextWithOptions(rect.size, NO, 1.0);
     [image drawInRect:rect];
     UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
     NSData *imageData = UIImageJPEGRepresentation(img, myQuality);
