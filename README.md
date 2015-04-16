@@ -31,7 +31,7 @@ ViSearch is an API that provides accurate, reliable and scalable image search. V
 
 The ViSearch iOS SDK is an open source software to provide easy integration of ViSearch Search API with your iOS applications. It provides three search methods based on the ViSearch Search API - pre-indexed search, color search and upload search. For source code and references, please visit the [Github Repository](https://github.com/visenze/visearch-sdk-ios).
 
->Current stable version: 1.0.2
+>Current stable version: 1.0.3
 
 >Supported iOS version: iOS 6.x and higher 
 
@@ -70,7 +70,7 @@ Edit the Podfile as follow:
 source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '7.0' 
 ...
-pod 'ViSearch', '~>1.0.2'
+pod 'ViSearch', '~>1.0.3'
 ...
 ```
 
@@ -195,7 +195,7 @@ uploadSearchParams.imageUrl = @"http://example.com/example.jpg";
 ```
 
 ####4.3.1 Selection Box
-If the object you wish to search for takes up only a small portion of your image, or other irrelevant objects exists in the same image, chances are the search result could become inaccurate. Use the Box parameter to refine the search area of the image to improve accuracy. The box coordinated is set with respect to the original size of the uploading image:
+If the object you wish to search for takes up only a small portion of your image, or other irrelevant objects exists in the same image, chances are the search result could become inaccurate. Use the Box parameter to refine the search area of the image to improve accuracy. The box coordinated is set with respect to the original size of the uploading image. Note: the coordinate system uses pixel as unit instead of point.
 
 ```objectivec
 // create the box to refine the area on the searching image
@@ -221,7 +221,7 @@ To reduce upload search latency, by default the uploadSearch method makes a copy
 // by default, the max width of the image is set to 512px, quality is 1.0
 UploadSearchParams *uploadSearchParams = [[UploadSearchParams alloc] init];
 // or you can explicitly set a param's settings
-uploadSearchParams.settings = [ParamSettings defaultSettings];
+uploadSearchParams.settings = [ImageSettings defaultSettings];
 ```
 
 If your image contains fine details such as textile patterns and textures, you can use an image with larger size for search to get better search result:
@@ -230,16 +230,16 @@ If your image contains fine details such as textile patterns and textures, you c
 // by default, the max width of the image is set to 512px, quality is 1.0
 UploadSearchParams *uploadSearchParams = [[UploadSearchParams alloc] init];
 // set the image with high quality settings. 
-// Max width is 1024px, and the quality is 1.0
-uploadSearchParams.settings = [ParamSettings highqualitySettings];
+// Max width is 1024px, and the quality is 0.9. Note: Quality with 1.0 take hugespace
+uploadSearchParams.settings = [ImageSettings highqualitySettings];
 ```
 
 Or, provide the customized resize settings. To make efficient use the of the memory and network bandwidth of mobile device, the maximum size is set at 1024 x 1024. Any image exceeds the limit will be resized to the limit:
 
 ```objectivec
 //resize the image to 800 by 800 area using jpeg 1.0 quality
-uploadSearchParams.settings = [[ParamSettings alloc] 
-	initWithSize:CGSizeMake(800, 800) Quality:1.0];
+uploadSearchParams.settings = [[ImageSettings alloc] 
+	initWithSize:CGSizeMake(800, 800) Quality:0.9];
 ```
 
 
