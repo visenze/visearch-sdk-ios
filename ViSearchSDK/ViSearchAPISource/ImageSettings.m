@@ -12,7 +12,7 @@
 
 + (ImageSettings *)defaultSettings {
     ImageSettings *settings = [ImageSettings new];
-    settings.quality = 0.9;
+    settings.quality = 0.97;
     settings.maxWidth = 512;
     
     return settings;
@@ -20,7 +20,7 @@
 
 + (ImageSettings *)highqualitySettings {
     ImageSettings *settings = [ImageSettings new];
-    settings.quality = 0.9;
+    settings.quality = 0.985;
     settings.maxWidth = 1024;
     
     return settings;
