@@ -218,7 +218,7 @@ When performing upload search, you may notice the increased search latency with 
 To reduce upload search latency, by default the uploadSearch method makes a copy of your image file and resizes the copy to 512x512 pixels if one of the original dimensions exceed 512 pixels. This is the optimized size to lower search latency while not sacrificing search accuracy for general use cases:
 
 ```objectivec
-// by default, the max width of the image is set to 512px, quality is 1.0
+// by default, the max width of the image is set to 512px, quality is 0.97
 UploadSearchParams *uploadSearchParams = [[UploadSearchParams alloc] init];
 // or you can explicitly set a param's settings
 uploadSearchParams.settings = [ImageSettings defaultSettings];
@@ -227,17 +227,17 @@ uploadSearchParams.settings = [ImageSettings defaultSettings];
 If your image contains fine details such as textile patterns and textures, you can use an image with larger size for search to get better search result:
 
 ```objectivec
-// by default, the max width of the image is set to 512px, quality is 1.0
+// by default, the max width of the image is set to 512px, quality is 0.97
 UploadSearchParams *uploadSearchParams = [[UploadSearchParams alloc] init];
 // set the image with high quality settings. 
-// Max width is 1024px, and the quality is 0.9. Note: Quality with 1.0 take hugespace
+// Max width is 1024px, and the quality is 0.985. Note: Quality with 1.0 take hugespace
 uploadSearchParams.settings = [ImageSettings highqualitySettings];
 ```
 
 Or, provide the customized resize settings. To make efficient use the of the memory and network bandwidth of mobile device, the maximum size is set at 1024 x 1024. Any image exceeds the limit will be resized to the limit:
 
 ```objectivec
-//resize the image to 800 by 800 area using jpeg 1.0 quality
+//resize the image to 800 by 800 area using jpeg 0.9 quality
 uploadSearchParams.settings = [[ImageSettings alloc] 
 	initWithSize:CGSizeMake(800, 800) Quality:0.9];
 ```
