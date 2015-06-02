@@ -31,7 +31,7 @@ ViSearch is an API that provides accurate, reliable and scalable image search. V
 
 The ViSearch iOS SDK is an open source software to provide easy integration of ViSearch Search API with your iOS applications. It provides three search methods based on the ViSearch Search API - pre-indexed search, color search and upload search. For source code and references, please visit the [Github Repository](https://github.com/visenze/visearch-sdk-ios).
 
->Current stable version: 1.0.4
+>Current stable version: 1.0.5
 
 >Supported iOS version: iOS 6.x and higher 
 
@@ -70,7 +70,7 @@ Edit the Podfile as follow:
 source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '7.0' 
 ...
-pod 'ViSearch', '~>1.0.4'
+pod 'ViSearch', '~>1.0.5'
 ...
 ```
 
@@ -230,14 +230,14 @@ If your image contains fine details such as textile patterns and textures, you c
 // by default, the max width of the image is set to 512px, quality is 0.97
 UploadSearchParams *uploadSearchParams = [[UploadSearchParams alloc] init];
 // set the image with high quality settings. 
-// Max width is 1024px, and the quality is 0.985.
+// Max width is 1024px, and the quality is 0.985. Note: Quality with 1.0 take hugespace
 uploadSearchParams.settings = [ImageSettings highqualitySettings];
 ```
 
 Or, provide the customized resize settings. To make efficient use the of the memory and network bandwidth of mobile device, the maximum size is set at 1024 x 1024. Any image exceeds the limit will be resized to the limit:
 
 ```objectivec
-//resize the image to 800 by 800 area using jpeg 1.0 quality
+//resize the image to 800 by 800 area using jpeg 0.9 quality
 uploadSearchParams.settings = [[ImageSettings alloc] 
 	initWithSize:CGSizeMake(800, 800) Quality:0.9];
 ```
