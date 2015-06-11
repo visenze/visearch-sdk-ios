@@ -1,5 +1,4 @@
-#
-# Be sure to run `pod lib lint ViSearch.podspec' to ensure this is a
+
 # valid spec and remove all comments before submitting the spec.
 #
 # Any lines starting with a # are optional, but encouraged
@@ -17,7 +16,7 @@ Pod::Spec.new do |s|
                        DESC
   s.homepage         = "https://github.com/visenze/visearch-sdk-ios"
   s.license          = {:type => "MIT", :file => "LICENSE"}
-  s.author           = {"Yaoxuan" => "yaoxuan@visenze.com"}
+  s.author           = {"Yaoxuan" => "yaoxuan@visenze.com", "Yulu" => "yulu@visenze.com"}
   s.source           = { :git => "https://github.com/visenze/visearch-sdk-ios.git", :tag => s.version.to_s }
 
   s.platform     = :ios, '7.0'
