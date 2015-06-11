@@ -218,7 +218,7 @@ When performing upload search, you may notice the increased search latency with 
 To reduce upload search latency, by default the uploadSearch method makes a copy of your image file and resizes the copy to 512x512 pixels if one of the original dimensions exceed 512 pixels. This is the optimized size to lower search latency while not sacrificing search accuracy for general use cases:
 
 ```objectivec
-// by default, the max width of the image is set to 512px, quality is 1.0
+// by default, the max width of the image is set to 512px, quality is 0.97
 UploadSearchParams *uploadSearchParams = [[UploadSearchParams alloc] init];
 // or you can explicitly set a param's settings
 uploadSearchParams.settings = [ImageSettings defaultSettings];
@@ -227,10 +227,10 @@ uploadSearchParams.settings = [ImageSettings defaultSettings];
 If your image contains fine details such as textile patterns and textures, you can use an image with larger size for search to get better search result:
 
 ```objectivec
-// by default, the max width of the image is set to 512px, quality is 1.0
+// by default, the max width of the image is set to 512px, quality is 0.97
 UploadSearchParams *uploadSearchParams = [[UploadSearchParams alloc] init];
 // set the image with high quality settings. 
-// Max width is 1024px, and the quality is 0.9. Note: Quality with 1.0 take hugespace
+// Max width is 1024px, and the quality is 0.985.
 uploadSearchParams.settings = [ImageSettings highqualitySettings];
 ```
 
@@ -332,13 +332,13 @@ UploadSearchParams *uploadSearchParams = [[UploadSearchParams alloc] init];
 
 // the type of "count" on db schema is int, 
 // so we can specify the value range, or do a value match
-[uploadSearchParams.fq setObject:@"count" forKey:@"0, 199"];
-[uploadSearchParams.fq setObject:@"count" forKey:@"199"];
+[uploadSearchParams.fq setObject:@"0, 199" forKey:@"count"];
+[uploadSearchParams.fq setObject:@"199" forKey:@"count"];
 
 // the type of "price" on db schema is float, 
 // so we can specify the value range, or do a value match
-[uploadSearchParams.fq setObject:@"price" forKey:@"0.0, 199.0"];
-[uploadSearchParams.fq setObject:@"price" forKey:@"15.0"];
+[uploadSearchParams.fq setObject:@"0.0, 199.0" forKey:@"price"];
+[uploadSearchParams.fq setObject:@"15.0" forKey:@"price"];
 
 // the type of "description" on db schema is string, so we can do a string match. 
 [uploadSearchParams.fq setObject:@"description" forKey:@"wooden"];
