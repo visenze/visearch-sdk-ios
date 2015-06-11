@@ -332,13 +332,13 @@ UploadSearchParams *uploadSearchParams = [[UploadSearchParams alloc] init];
 
 // the type of "count" on db schema is int, 
 // so we can specify the value range, or do a value match
-[uploadSearchParams.fq setObject:@"count" forKey:@"0, 199"];
-[uploadSearchParams.fq setObject:@"count" forKey:@"199"];
+[uploadSearchParams.fq setObject:@"0, 199" forKey:@"count"];
+[uploadSearchParams.fq setObject:@"199" forKey:@"count"];
 
 // the type of "price" on db schema is float, 
 // so we can specify the value range, or do a value match
-[uploadSearchParams.fq setObject:@"price" forKey:@"0.0, 199.0"];
-[uploadSearchParams.fq setObject:@"price" forKey:@"15.0"];
+[uploadSearchParams.fq setObject:@"0.0, 199.0" forKey:@"price"];
+[uploadSearchParams.fq setObject:@"15.0" forKey:@"price"];
 
 // the type of "description" on db schema is string, so we can do a string match. 
 [uploadSearchParams.fq setObject:@"description" forKey:@"wooden"];
