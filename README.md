@@ -31,7 +31,7 @@ ViSearch is an API that provides accurate, reliable and scalable image search. V
 
 The ViSearch iOS SDK is an open source software to provide easy integration of ViSearch Search API with your iOS applications. It provides three search methods based on the ViSearch Search API - pre-indexed search, color search and upload search. For source code and references, please visit the [Github Repository](https://github.com/visenze/visearch-sdk-ios).
 
->Current stable version: 1.0.4
+>Current stable version: 1.0.5
 
 >Supported iOS version: iOS 6.x and higher 
 
@@ -70,7 +70,7 @@ Edit the Podfile as follow:
 source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '7.0' 
 ...
-pod 'ViSearch', '~>1.0.4'
+pod 'ViSearch', '~>1.0.5'
 ...
 ```
 
