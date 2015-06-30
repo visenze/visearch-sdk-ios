@@ -31,7 +31,7 @@ ViSearch is an API that provides accurate, reliable and scalable image search. V
 
 The ViSearch iOS SDK is an open source software to provide easy integration of ViSearch Search API with your iOS applications. It provides three search methods based on the ViSearch Search API - pre-indexed search, color search and upload search. For source code and references, please visit the [Github Repository](https://github.com/visenze/visearch-sdk-ios).
 
->Current stable version: 1.0.4
+>Current stable version: 1.0.5
 
 >Supported iOS version: iOS 6.x and higher 
 
@@ -70,7 +70,7 @@ Edit the Podfile as follow:
 source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '7.0' 
 ...
-pod 'ViSearch', '~>1.0.4'
+pod 'ViSearch', '~>1.0.5'
 ...
 ```
 
@@ -332,13 +332,13 @@ UploadSearchParams *uploadSearchParams = [[UploadSearchParams alloc] init];
 
 // the type of "count" on db schema is int, 
 // so we can specify the value range, or do a value match
-[uploadSearchParams.fq setObject:@"count" forKey:@"0, 199"];
-[uploadSearchParams.fq setObject:@"count" forKey:@"199"];
+[uploadSearchParams.fq setObject:@"0, 199" forKey:@"count"];
+[uploadSearchParams.fq setObject:@"199" forKey:@"count"];
 
 // the type of "price" on db schema is float, 
 // so we can specify the value range, or do a value match
-[uploadSearchParams.fq setObject:@"price" forKey:@"0.0, 199.0"];
-[uploadSearchParams.fq setObject:@"price" forKey:@"15.0"];
+[uploadSearchParams.fq setObject:@"0.0, 199.0" forKey:@"price"];
+[uploadSearchParams.fq setObject:@"15.0" forKey:@"price"];
 
 // the type of "description" on db schema is string, so we can do a string match. 
 [uploadSearchParams.fq setObject:@"description" forKey:@"wooden"];

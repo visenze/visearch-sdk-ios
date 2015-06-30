@@ -67,8 +67,9 @@
                 for (NSString* value in [params objectForKey:key]) {
                     [urlString appendFormat:@"&%@=%@", key, value];
                 }
+            } else {
+                [urlString appendFormat:@"&%@=%@", key, [params objectForKey:key]];
             }
-            [urlString appendFormat:@"&%@=%@", key, [params objectForKey:key]];
         }
     }
     return [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
