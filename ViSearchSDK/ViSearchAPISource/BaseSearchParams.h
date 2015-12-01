@@ -21,6 +21,9 @@
 @property (atomic) NSDictionary *custom;
 @property (atomic) float scoreMin;
 @property (atomic) float scoreMax;
+@property (atomic) BOOL getAllFl;
+@property (atomic) NSString *detection;
+
 
 - (id)init;
 - (NSDictionary*)toDict;
