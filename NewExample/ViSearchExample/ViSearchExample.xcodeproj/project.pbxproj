@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		50395D0B1C0E866F00BC9A14 /* ViSearch.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 50395D0A1C0E866F00BC9A14 /* ViSearch.podspec */; };
+		50395D0D1C0E867E00BC9A14 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 50395D0C1C0E867E00BC9A14 /* README.md */; };
+		50395D0F1C0E869000BC9A14 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 50395D0E1C0E869000BC9A14 /* LICENSE */; };
 		509BF4D91C0D3E5F0080E055 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 509BF4D81C0D3E5F0080E055 /* main.m */; };
 		509BF4DC1C0D3E5F0080E055 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 509BF4DB1C0D3E5F0080E055 /* AppDelegate.m */; };
 		509BF4DF1C0D3E5F0080E055 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 509BF4DE1C0D3E5F0080E055 /* ViewController.m */; };
@@ -50,6 +53,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		50395D0A1C0E866F00BC9A14 /* ViSearch.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ViSearch.podspec; path = ../../ViSearch.podspec; sourceTree = "<group>"; };
+		50395D0C1C0E867E00BC9A14 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../../README.md; sourceTree = "<group>"; };
+		50395D0E1C0E869000BC9A14 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE; path = ../../LICENSE; sourceTree = "<group>"; };
 		509BF4D41C0D3E5F0080E055 /* ViSearchExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ViSearchExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		509BF4D81C0D3E5F0080E055 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		509BF4DA1C0D3E5F0080E055 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -123,9 +129,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		50395D101C0E869400BC9A14 /* Others */ = {
+			isa = PBXGroup;
+			children = (
+				50395D0E1C0E869000BC9A14 /* LICENSE */,
+				50395D0C1C0E867E00BC9A14 /* README.md */,
+				50395D0A1C0E866F00BC9A14 /* ViSearch.podspec */,
+			);
+			name = Others;
+			sourceTree = "<group>";
+		};
 		509BF4CB1C0D3E5F0080E055 = {
 			isa = PBXGroup;
 			children = (
+				50395D101C0E869400BC9A14 /* Others */,
 				509BF4D61C0D3E5F0080E055 /* ViSearchExample */,
 				509BF4F01C0D3E5F0080E055 /* ViSearchExampleTests */,
 				509BF4FB1C0D3E5F0080E055 /* ViSearchExampleUITests */,
@@ -351,8 +368,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				509BF4E71C0D3E5F0080E055 /* LaunchScreen.storyboard in Resources */,
+				50395D0B1C0E866F00BC9A14 /* ViSearch.podspec in Resources */,
 				509BF4E41C0D3E5F0080E055 /* Assets.xcassets in Resources */,
 				509BF4E21C0D3E5F0080E055 /* Main.storyboard in Resources */,
+				50395D0F1C0E869000BC9A14 /* LICENSE in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -390,6 +409,7 @@
 				509BF5351C0D3EF70080E055 /* ViSearchClient.m in Sources */,
 				509BF53A1C0D3EF70080E055 /* ViSearchResult.m in Sources */,
 				509BF5381C0D3EF70080E055 /* ImageResult.m in Sources */,
+				50395D0D1C0E867E00BC9A14 /* README.md in Sources */,
 				509BF4D91C0D3E5F0080E055 /* main.m in Sources */,
 				509BF5321C0D3EF70080E055 /* SearchParams.m in Sources */,
 				509BF52C1C0D3EF70080E055 /* NSString+HMAC_SHA1.m in Sources */,
@@ -620,6 +640,7 @@
 				509BF5031C0D3E5F0080E055 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		509BF5041C0D3E5F0080E055 /* Build configuration list for PBXNativeTarget "ViSearchExampleTests" */ = {
 			isa = XCConfigurationList;
@@ -628,6 +649,7 @@
 				509BF5061C0D3E5F0080E055 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		509BF5071C0D3E5F0080E055 /* Build configuration list for PBXNativeTarget "ViSearchExampleUITests" */ = {
 			isa = XCConfigurationList;
@@ -636,6 +658,7 @@
 				509BF5091C0D3E5F0080E055 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
