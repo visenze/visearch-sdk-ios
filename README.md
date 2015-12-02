@@ -31,7 +31,7 @@ ViSearch is an API that provides accurate, reliable and scalable image search. V
 
 The ViSearch iOS SDK is an open source software to provide easy integration of ViSearch Search API with your iOS applications. It provides three search methods based on the ViSearch Search API - pre-indexed search, color search and upload search. For source code and references, please visit the [Github Repository](https://github.com/visenze/visearch-sdk-ios).
 
->Current stable version: 1.0.6
+>Current stable version: 1.0.7
 
 >Supported iOS version: iOS 6.x and higher 
 
@@ -46,7 +46,7 @@ In Xcode, go to File > New > Project Select the Single View Application.
 
 Type a name for your project and press Next, here we use Demo as the project name.
 
-![screenshot](https://www.visenze.com/docs/sites/default/files/Screen%20Shot%202015-01-09%20at%206.20.17%20PM.png)
+-![screenshot](https://www.visenze.com/docs/sites/default/files/Screen%20Shot%202015-01-09%20at%206.20.17%20PM.png)
 
 ###2.2 Import ViSearch SDK
 
@@ -70,7 +70,7 @@ Edit the Podfile as follow:
 source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '7.0' 
 ...
-pod 'ViSearch', '~>1.0.6'
+pod 'ViSearch', '~>1.0.7'
 ...
 ```
 
@@ -85,11 +85,11 @@ The Demo.xcworkspace project should be created.
 
 You can also download the iOS [ViSearch SDK](https://github.com/visenze/visearch-sdk-ios/archive/master.zip) directly. To use it, unzip it and drag ViSearch SDK folder into Demo project's file folder.
 
-![screenshot](https://www.visenze.com/docs/sites/default/files/Screen%20Shot%202015-01-09%20at%207.02.44%20PM.png)
+-![screenshot](https://www.visenze.com/docs/sites/default/files/Screen%20Shot%202015-01-09%20at%207.02.44%20PM.png)
 
 Then add it to your project
 
-![screenshot](https://www.visenze.com/docs/sites/default/files/Screen%20Shot%202015-01-09%20at%207.03.28%20PM.png)
+-![screenshot](https://www.visenze.com/docs/sites/default/files/Screen%20Shot%202015-01-09%20at%207.03.28%20PM.png)
 
 
 ##3. Initialization
@@ -308,6 +308,12 @@ SearchParams *searchParams = [[SearchParams alloc] init];
 searchParams.fl = @[@"price",@"brand",@"im_url"];
 ```
 
+To retrieve all metadata of your image results, specify get_all_fl parameter and set it to true:
+```objectivec
+SearchParams *searchParams = [[SearchParams alloc] init];
+searchParams.getAllFl = true;
+```
+
 In result callback you can read the metadata:
 ```objectivec
 success:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
@@ -384,4 +390,4 @@ uplaodSearchParams.scoreMax = 0.8; // the maximum score is 0.8
 
 
 ##7. Code Samples
-Source code of a demo application can be found [here](https://github.com/visenze/visearch-sdk-ios/tree/master/Example)
+Source code of a demo application can be found [here](https://github.com/visenze/visearch-sdk-ios/tree/master/NewExample/ViSearchExample)

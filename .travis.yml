@@ -1,3 +1,3 @@
 language: objective-c
-script:
- - "xctool -workspace Example/ViSearch.xcworkspace -scheme ViSearch-Example -sdk iphonesimulator8.1 -destination 'platform=iOS Simulator,name=iPhone 6,OS=8.1' build test"
+script: 
+- "xctool -project NewExample/ViSearchExample/ViSearchExample.xcodeproj -scheme ViSearchExample -sdk iphonesimulator build test"
