@@ -16,6 +16,7 @@
 @synthesize success;
 @synthesize content;
 @synthesize imageResultsArray = _imageResultsArray;
+@synthesize productType = _productType;
 
 - (id)initWithSuccess: (BOOL) succ withError: (ViSearchError*) err {
     if ((self = [super init]) ) {
@@ -44,7 +45,7 @@
             imgResult.im_name = [data objectForKey:@"im_name"];
             imgResult.metadataDictionary = values_map;
             
-            id score = [values_map objectForKey:@"score"];
+            id score = [data objectForKey:@"score"];
             if (score) {
                 imgResult.score = [score floatValue];
             }
@@ -57,6 +58,24 @@
     }
     
     return _imageResultsArray;
+}
+
+- (ViSearchProductType *) productType {
+    if (!_productType) {
+        _productType = [ViSearchProductType new];
+        _productType.productTypeList =  [self.content objectForKey:@"product_types_list"];
+        
+        NSDictionary *dict = [[self.content objectForKey:@"product_types"] objectAtIndex:0];
+        _productType.type = [dict objectForKey:@"type"];
+        _productType.score = [[dict objectForKey:@"score"] doubleValue];
+        
+        NSArray *coordinates = [dict objectForKey:@"box"];
+        _productType.box = [[Box alloc] initWithX1:[[coordinates objectAtIndex:0] intValue]
+                                                y1:[[coordinates objectAtIndex:1] intValue]
+                                                x2:[[coordinates objectAtIndex:2] intValue]
+                                                y2:[[coordinates objectAtIndex:3] intValue]];
+    }
+    return _productType;
 }
 
 @end

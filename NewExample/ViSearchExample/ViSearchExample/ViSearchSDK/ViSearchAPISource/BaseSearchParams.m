@@ -27,13 +27,15 @@
         self.fq = [NSMutableDictionary dictionary];
         self.fl = nil;
         self.queryInfo = false;
-        self.custom = nil;
+        
+        NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+        [dict setValue:@"visenze_admin" forKey:@"vtt_source"];
+        self.custom = dict;
+        
         self.scoreMin = 0;
         self.scoreMax = 1;
         self.getAllFl = false;
         self.detection = nil;
-        
-        VALUES_DETECTION = [[NSArray alloc] initWithObjects: @"all", @"top", @"dress", @"shoe", @"bag", @"bottom", @"saree", nil];
     }
     return self;
 }
@@ -65,7 +67,7 @@
     
     [dict setValue:getAllFl?@"true":@"false" forKey:@"get_all_fl"];
     
-    if (detection && [VALUES_DETECTION containsObject:detection]) {
+    if (detection) {
         [dict setValue:detection forKey:@"detection"];
     }
     
