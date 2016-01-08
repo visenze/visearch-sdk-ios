@@ -1,3 +1,2 @@
 language: objective-c
 script: 
-- "xctool -project NewExample/ViSearchExample/ViSearchExample.xcodeproj -scheme ViSearchExample -sdk iphonesimulator build test"

@@ -15,5 +15,6 @@
 @property NSString *url;
 @property CGFloat score;
 @property NSDictionary *metadataDictionary;
+@property UIImage *image;
 
 @end

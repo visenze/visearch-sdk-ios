@@ -13,7 +13,7 @@
 
 @property Box *box;
 @property double score;
-@property NSArray *productTypeList;
+@property NSDictionary *attributes;
 @property NSString *type;
 
 @end

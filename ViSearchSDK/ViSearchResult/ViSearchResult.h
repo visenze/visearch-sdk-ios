@@ -17,7 +17,8 @@
 @property (nonatomic, readonly) ViSearchError *error;
 @property (nonatomic) NSDictionary *content;
 @property (nonatomic, readonly) NSArray *imageResultsArray;
-@property (nonatomic, readonly) ViSearchProductType *productType;
+@property (nonatomic, readonly) NSArray *productTypes;
+@property (nonatomic, readonly) NSArray *productTypesList;
 
 -(id) initWithSuccess: (BOOL) success withError: (ViSearchError*) error;
 +(id) resultWithSuccess: (BOOL) success withError: (ViSearchError*) error;

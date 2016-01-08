@@ -27,11 +27,7 @@
         self.fq = [NSMutableDictionary dictionary];
         self.fl = nil;
         self.queryInfo = false;
-        
-        NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-        [dict setValue:@"visenze_admin" forKey:@"vtt_source"];
-        self.custom = dict;
-        
+        self.custom = nil;
         self.scoreMin = 0;
         self.scoreMax = 1;
         self.getAllFl = false;

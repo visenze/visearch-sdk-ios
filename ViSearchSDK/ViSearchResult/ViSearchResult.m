@@ -16,7 +16,8 @@
 @synthesize success;
 @synthesize content;
 @synthesize imageResultsArray = _imageResultsArray;
-@synthesize productType = _productType;
+@synthesize productTypes = _productTypes;
+@synthesize productTypesList = _productTypesList;
 
 - (id)initWithSuccess: (BOOL) succ withError: (ViSearchError*) err {
     if ((self = [super init]) ) {
@@ -60,22 +61,54 @@
     return _imageResultsArray;
 }
 
-- (ViSearchProductType *) productType {
-    if (!_productType) {
-        _productType = [ViSearchProductType new];
-        _productType.productTypeList =  [self.content objectForKey:@"product_types_list"];
+- (NSArray*) productTypes {
+    if (!_productTypes) {
+        NSArray *types = [self.content objectForKey:@"product_types"];
+        NSMutableArray *temp = [[NSMutableArray alloc] init];
         
-        NSDictionary *dict = [[self.content objectForKey:@"product_types"] objectAtIndex:0];
-        _productType.type = [dict objectForKey:@"type"];
-        _productType.score = [[dict objectForKey:@"score"] doubleValue];
+        for (NSDictionary *dict in types) {
+            ViSearchProductType *product = [[ViSearchProductType alloc] init];
+            product.type = [dict objectForKey:@"type"];
+            product.score = [[dict objectForKey:@"score"] doubleValue];
+            product.attributes = [dict objectForKey:@"attributes"];
+            
+            NSArray *coordinates = [dict objectForKey:@"box"];
+            product.box = [[Box alloc] initWithX1:[[coordinates objectAtIndex:0] intValue]
+                                               y1:[[coordinates objectAtIndex:1] intValue]
+                                               x2:[[coordinates objectAtIndex:2] intValue]
+                                               y2:[[coordinates objectAtIndex:3] intValue]];
+            
+            [temp addObject:product];
+        }
         
-        NSArray *coordinates = [dict objectForKey:@"box"];
-        _productType.box = [[Box alloc] initWithX1:[[coordinates objectAtIndex:0] intValue]
-                                                y1:[[coordinates objectAtIndex:1] intValue]
-                                                x2:[[coordinates objectAtIndex:2] intValue]
-                                                y2:[[coordinates objectAtIndex:3] intValue]];
+        _productTypes = temp;
     }
-    return _productType;
+    
+    return _productTypes;
+}
+
+- (NSArray*) productTypesList {
+    if (!_productTypesList) {
+        NSArray *list = [self.content objectForKey:@"product_types_list"];
+        NSMutableArray *temp = [[NSMutableArray alloc] init];
+        
+        for (NSDictionary *dict in list) {
+            ViSearchProductType *product = [[ViSearchProductType alloc] init];
+                        
+            if ([dict isKindOfClass:[NSDictionary class]]) {
+                product.type = [dict objectForKey:@"type"];
+                product.attributes = [dict objectForKey:@"attributes_list"];
+            } else {
+                product.type = [NSString stringWithFormat:@"%@", dict];
+            }
+            
+            [temp addObject:product];
+        }
+        
+        _productTypesList = temp;
+    }
+    
+    return _productTypesList;
 }
 
 @end
