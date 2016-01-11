@@ -21,6 +21,7 @@
 	  - 6.1 [Retrieving Metadata](#61-retrieving-metadata)
 	  - 6.2 [Filtering Results](#62-filtering-results)
 	  - 6.3 [Result Score](#63-result-score)
+      - 6.4 [Automatic Object Recognition Beta](#64-automatic-object-recognition-beta)
  7. [Code Samples](#7-code-samples)
 
 ---
@@ -31,7 +32,7 @@ ViSearch is an API that provides accurate, reliable and scalable image search. V
 
 The ViSearch iOS SDK is an open source software to provide easy integration of ViSearch Search API with your iOS applications. It provides three search methods based on the ViSearch Search API - pre-indexed search, color search and upload search. For source code and references, please visit the [Github Repository](https://github.com/visenze/visearch-sdk-ios).
 
->Current stable version: 1.0.7
+>Current stable version: 1.0.8
 
 >Supported iOS version: iOS 6.x and higher 
 
@@ -70,7 +71,7 @@ Edit the Podfile as follow:
 source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '7.0' 
 ...
-pod 'ViSearch', '~>1.0.7'
+pod 'ViSearch', '~>1.0.8'
 ...
 ```
 
@@ -388,6 +389,26 @@ uplaodSearchParams.scoreMax = 0.8; // the maximum score is 0.8
 ...
 ```
 
+###6.4 Automatic Object Recognition Beta
+With Automatic Object Recognition, ViSearch /uploadsearch API is smart to detect the objects present in the query image and suggest the best matched product type to run the search on. 
+
+You can turn on the feature in upload search by setting the API parameter "detection=all". We are now able to detect various types of fashion items, including `Top`, `Dress`, `Bottom`, `Shoe`, `Bag`, `Watch` and `Indian Ethnic Wear`. The list is ever-expanding as we explore this feature for other categories. 
+
+Notice: This feature is currently available for fashion application type only. You will need to make sure your app type is configurated as "fashion" on [ViSenze dashboard](https://developers.visenze.com/setup/#Choose-Your-Application-Type). 
+
+```java
+params.detection = @"all";
+```
+
+You could also recognize objects from a paticular type on the uploaded query image through configuring the detection parameter to a specific product type as "detection={type}". Our API will run the search within that product type.
+
+Sample request to detect `bag` in an uploaded image:
+
+```java
+params.detection = @"bag";
+```
+
+The detected product types are listed in `product_types` together with the match score and box area of the detected object. Multiple objects can be detected from the query image and they are ranked from the highest score to lowest. The full list of supported product types by our API will also be returned in `product_types_list`. 
 
 ##7. Code Samples
 Source code of a demo application can be found [here](https://github.com/visenze/visearch-sdk-ios/tree/master/NewExample/ViSearchExample)
