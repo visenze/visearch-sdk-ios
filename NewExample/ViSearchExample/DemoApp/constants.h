@@ -75,10 +75,10 @@ static int const IMAGE_NAME_LENGTH_LIMIT        = 18;
 static CGFloat const SCALE_VIEW_BORDER_WIDTH    = 3;
 static CGFloat const SCALER_VIEW_LENGTH         = 20.0;
 static CGFloat const EXTRA_DISTANCE             = 15.0;
-static CGFloat const MINIMUM_WIDTH              = 100 + 2 * EXTRA_DISTANCE;
+static CGFloat const MINIMUM_WIDTH              = 60 + 2 * EXTRA_DISTANCE;
 static CGFloat const GESTURE_DETECTION_LENGTH   = EXTRA_DISTANCE * 3;// + SCALER_VIEW_LENGTH;
 
-static CGFloat const COMPRESSED_IMAGE_SIZE      = 512.0;
+static CGFloat const COMPRESSED_IMAGE_SIZE      = 1024.0;
 static inline double radians (double degrees) {return degrees * M_PI/180;}
 
 #endif /* constants_h */

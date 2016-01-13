@@ -286,20 +286,7 @@
 }
 
 - (UIImage *)cropImage:(UIImage *)image withSize:(CGSize)size{
-    CGRect rect;
-    if (image.size.width >= image.size.height) {
-        rect = CGRectMake((image.size.width - image.size.height) / 2, 0 , image.size.height, image.size.height);
-    } else {
-        rect = CGRectMake(0, (image.size.height - image.size.width) / 2, image.size.width, image.size.width);
-    }
-    CGImageRef imageRef = CGImageCreateWithImageInRect([image CGImage], rect);
-
-    UIImage *croppedImage = [UIImage imageWithCGImage:imageRef
-                                                scale:image.scale
-                                          orientation:image.imageOrientation];
-    CGImageRelease(imageRef);
-    
-    return croppedImage;
+    return image;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
