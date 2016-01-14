@@ -151,6 +151,7 @@
     uploadParams.imageFile = image;
     uploadParams.detection = detection;
     uploadParams.score = YES;
+    uploadParams.settings = [ImageSettings highqualitySettings];
     
     if (box) {
         uploadParams.box = box;

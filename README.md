@@ -1,4 +1,4 @@
-# ViSearch iOS SDK
+# ViSearch iOS SDK and Demo Source Code
 
 [![Build Status](https://travis-ci.org/visenze/visearch-sdk-ios.svg)](https://travis-ci.org/visenze/visearch-sdk-ios)
 
@@ -22,7 +22,7 @@
 	  - 6.2 [Filtering Results](#62-filtering-results)
 	  - 6.3 [Result Score](#63-result-score)
       - 6.4 [Automatic Object Recognition Beta](#64-automatic-object-recognition-beta)
- 7. [Code Samples](#7-code-samples)
+ 7. [Demo Source Code](#7-demo-source-code)
 
 ---
 
@@ -410,5 +410,5 @@ params.detection = @"bag";
 
 The detected product types are listed in `product_types` together with the match score and box area of the detected object. Multiple objects can be detected from the query image and they are ranked from the highest score to lowest. The full list of supported product types by our API will also be returned in `product_types_list`. 
 
-##7. Code Samples
+##7. Demo Source Code
 Source code of a demo application can be found [here](https://github.com/visenze/visearch-sdk-ios/tree/master/NewExample/ViSearchExample)

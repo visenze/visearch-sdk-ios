@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1509" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
@@ -795,7 +795,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PUD-be-Ayk">
@@ -886,7 +886,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0bO-Bc-Nzn">
@@ -1428,7 +1428,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yCb-kr-Yy8">
@@ -2085,11 +2085,11 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kys-iV-lgk">
-                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <rect key="frame" x="-23" y="-15" width="20" height="20"/>
                                 <color key="backgroundColor" red="0.86274509799999999" green="0.86666666670000003" blue="0.89019607840000003" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Kys-iV-lgk" secondAttribute="height" multiplier="1:1" id="Hgi-an-02Y"/>
-                                    <constraint firstAttribute="height" constant="70" id="QQ8-73-O2W"/>
+                                    <constraint firstAttribute="height" constant="50" id="QQ8-73-O2W"/>
                                 </constraints>
                                 <state key="normal" image="album">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2097,7 +2097,7 @@
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="35"/>
+                                        <integer key="value" value="25"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <variation key="default">
@@ -2184,10 +2184,10 @@
                                 </connections>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4MH-62-dYK">
-                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <rect key="frame" x="-23" y="-15" width="20" height="20"/>
                                 <color key="backgroundColor" red="0.86274509799999999" green="0.86666666670000003" blue="0.89019607840000003" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="70" id="1T6-Sv-9Yq"/>
+                                    <constraint firstAttribute="height" constant="50" id="1T6-Sv-9Yq"/>
                                     <constraint firstAttribute="width" secondItem="4MH-62-dYK" secondAttribute="height" multiplier="1:1" id="9f2-gR-2r6"/>
                                 </constraints>
                                 <state key="normal" image="Camera_b">
@@ -2196,7 +2196,7 @@
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="35"/>
+                                        <integer key="value" value="25"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <variation key="default">
@@ -2216,11 +2216,11 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oPm-il-7mz">
-                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <rect key="frame" x="-10" y="-10" width="30" height="30"/>
                                 <color key="backgroundColor" red="0.86274509803921573" green="0.8666666666666667" blue="0.8901960784313725" alpha="0.70000000000000007" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="oPm-il-7mz" secondAttribute="height" multiplier="1:1" id="geG-ay-7uY"/>
-                                    <constraint firstAttribute="width" constant="70" id="gwx-MT-CZ8"/>
+                                    <constraint firstAttribute="width" constant="50" id="gwx-MT-CZ8"/>
                                 </constraints>
                                 <state key="normal" image="Flash_b">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2228,7 +2228,7 @@
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="35"/>
+                                        <integer key="value" value="25"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <variation key="default">
@@ -2299,8 +2299,6 @@
                                 <exclude reference="FPw-7o-3lK"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="JZ6-Xe-EFS"/>
-                                <exclude reference="w2q-xr-gen"/>
                                 <exclude reference="Jar-Ha-nNt"/>
                                 <exclude reference="ntO-zm-CqA"/>
                                 <exclude reference="wAb-4B-zX0"/>
@@ -2309,13 +2307,15 @@
                                 <exclude reference="E4i-Jz-z52"/>
                                 <exclude reference="ebH-53-gtN"/>
                                 <exclude reference="sK8-CY-3fl"/>
+                                <exclude reference="1eF-wx-cWK"/>
+                                <exclude reference="oaa-ck-SEY"/>
+                                <exclude reference="M0j-B6-7tv"/>
+                                <exclude reference="zKy-BU-mE7"/>
+                                <exclude reference="JZ6-Xe-EFS"/>
+                                <exclude reference="w2q-xr-gen"/>
                                 <exclude reference="YFf-dv-eRW"/>
                                 <exclude reference="ZjN-hH-Gz1"/>
                                 <exclude reference="az0-Ds-A1p"/>
-                                <exclude reference="M0j-B6-7tv"/>
-                                <exclude reference="zKy-BU-mE7"/>
-                                <exclude reference="1eF-wx-cWK"/>
-                                <exclude reference="oaa-ck-SEY"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -2328,8 +2328,6 @@
                                 <include reference="FPw-7o-3lK"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="JZ6-Xe-EFS"/>
-                                <include reference="w2q-xr-gen"/>
                                 <include reference="Jar-Ha-nNt"/>
                                 <include reference="ntO-zm-CqA"/>
                                 <include reference="wAb-4B-zX0"/>
@@ -2338,13 +2336,15 @@
                                 <include reference="E4i-Jz-z52"/>
                                 <include reference="ebH-53-gtN"/>
                                 <include reference="sK8-CY-3fl"/>
+                                <include reference="1eF-wx-cWK"/>
+                                <include reference="oaa-ck-SEY"/>
+                                <include reference="M0j-B6-7tv"/>
+                                <include reference="zKy-BU-mE7"/>
+                                <include reference="JZ6-Xe-EFS"/>
+                                <include reference="w2q-xr-gen"/>
                                 <include reference="YFf-dv-eRW"/>
                                 <include reference="ZjN-hH-Gz1"/>
                                 <include reference="az0-Ds-A1p"/>
-                                <include reference="M0j-B6-7tv"/>
-                                <include reference="zKy-BU-mE7"/>
-                                <include reference="1eF-wx-cWK"/>
-                                <include reference="oaa-ck-SEY"/>
                             </mask>
                         </variation>
                     </view>
@@ -2442,11 +2442,11 @@
                                         <exclude reference="rDM-Jr-Ajp"/>
                                     </mask>
                                     <mask key="constraints">
+                                        <exclude reference="BWd-Dv-AZ2"/>
+                                        <exclude reference="jMS-3x-6uL"/>
                                         <exclude reference="3bx-I1-be8"/>
                                         <exclude reference="8Lo-6W-keg"/>
                                         <exclude reference="ueP-9W-fGp"/>
-                                        <exclude reference="BWd-Dv-AZ2"/>
-                                        <exclude reference="jMS-3x-6uL"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
@@ -2455,11 +2455,11 @@
                                         <include reference="rDM-Jr-Ajp"/>
                                     </mask>
                                     <mask key="constraints">
+                                        <include reference="BWd-Dv-AZ2"/>
+                                        <include reference="jMS-3x-6uL"/>
                                         <include reference="3bx-I1-be8"/>
                                         <include reference="8Lo-6W-keg"/>
                                         <include reference="ueP-9W-fGp"/>
-                                        <include reference="BWd-Dv-AZ2"/>
-                                        <include reference="jMS-3x-6uL"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -2569,10 +2569,10 @@
     </scenes>
     <resources>
         <image name="Camera" width="130" height="130"/>
-        <image name="Camera_b" width="57" height="52"/>
+        <image name="Camera_b" width="35" height="33"/>
         <image name="Close" width="123" height="123"/>
-        <image name="Flash_b" width="57" height="56"/>
-        <image name="album" width="62" height="48"/>
+        <image name="Flash_b" width="35" height="36"/>
+        <image name="album" width="35" height="34"/>
         <image name="backArrow" width="30" height="45"/>
         <image name="collectionquare" width="79" height="67"/>
         <image name="hm" width="42" height="39"/>
