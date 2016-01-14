@@ -436,7 +436,20 @@ typedef enum {
     self.detectionType = product.type;
     
     if (![self loadCache]) {
+        [self scrollViewButtonDisabled];
         [self uploadSearch];
+    }
+}
+
+- (void) scrollViewButtonDisabled {
+    for (UIButton *button in self.scrollView.subviews) {
+        button.userInteractionEnabled = NO;
+    }
+}
+
+- (void) scrollViewButtonEnabled {
+    for (UIButton *button in self.scrollView.subviews) {
+        button.userInteractionEnabled = YES;
     }
 }
 
@@ -452,7 +465,7 @@ typedef enum {
     uploadSearchCount++;
     [self beforeSearch];
 
-    NSString *detection = [self.detectionType isEqualToString:@"other"] ? @"all" : self.detectionType;
+    NSString *detection = self.detectionType;
     
     [self.generalService
      uploadSearchWithImage:self.image
@@ -460,6 +473,7 @@ typedef enum {
      andBox:self.currentBox
      completionBlock:^(BOOL succeeded, ViSearchResult *result) {
          uploadSearchCount--;
+         [self scrollViewButtonEnabled];
          if (succeeded) {
              if (uploadSearchCount == 0) {
                  dispatch_async(dispatch_get_main_queue(), ^{
@@ -646,6 +660,7 @@ typedef enum {
                                                x2:(frame.origin.x + frame.size.width - EXTRA_DISTANCE) * boxRatio
                                                y2:(frame.origin.y + frame.size.height - EXTRA_DISTANCE) * boxRatio];
         [self.imageCache removeAllObjects];
+        [self scrollViewButtonDisabled];
         [self uploadSearch];
     }
 }
@@ -725,6 +740,7 @@ PanPostition getPosition(CGPoint position, CGFloat width, CGFloat height){
         self.image = [self.generalService rotateImage:self.image withAngle:rotationAngle];
         
         self.originalImage = self.image;
+        [self scrollViewButtonDisabled];
         [self uploadSearch];
         [self initDisplayView];
     }

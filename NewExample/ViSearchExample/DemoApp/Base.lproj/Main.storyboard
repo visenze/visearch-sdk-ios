@@ -2299,6 +2299,9 @@
                                 <exclude reference="FPw-7o-3lK"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="Jar-Ha-nNt"/>
+                                <exclude reference="ntO-zm-CqA"/>
+                                <exclude reference="wAb-4B-zX0"/>
                                 <exclude reference="3KT-Ag-BQ6"/>
                                 <exclude reference="ChT-2W-ceT"/>
                                 <exclude reference="E4i-Jz-z52"/>
@@ -2306,9 +2309,6 @@
                                 <exclude reference="sK8-CY-3fl"/>
                                 <exclude reference="1eF-wx-cWK"/>
                                 <exclude reference="oaa-ck-SEY"/>
-                                <exclude reference="Jar-Ha-nNt"/>
-                                <exclude reference="ntO-zm-CqA"/>
-                                <exclude reference="wAb-4B-zX0"/>
                                 <exclude reference="M0j-B6-7tv"/>
                                 <exclude reference="zKy-BU-mE7"/>
                                 <exclude reference="JZ6-Xe-EFS"/>
@@ -2328,6 +2328,9 @@
                                 <include reference="FPw-7o-3lK"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="Jar-Ha-nNt"/>
+                                <include reference="ntO-zm-CqA"/>
+                                <include reference="wAb-4B-zX0"/>
                                 <include reference="3KT-Ag-BQ6"/>
                                 <include reference="ChT-2W-ceT"/>
                                 <include reference="E4i-Jz-z52"/>
@@ -2335,9 +2338,6 @@
                                 <include reference="sK8-CY-3fl"/>
                                 <include reference="1eF-wx-cWK"/>
                                 <include reference="oaa-ck-SEY"/>
-                                <include reference="Jar-Ha-nNt"/>
-                                <include reference="ntO-zm-CqA"/>
-                                <include reference="wAb-4B-zX0"/>
                                 <include reference="M0j-B6-7tv"/>
                                 <include reference="zKy-BU-mE7"/>
                                 <include reference="JZ6-Xe-EFS"/>
@@ -2569,10 +2569,10 @@
     </scenes>
     <resources>
         <image name="Camera" width="130" height="130"/>
-        <image name="Camera_b" width="51" height="49"/>
+        <image name="Camera_b" width="35" height="33"/>
         <image name="Close" width="123" height="123"/>
-        <image name="Flash_b" width="49" height="50"/>
-        <image name="album" width="57" height="55"/>
+        <image name="Flash_b" width="35" height="36"/>
+        <image name="album" width="35" height="34"/>
         <image name="backArrow" width="30" height="45"/>
         <image name="collectionquare" width="79" height="67"/>
         <image name="hm" width="42" height="39"/>
