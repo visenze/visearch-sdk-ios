@@ -27,8 +27,8 @@
     
     //TODO: insert your own application keys
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-    [dict setValue:@"" forKey:@"access_key"];
-    [dict setValue:@"" forKey:@"secret_key"];
+    [dict setValue:@"YOUR_ACCESS_KEY" forKey:@"access_key"];
+    [dict setValue:@"YOUR_SECRET_KEY" forKey:@"secret_key"];
     [[CoreDataModel sharedInstance] insertApplication:dict];
 }
 

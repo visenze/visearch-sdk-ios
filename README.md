@@ -7,8 +7,9 @@
 ##Table of Contents
  1. [Overview](#1-overview)
  2. [Setup](#2-setup)
- 	  - 2.1 [Install the SDK](#21-install-the-sdk)
- 	  - 2.2 [Add User Permissions](#22-add-user-permissions)
+      - 2.1 [Run the Demo](21-run-the-demo)
+      - 2.2 [Set up Xcode Project](#22-set-up-xcode-project)
+      - 2.3 [Import ViSearch SDK](#23-import-visearch-sdk)
  3. [Initialization](#3-initialization)
  4. [Searching Images](#4-searching-images)
 	  - 4.1 [Pre-indexed Search](#41-pre-indexed-search)
@@ -22,7 +23,6 @@
 	  - 6.2 [Filtering Results](#62-filtering-results)
 	  - 6.3 [Result Score](#63-result-score)
       - 6.4 [Automatic Object Recognition Beta](#64-automatic-object-recognition-beta)
- 7. [Demo Source Code](#7-demo-source-code)
 
 ---
 
@@ -39,7 +39,39 @@ The ViSearch iOS SDK is an open source software to provide easy integration of V
 
 ##2. Setup
 
-###2.1 Set up Xcode project
+###2.1 Run the Demo
+
+The source code of a demo application is provided together with the SDK([demo](https://github.com/visenze/visearch-sdk-ios/tree/master/NewExample/ViSearchExample)). You can simply open **ViSearchExample** project in XCode and run the demo.
+
+![screenshot](https://developers.visenze.com/guides/ios/xcode_1.png)
+
+You should change the access key and secret key to your own key pair before running.
+
+```objectivec
+@implementation HomeViewController {
+    NSMutableArray *rectangles;
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+    rectangles = [[NSMutableArray alloc] init];
+    self.generalService = [GeneralServices sharedInstance];
+    
+    //TODO: insert your own application keys
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+    [dict setValue:@"YOUR_ACCESS_KEY" forKey:@"access_key"];
+    [dict setValue:@"YOUR_SECRET_KEY" forKey:@"secret_key"];
+    [[CoreDataModel sharedInstance] insertApplication:dict];
+}
+```
+
+You can play around with our demo app to see how we build up the cool image search feature using ViSearch SDK.
+
+![ios_demo](https://developers.visenze.com/guides/ios/ios_demo.png)
+
+
+###2.2 Set up Xcode project
 
 In Xcode, go to File > New > Project Select the Single View Application.
 
@@ -49,9 +81,9 @@ Type a name for your project and press Next, here we use Demo as the project nam
 
 -![screenshot](https://www.visenze.com/docs/sites/default/files/Screen%20Shot%202015-01-09%20at%206.20.17%20PM.png)
 
-###2.2 Import ViSearch SDK
+###2.3 Import ViSearch SDK
 
-####2.2.1 Using CocoaPods
+####2.3.1 Using CocoaPods
 
 First you need to install the Cocoapods Ruby gem:
 
@@ -82,7 +114,7 @@ pod install
 ```
 The Demo.xcworkspace project should be created.
 
-#### 2.2.2 Using Manual Approach
+#### 2.3.2 Using Manual Approach
 
 You can also download the iOS [ViSearch SDK](https://github.com/visenze/visearch-sdk-ios/archive/master.zip) directly. To use it, unzip it and drag ViSearch SDK folder into Demo project's file folder.
 
@@ -409,6 +441,3 @@ params.detection = @"bag";
 ```
 
 The detected product types are listed in `product_types` together with the match score and box area of the detected object. Multiple objects can be detected from the query image and they are ranked from the highest score to lowest. The full list of supported product types by our API will also be returned in `product_types_list`. 
-
-##7. Demo Source Code
-Source code of a demo application can be found [here](https://github.com/visenze/visearch-sdk-ios/tree/master/NewExample/ViSearchExample)
