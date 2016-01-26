@@ -41,9 +41,9 @@ The ViSearch iOS SDK is an open source software to provide easy integration of V
 
 ###2.1 Run the Demo
 
-The source code of a demo application is provided together with the SDK([demo](https://github.com/visenze/visearch-sdk-ios/tree/master/NewExample/ViSearchExample)). You can simply open **ViSearchExample** project in XCode and run the demo.
+The source code of a demo application is provided together with the SDK ([demo](https://github.com/visenze/visearch-sdk-ios/tree/master/NewExample/ViSearchExample)). You can simply open **ViSearchExample** project in XCode and run the demo.
 
-![screenshot](https://developers.visenze.com/guides/ios/xcode_1.png)
+![screenshot](./doc/xcode_1.png)
 
 You should change the access key and secret key to your own key pair before running.
 
@@ -68,18 +68,18 @@ You should change the access key and secret key to your own key pair before runn
 
 You can play around with our demo app to see how we build up the cool image search feature using ViSearch SDK.
 
-![ios_demo](https://developers.visenze.com/guides/ios/ios_demo.png)
+![ios_demo](./doc/ios_demo.png)
 
 
 ###2.2 Set up Xcode project
 
 In Xcode, go to File > New > Project Select the Single View Application.
 
-![screenshot](https://www.visenze.com/docs/sites/default/files/Screen%20Shot%202015-01-09%20at%206.20.03%20PM.png)
+![screenshot](./doc/ios0.png)
 
 Type a name for your project and press Next, here we use Demo as the project name.
 
--![screenshot](https://www.visenze.com/docs/sites/default/files/Screen%20Shot%202015-01-09%20at%206.20.17%20PM.png)
+![screenshot](./doc/ios1.png)
 
 ###2.3 Import ViSearch SDK
 
@@ -118,11 +118,11 @@ The Demo.xcworkspace project should be created.
 
 You can also download the iOS [ViSearch SDK](https://github.com/visenze/visearch-sdk-ios/archive/master.zip) directly. To use it, unzip it and drag ViSearch SDK folder into Demo project's file folder.
 
--![screenshot](https://www.visenze.com/docs/sites/default/files/Screen%20Shot%202015-01-09%20at%207.02.44%20PM.png)
+![screenshot](./doc/ios2.png)
 
 Then add it to your project
 
--![screenshot](https://www.visenze.com/docs/sites/default/files/Screen%20Shot%202015-01-09%20at%207.03.28%20PM.png)
+![screenshot](./doc/ios3.png)
 
 
 ##3. Initialization
