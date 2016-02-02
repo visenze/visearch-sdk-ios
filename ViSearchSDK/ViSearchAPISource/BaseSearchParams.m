@@ -95,7 +95,7 @@
     }
     
     for (NSString* key in custom.allKeys) {
-        [dict setValue:[NSMutableString stringWithFormat: @"%@:%@",key, [custom objectForKey:key]] forKey:key];
+        [dict setValue:[NSMutableString stringWithFormat: @"%@", [custom objectForKey:key]] forKey:key];
     }
     
     return dict;
