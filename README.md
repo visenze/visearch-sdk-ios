@@ -85,7 +85,7 @@ Type a name for your project and press Next, here we use Demo as the project nam
 
 ####2.3.1 Using CocoaPods
 
-First you need to install the Cocoapods Ruby gem:
+First you need to install the CocoaPods Ruby gem:
 
 ```
 [sudo] gem install cocoapods 
