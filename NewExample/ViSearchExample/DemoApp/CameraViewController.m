@@ -119,13 +119,16 @@
 }
 
 - (IBAction)lightClicked:(id)sender {
-    if (isTorchOn) {
-        device.torchMode = AVCaptureTorchModeOff;
-    } else {
-        device.torchMode = AVCaptureTorchModeOn;
+    if ( ![(NSString*)[UIDevice currentDevice].model hasPrefix:@"iPad"] ) {
+        /* Device is not iPad */
+        if (isTorchOn) {
+            device.torchMode = AVCaptureTorchModeOff;
+        } else {
+            device.torchMode = AVCaptureTorchModeOn;
+        }
+        
+        isTorchOn = !isTorchOn;
     }
-    
-    isTorchOn = !isTorchOn;
 }
 
 - (IBAction)albumButtonClicked:(id)sender {
