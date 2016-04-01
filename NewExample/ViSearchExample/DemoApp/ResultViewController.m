@@ -480,12 +480,6 @@ typedef enum {
                      [self hideLoadingView];
                      [self.searchResultLabel setText:MSG_UP_SEARCH_RESULT];
                      self.searchResults = result;
-                     NSString *type = [[[result.content
-                                         objectForKey:KEY_PRODUCT_TYPE] objectAtIndex:0]
-                                       objectForKey:KEY_TYPE];
-                     type = type ? type : DEFAULT_TYPE;
-                     
-                     [self.imageCache setValue:result forKey:type];
                      
                      if (isDynamicView) {
                          [self showDynamicCollectionView];
