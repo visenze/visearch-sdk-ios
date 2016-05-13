@@ -17,6 +17,8 @@
 @synthesize content;
 @synthesize imageResultsArray = _imageResultsArray;
 @synthesize reqId = _reqId;
+@synthesize productTypes = _productTypes;
+@synthesize productTypesList = _productTypesList;
 
 - (id)initWithSuccess: (BOOL) succ withError: (ViSearchError*) err {
     return [self initWithSuccess:succ withError:err andContent:nil];
@@ -54,7 +56,7 @@
             imgResult.im_name = [data objectForKey:@"im_name"];
             imgResult.metadataDictionary = values_map;
             
-            id score = [values_map objectForKey:@"score"];
+            id score = [data objectForKey:@"score"];
             if (score) {
                 imgResult.score = [score floatValue];
             }
@@ -71,6 +73,56 @@
 
 - (NSString *)reqId {
     return [self.content objectForKey:@"X-Log-ID"];
+}
+
+- (NSArray*) productTypes {
+    if (!_productTypes) {
+        NSArray *types = [self.content objectForKey:@"product_types"];
+        NSMutableArray *temp = [[NSMutableArray alloc] init];
+        
+        for (NSDictionary *dict in types) {
+            ViSearchProductType *product = [[ViSearchProductType alloc] init];
+            product.type = [dict objectForKey:@"type"];
+            product.score = [[dict objectForKey:@"score"] doubleValue];
+            product.attributes = [dict objectForKey:@"attributes"];
+            
+            NSArray *coordinates = [dict objectForKey:@"box"];
+            product.box = [[Box alloc] initWithX1:[[coordinates objectAtIndex:0] intValue]
+                                               y1:[[coordinates objectAtIndex:1] intValue]
+                                               x2:[[coordinates objectAtIndex:2] intValue]
+                                               y2:[[coordinates objectAtIndex:3] intValue]];
+            
+            [temp addObject:product];
+        }
+        
+        _productTypes = temp;
+    }
+    
+    return _productTypes;
+}
+
+- (NSArray*) productTypesList {
+    if (!_productTypesList) {
+        NSArray *list = [self.content objectForKey:@"product_types_list"];
+        NSMutableArray *temp = [[NSMutableArray alloc] init];
+        
+        for (NSDictionary *dict in list) {
+            ViSearchProductType *product = [[ViSearchProductType alloc] init];
+                        
+            if ([dict isKindOfClass:[NSDictionary class]]) {
+                product.type = [dict objectForKey:@"type"];
+                product.attributes = [dict objectForKey:@"attributes_list"];
+            } else {
+                product.type = [NSString stringWithFormat:@"%@", dict];
+            }
+            
+            [temp addObject:product];
+        }
+        
+        _productTypesList = temp;
+    }
+    
+    return _productTypesList;
 }
 
 @end

@@ -8,9 +8,12 @@
 
 #import "BaseSearchParams.h"
 
-@implementation BaseSearchParams
+@implementation BaseSearchParams {
+    NSArray *VALUES_DETECTION;
+}
 
-@synthesize limit, page, facet, facetSize, facetField, score, fq, fl, queryInfo, custom, scoreMax, scoreMin;
+@synthesize limit, page, facet, facetSize, facetField, score, fq, fl, queryInfo, custom, scoreMax, scoreMin, getAllFl, detection;
+
 - (id)init
 {
     if( self = [super init] )
@@ -27,6 +30,8 @@
         self.custom = nil;
         self.scoreMin = 0;
         self.scoreMax = 1;
+        self.getAllFl = false;
+        self.detection = nil;
     }
     return self;
 }
@@ -56,6 +61,12 @@
     [dict setValue: [NSString stringWithFormat:@"%f", scoreMax] forKey: @"score_max"];
     [dict setValue: [NSString stringWithFormat:@"%f", scoreMin] forKey: @"score_min"];
     
+    [dict setValue:getAllFl?@"true":@"false" forKey:@"get_all_fl"];
+    
+    if (detection) {
+        [dict setValue:detection forKey:@"detection"];
+    }
+    
     if (fq) {
         NSMutableArray* builder = [[NSMutableArray alloc]init];
         NSArray *keys=[fq allKeys];
@@ -84,7 +95,7 @@
     }
     
     for (NSString* key in custom.allKeys) {
-        [dict setValue:[NSMutableString stringWithFormat: @"%@:%@",key, [custom objectForKey:key]] forKey:key];
+        [dict setValue:[NSMutableString stringWithFormat: @"%@", [custom objectForKey:key]] forKey:key];
     }
     
     return dict;

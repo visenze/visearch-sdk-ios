@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "ViSearchError.h"
 #import "ImageResult.h"
+#import "ViSearchProductType.h"
 
 @interface ViSearchResult : NSObject
 
@@ -17,6 +18,8 @@
 @property (nonatomic, readonly) NSDictionary *content;
 @property (nonatomic, readonly) NSArray *imageResultsArray;
 @property (nonatomic, readonly) NSString *reqId;
+@property (nonatomic, readonly) NSArray *productTypes;
+@property (nonatomic, readonly) NSArray *productTypesList;
 
 -(id) initWithSuccess: (BOOL) success withError: (ViSearchError*) error;
 -(id) initWithSuccess:(BOOL)success withError:(ViSearchError *)error andContent:(NSDictionary *)content;

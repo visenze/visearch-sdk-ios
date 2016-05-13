@@ -52,6 +52,7 @@
     [dic setValue:self.action forKey:@"action"];
     [dic setValue:self.imName forKey:@"im_name"];
     [dic setValue:self.reqId forKey:@"reqid"];
+    [dic setValue:self.cid forKey:@"cid"];
     
     [dic setValue:[self cuid] forKey:@"cuid"];
     

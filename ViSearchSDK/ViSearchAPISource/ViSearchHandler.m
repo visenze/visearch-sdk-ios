@@ -68,6 +68,12 @@
     return result;
 }
 
+- (NSString *)urlEncodeValue:(NSString *)str
+{
+    NSString *result = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)str, NULL, CFSTR(":/?#[]@!$&’()*+,;="), kCFStringEncodingUTF8));
+    return result;
+}
+
 - (NSString*)generateRequestUrlPrefixWithParams:(NSDictionary*)params {
     return [self generateRequestUrlPrefixWithParams:params andDomainUrl:nil];
 }
@@ -85,16 +91,19 @@
     
     if (params != nil) {
         for (NSString* key in params.allKeys) {
+            NSString* encodeKey = [self urlEncodeValue:key];
             if([[params objectForKey:key] isKindOfClass:[NSArray class]]){
                 for (NSString* value in [params objectForKey:key]) {
-                    [urlString appendFormat:@"&%@=%@", key, value];
+                    NSString* encodeValue = [self urlEncodeValue:value];
+                    [urlString appendFormat:@"&%@=%@", encodeKey, encodeValue];
                 }
             } else {
-                [urlString appendFormat:@"&%@=%@", key, [params objectForKey:key]];
+                NSString* encodeParam =[self urlEncodeValue:[params objectForKey:key]];
+                [urlString appendFormat:@"&%@=%@", encodeKey, encodeParam];
             }
         }
     }
-    
+
     return [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 }
 

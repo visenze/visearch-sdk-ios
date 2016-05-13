@@ -1,4 +1,4 @@
-# ViSearch iOS SDK
+# ViSearch iOS SDK and Demo Source Code
 
 [![Build Status](https://travis-ci.org/visenze/visearch-sdk-ios.svg)](https://travis-ci.org/visenze/visearch-sdk-ios)
 
@@ -7,8 +7,9 @@
 ##Table of Contents
  1. [Overview](#1-overview)
  2. [Setup](#2-setup)
- 	  - 2.1 [Install the SDK](#21-install-the-sdk)
- 	  - 2.2 [Add User Permissions](#22-add-user-permissions)
+      - 2.1 [Run the Demo](21-run-the-demo)
+      - 2.2 [Set up Xcode Project](#22-set-up-xcode-project)
+      - 2.3 [Import ViSearch SDK](#23-import-visearch-sdk)
  3. [Initialization](#3-initialization)
  4. [Searching Images](#4-searching-images)
 	  - 4.1 [Pre-indexed Search](#41-pre-indexed-search)
@@ -21,8 +22,8 @@
 	  - 6.1 [Retrieving Metadata](#61-retrieving-metadata)
 	  - 6.2 [Filtering Results](#62-filtering-results)
 	  - 6.3 [Result Score](#63-result-score)
+	  - 6.4 [Automatic Object Recognition Beta](#64-automatic-object-recognition-beta)
  7. [Event Tracking](#7-event-tracking)
- 8. [Code Samples](#8-code-samples)
 
 ---
 
@@ -32,28 +33,60 @@ ViSearch is an API that provides accurate, reliable and scalable image search. V
 
 The ViSearch iOS SDK is an open source software to provide easy integration of ViSearch Search API with your iOS applications. It provides three search methods based on the ViSearch Search API - pre-indexed search, color search and upload search. For source code and references, please visit the [Github Repository](https://github.com/visenze/visearch-sdk-ios).
 
->Current stable version: 1.0.5
+>Current stable version: 1.0.9
 
 >Supported iOS version: iOS 6.x and higher 
 
 
 ##2. Setup
 
-###2.1 Set up Xcode project
+###2.1 Run the Demo
+
+The source code of a demo application is provided together with the SDK ([demo](https://github.com/visenze/visearch-sdk-ios/tree/master/NewExample/ViSearchExample)). You can simply open **ViSearchExample** project in XCode and run the demo.
+
+![screenshot](./doc/xcode_1.png)
+
+You should change the access key and secret key to your own key pair before running.
+
+```objectivec
+@implementation HomeViewController {
+    NSMutableArray *rectangles;
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+    rectangles = [[NSMutableArray alloc] init];
+    self.generalService = [GeneralServices sharedInstance];
+    
+    //TODO: insert your own application keys
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+    [dict setValue:@"YOUR_ACCESS_KEY" forKey:@"access_key"];
+    [dict setValue:@"YOUR_SECRET_KEY" forKey:@"secret_key"];
+    [[CoreDataModel sharedInstance] insertApplication:dict];
+}
+```
+
+You can play around with our demo app to see how we build up the cool image search feature using ViSearch SDK.
+
+![ios_demo](./doc/ios_demo.png)
+
+
+###2.2 Set up Xcode project
 
 In Xcode, go to File > New > Project Select the Single View Application.
 
-![screenshot](https://www.visenze.com/docs/sites/default/files/Screen%20Shot%202015-01-09%20at%206.20.03%20PM.png)
+![screenshot](./doc/ios0.png)
 
 Type a name for your project and press Next, here we use Demo as the project name.
 
-![screenshot](https://www.visenze.com/docs/sites/default/files/Screen%20Shot%202015-01-09%20at%206.20.17%20PM.png)
+![screenshot](./doc/ios1.png)
 
-###2.2 Import ViSearch SDK
+###2.3 Import ViSearch SDK
 
-####2.2.1 Using CocoaPods
+####2.3.1 Using CocoaPods
 
-First you need to install the Cocoapods Ruby gem:
+First you need to install the CocoaPods Ruby gem:
 
 ```
 [sudo] gem install cocoapods 
@@ -71,7 +104,7 @@ Edit the Podfile as follow:
 source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '7.0' 
 ...
-pod 'ViSearch', '~>1.0.5'
+pod 'ViSearch', '~>1.0.9'
 ...
 ```
 
@@ -82,15 +115,15 @@ pod install
 ```
 The Demo.xcworkspace project should be created.
 
-#### 2.2.2 Using Manual Approach
+#### 2.3.2 Using Manual Approach
 
 You can also download the iOS [ViSearch SDK](https://github.com/visenze/visearch-sdk-ios/archive/master.zip) directly. To use it, unzip it and drag ViSearch SDK folder into Demo project's file folder.
 
-![screenshot](https://www.visenze.com/docs/sites/default/files/Screen%20Shot%202015-01-09%20at%207.02.44%20PM.png)
+![screenshot](./doc/ios2.png)
 
 Then add it to your project
 
-![screenshot](https://www.visenze.com/docs/sites/default/files/Screen%20Shot%202015-01-09%20at%207.03.28%20PM.png)
+![screenshot](./doc/ios3.png)
 
 
 ##3. Initialization
@@ -310,6 +343,12 @@ SearchParams *searchParams = [[SearchParams alloc] init];
 searchParams.fl = @[@"price",@"brand",@"im_url"];
 ```
 
+To retrieve all metadata of your image results, specify get_all_fl parameter and set it to true:
+```objectivec
+SearchParams *searchParams = [[SearchParams alloc] init];
+searchParams.getAllFl = true;
+```
+
 In result callback you can read the metadata:
 ```objectivec
 success:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
@@ -383,7 +422,30 @@ uplaodSearchParams.scoreMax = 0.8; // the maximum score is 0.8
 // start searching. Every image result will have a score within [0.3, 0.8].
 ...
 ```
+
+###6.4 Automatic Object Recognition Beta
+With Automatic Object Recognition, ViSearch /uploadsearch API is smart to detect the objects present in the query image and suggest the best matched product type to run the search on. 
+
+You can turn on the feature in upload search by setting the API parameter "detection=all". We are now able to detect various types of fashion items, including `Top`, `Dress`, `Bottom`, `Shoe`, `Bag`, `Watch` and `Indian Ethnic Wear`. The list is ever-expanding as we explore this feature for other categories. 
+
+Notice: This feature is currently available for fashion application type only. You will need to make sure your app type is configurated as "fashion" on [ViSenze dashboard](https://developers.visenze.com/setup/#Choose-Your-Application-Type). 
+
+```java
+params.detection = @"all";
+```
+
+You could also recognize objects from a paticular type on the uploaded query image through configuring the detection parameter to a specific product type as "detection={type}". Our API will run the search within that product type.
+
+Sample request to detect `bag` in an uploaded image:
+
+```java
+params.detection = @"bag";
+```
+
+The detected product types are listed in `product_types` together with the match score and box area of the detected object. Multiple objects can be detected from the query image and they are ranked from the highest score to lowest. The full list of supported product types by our API will also be returned in `product_types_list`. 
+
 ##7. Event Tracking
+
 ###Send Action For Tracking
 User action can be sent in this way:
 
@@ -408,6 +470,3 @@ cid| An identify assigned by visenze for each e-commerce provider | Require
 reqid| visearch request id of current search. This attribute can be accessed in ViSearchResult in [Section 5](#5-search-results) | Require
 action | action type, eg: view, click, buy, add_cart. Currently, we only support click event. More events will be supported in the future. | Require
 im_name | image id (im_name) for this behavior | Optional
-
-##8. Code Samples
-Source code of a demo application can be found [here](https://github.com/visenze/visearch-sdk-ios/tree/master/Example)
