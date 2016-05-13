@@ -507,7 +507,7 @@
 				TargetAttributes = {
 					50FAF5B51C113499009C7C04 = {
 						CreatedOnToolsVersion = 7.1.1;
-						DevelopmentTeam = 345PN8HV64;
+						DevelopmentTeam = Y532GX4NWP;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
@@ -764,7 +764,7 @@
 				INFOPLIST_FILE = DemoApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.visenze.ViSearchExample;
+				PRODUCT_BUNDLE_IDENTIFIER = com.visenze.DemoExample;
 				PRODUCT_NAME = ViSearchExample;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "DemoApp/DemoApp-Bridging-Header.h";
@@ -782,7 +782,7 @@
 				INFOPLIST_FILE = DemoApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.visenze.ViSearchExample;
+				PRODUCT_BUNDLE_IDENTIFIER = com.visenze.DemoExample;
 				PRODUCT_NAME = ViSearchExample;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "DemoApp/DemoApp-Bridging-Header.h";

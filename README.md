@@ -22,7 +22,8 @@
 	  - 6.1 [Retrieving Metadata](#61-retrieving-metadata)
 	  - 6.2 [Filtering Results](#62-filtering-results)
 	  - 6.3 [Result Score](#63-result-score)
-      - 6.4 [Automatic Object Recognition Beta](#64-automatic-object-recognition-beta)
+	  - 6.4 [Automatic Object Recognition Beta](#64-automatic-object-recognition-beta)
+ 7. [Event Tracking](#7-event-tracking)
 
 ---
 
@@ -286,6 +287,7 @@ After a successful search request, a list of results are passed to the callback 
 |error|ViSearchError|Besides the error caused by network condition, it also shows the error caused by invalid parameters sent to the server.|
 |content|NSDictionary|The complete json data returned from the server.(This property may be deprecated in the feature)|
 |imageResultsArray|NSArray|A list of image results returned from the server.|
+|reqId|NSString|A request id which can be used for tracking. More details can be found in [Section 7](#7-event-tracking) |
 
 You are encouraged to use the imageResultsArray, since **content** property may be deprecated in the future. Every image result is in the form of **ImageResult**. You can use following properties of a **ImageResult** to fulfill your own purpose.
 
@@ -441,3 +443,30 @@ params.detection = @"bag";
 ```
 
 The detected product types are listed in `product_types` together with the match score and box area of the detected object. Multiple objects can be detected from the query image and they are ranked from the highest score to lowest. The full list of supported product types by our API will also be returned in `product_types_list`. 
+
+##7. Event Tracking
+
+###Send Action For Tracking
+User action can be sent in this way:
+
+```objectivec
+TrackParams *params = [TrackParams createWithCID:@"1234567" ReqId:reqId andAction:@"click"];
+ViSearchClient *client = [ViSearchAPI defaultClient];
+// ... client setup
+
+// You can also append an im_name field
+parmas.withImName(@"12345678");
+
+[client track:params completion:^(BOOL success) {
+	  // ... Your code here
+ }];
+
+```
+The following fields could be used for tracking user events:
+
+Field | Description | Required
+--- | --- | ---
+cid| An identify assigned by visenze for each e-commerce provider | Require
+reqid| visearch request id of current search. This attribute can be accessed in ViSearchResult in [Section 5](#5-search-results) | Require
+action | action type, eg: view, click, buy, add_cart. Currently, we only support click event. More events will be supported in the future. | Require
+im_name | image id (im_name) for this behavior | Optional

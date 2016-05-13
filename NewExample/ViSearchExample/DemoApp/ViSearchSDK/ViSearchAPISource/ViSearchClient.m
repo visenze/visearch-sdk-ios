@@ -51,7 +51,7 @@
     if (_host) {
         return _host;
     }else {
-        return @"http://visearch.visenze.com";
+        return @"https://visearch.visenze.com";
     }
 }
 

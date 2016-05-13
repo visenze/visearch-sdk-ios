@@ -43,9 +43,10 @@
     
     [NSURLConnection sendAsynchronousRequest:request queue:queue
         completionHandler:^(NSURLResponse *response, NSData *data, NSError *error){
-            NSInteger statusCode = ((NSHTTPURLResponse *)response).statusCode;
-                               
-            ViSearchResult *result = [self generateResultWithResponseData:data error:error httpStatusCode:(int)statusCode];
+            NSHTTPURLResponse *res = ((NSHTTPURLResponse *)response);
+            NSInteger statusCode = res.statusCode;
+            ViSearchResult *result = [self generateResultWithResponseData:data error:error httpStatusCode:(int)statusCode httpHeaders:res.allHeaderFields];
+          
             if (!error) {//error not nil
                 success(statusCode, result, error);
            } else {
