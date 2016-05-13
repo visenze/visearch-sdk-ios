@@ -21,45 +21,67 @@
 
 #pragma mark Preprocess Network Help Functions
 - (ViSearchResult*)generateResultWithResponseData:(NSData*)responseData error:(NSError*)error httpStatusCode:(int)httpStatusCode {
-    
-    ViSearchResult *result;
+    return [self generateResultWithResponseData:responseData error:error httpStatusCode:httpStatusCode httpHeaders:nil];
+}
 
+- (ViSearchResult*)generateResultWithResponseData:(NSData*)responseData error:(NSError*)error
+    httpStatusCode:(int)httpStatusCode httpHeaders:(NSDictionary*) headers
+{
+  
+    ViSearchResult *result;
+    
     if (!responseData) {
-        result = [ViSearchResult resultWithSuccess:false
-            withError:[ViSearchError errorWithErrorMsg:@"no response data" andHttpStatusCode:httpStatusCode andErrorCode:0]];
-        return result;
+      result = [ViSearchResult resultWithSuccess:false
+                                       withError:[ViSearchError errorWithErrorMsg:@"no response data" andHttpStatusCode:httpStatusCode andErrorCode:0]];
+      return result;
     }
     
     NSError *jsonError = nil;
-    NSDictionary *dict;
-    dict = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingAllowFragments error:&jsonError];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:
+            [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingAllowFragments error:&jsonError]];
+  
+    if (headers) {
+        [dict addEntriesFromDictionary:headers];
+    }
+    
     if (jsonError) {
-        if (error) {
-            return [ViSearchResult resultWithSuccess:false
-                withError:[ViSearchError errorWithErrorMsg:[error description] andHttpStatusCode:httpStatusCode andErrorCode:0]];
-        } else {
-            return [ViSearchResult resultWithSuccess:false
-                withError:[ViSearchError errorWithErrorMsg:[jsonError description] andHttpStatusCode:httpStatusCode andErrorCode:0]];
-        }
+      if (error) {
+        return [ViSearchResult resultWithSuccess:false
+                                       withError:[ViSearchError errorWithErrorMsg:[error description] andHttpStatusCode:httpStatusCode andErrorCode:0]];
+      } else {
+        return [ViSearchResult resultWithSuccess:false
+                                       withError:[ViSearchError errorWithErrorMsg:[jsonError description] andHttpStatusCode:httpStatusCode andErrorCode:0]];
+      }
     }
     
     ViSearchError *viSearchError = [ViSearchError checkErrorFromJSONDictionary:dict andHttpStatusCode:httpStatusCode];
     if (viSearchError) {
-        return [ViSearchResult resultWithSuccess:false withError:viSearchError];
+      return [ViSearchResult resultWithSuccess:false withError:viSearchError];
     }
-    result = [ViSearchResult resultWithSuccess:true withError:nil];
-    result.content = dict;
+    result = [ViSearchResult resultWithSuccess:true withError:nil andContent:dict];
     
     if (error) {
-        return [ViSearchResult resultWithSuccess:false
-            withError:[ViSearchError errorWithErrorMsg:[error description] andHttpStatusCode:httpStatusCode andErrorCode:0]];
+      return [ViSearchResult resultWithSuccess:false
+                                     withError:[ViSearchError errorWithErrorMsg:[error description] andHttpStatusCode:httpStatusCode andErrorCode:0]];
     }
     
     return result;
 }
 
 - (NSString*)generateRequestUrlPrefixWithParams:(NSDictionary*)params {
-    NSMutableString *urlString = [NSMutableString stringWithFormat:@"%@/%@?", [self.delegate getHost], self.searchType];
+    return [self generateRequestUrlPrefixWithParams:params andDomainUrl:nil];
+}
+
+- (NSString*)generateRequestUrlPrefixWithParams:(NSDictionary*)params andDomainUrl:(NSString *)domain {
+    NSString *baseUrl;
+    
+    if (!domain) {
+        baseUrl = [self.delegate getHost];
+    } else {
+        baseUrl = domain;
+    }
+        
+    NSMutableString *urlString = [NSMutableString stringWithFormat:@"%@/%@?", baseUrl, self.searchType];
     
     if (params != nil) {
         for (NSString* key in params.allKeys) {
@@ -72,6 +94,7 @@
             }
         }
     }
+    
     return [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 }
 
@@ -84,5 +107,7 @@
     
     return authEncodeString;
 }
+
+- (void)handleWithParams:(BaseSearchParams *)params completion:(void (^)(BOOL))completion {}
 
 @end

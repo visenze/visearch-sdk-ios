@@ -21,7 +21,8 @@
 	  - 6.1 [Retrieving Metadata](#61-retrieving-metadata)
 	  - 6.2 [Filtering Results](#62-filtering-results)
 	  - 6.3 [Result Score](#63-result-score)
- 7. [Code Samples](#7-code-samples)
+ 7. [Event Tracking](#7-event-tracking)
+ 8. [Code Samples](#8-code-samples)
 
 ---
 
@@ -253,6 +254,7 @@ After a successful search request, a list of results are passed to the callback 
 |error|ViSearchError|Besides the error caused by network condition, it also shows the error caused by invalid parameters sent to the server.|
 |content|NSDictionary|The complete json data returned from the server.(This property may be deprecated in the feature)|
 |imageResultsArray|NSArray|A list of image results returned from the server.|
+|reqId|NSString|A request id which can be used for tracking. More details can be found in [Section 7](#7-event-tracking) |
 
 You are encouraged to use the imageResultsArray, since **content** property may be deprecated in the future. Every image result is in the form of **ImageResult**. You can use following properties of a **ImageResult** to fulfill your own purpose.
 
@@ -381,7 +383,31 @@ uplaodSearchParams.scoreMax = 0.8; // the maximum score is 0.8
 // start searching. Every image result will have a score within [0.3, 0.8].
 ...
 ```
+##7. Event Tracking
+###Send Action For Tracking
+User action can be sent in this way:
 
+```objectivec
+TrackParams *params = [TrackParams createWithCID:@"1234567" ReqId:reqId andAction:@"click"];
+ViSearchClient *client = [ViSearchAPI defaultClient];
+// ... client setup
 
-##7. Code Samples
+// You can also append an im_name field
+parmas.withImName(@"12345678");
+
+[client track:params completion:^(BOOL success) {
+	  // ... Your code here
+ }];
+
+```
+The following fields could be used for tracking user events:
+
+Field | Description | Required
+--- | --- | ---
+cid| An identify assigned by visenze for each e-commerce provider | Require
+reqid| visearch request id of current search. This attribute can be accessed in ViSearchResult in [Section 5](#5-search-results) | Require
+action | action type, eg: view, click, buy, add_cart. Currently, we only support click event. More events will be supported in the future. | Require
+im_name | image id (im_name) for this behavior | Optional
+
+##8. Code Samples
 Source code of a demo application can be found [here](https://github.com/visenze/visearch-sdk-ios/tree/master/Example)

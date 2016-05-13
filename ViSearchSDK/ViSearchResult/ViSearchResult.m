@@ -16,18 +16,28 @@
 @synthesize success;
 @synthesize content;
 @synthesize imageResultsArray = _imageResultsArray;
+@synthesize reqId = _reqId;
 
 - (id)initWithSuccess: (BOOL) succ withError: (ViSearchError*) err {
+    return [self initWithSuccess:succ withError:err andContent:nil];
+}
+
+- (id)initWithSuccess:(BOOL)succ withError:(ViSearchError *)err andContent:(NSDictionary *)cnt {
     if ((self = [super init]) ) {
         success = succ;
+        content = cnt;
         if (err != nil)
             error = err;
-    }
+        }
     return self;
 }
 
 + (id)resultWithSuccess: (BOOL) success withError: (ViSearchError*) error {
     return [[ViSearchResult alloc] initWithSuccess:success withError:error];
+}
+
++ (id)resultWithSuccess:(BOOL)success withError:(ViSearchError *)error andContent:(NSDictionary *)content {
+    return [[ViSearchResult new] initWithSuccess:success withError:error andContent:content];
 }
 
 - (NSArray *)imageResultsArray {
@@ -57,6 +67,10 @@
     }
     
     return _imageResultsArray;
+}
+
+- (NSString *)reqId {
+    return [self.content objectForKey:@"X-Log-ID"];
 }
 
 @end

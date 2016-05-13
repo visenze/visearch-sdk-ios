@@ -43,6 +43,8 @@ static int LABEL_CELL_TAG = 2345;
     spinner.frame = CGRectMake(0, 0, 24, 24);
     spinner.center = self.view.center;
     [self.view addSubview:spinner];
+  
+  
 }
 
 - (void)didReceiveMemoryWarning {

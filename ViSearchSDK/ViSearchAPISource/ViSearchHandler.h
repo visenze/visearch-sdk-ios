@@ -35,7 +35,13 @@
 - (void)handleWithParams:(BaseSearchParams *)params
                  success:(void (^)(NSInteger, id, NSError *)) success
                  failure:(void (^)(NSInteger, id, NSError *)) failure;
+- (void)handleWithParams:(BaseSearchParams *)params
+              completion:(void (^)(BOOL success)) completion;
+
 - (ViSearchResult*)generateResultWithResponseData:(NSData*)responseData error:(NSError*)error httpStatusCode:(int)httpStatusCode;
+- (ViSearchResult*)generateResultWithResponseData:(NSData*)responseData error:(NSError*)error
+    httpStatusCode:(int)httpStatusCode httpHeaders:(NSDictionary*) headers;
+- (NSString*)generateRequestUrlPrefixWithParams:(NSDictionary*)params andDomainUrl:(NSString *)domain;
 - (NSString*)generateRequestUrlPrefixWithParams:(NSDictionary*)params;
 - (NSString *)getAuthParams;
 @end
