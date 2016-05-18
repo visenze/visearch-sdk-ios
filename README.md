@@ -228,6 +228,23 @@ uploadSearchParams.imageUrl = @"http://example.com/example.jpg";
 ...
 ```
 
+* Once uploading an image, you will receive a im\_id attribute from the [Search Results](#5-search-results). If you want to search the same image again, you can save your bandwidth by specifying the im\_id in the params:
+
+```objectivec 
+#import <ViSearch/VisearchAPI.h>
+...
+UploadSearchParams *uploadSearchParams = [[UploadSearchParams alloc] init];
+uploadSearchParams.imId = visearchResult.imId;
+    
+[[ViSearchAPI defaultClient] 
+	searchWithImageUrl:uploadSearchParams 
+	success:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
+	// Do something when request succeeds
+    } failure:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
+	// Do something when request fails 
+    }];
+...
+```
 ####4.3.1 Selection Box
 If the object you wish to search for takes up only a small portion of your image, or other irrelevant objects exists in the same image, chances are the search result could become inaccurate. Use the Box parameter to refine the search area of the image to improve accuracy. The box coordinated is set with respect to the original size of the uploading image. Note: the coordinate system uses pixel as unit instead of point.
 
@@ -288,6 +305,7 @@ After a successful search request, a list of results are passed to the callback 
 |content|NSDictionary|The complete json data returned from the server.(This property may be deprecated in the feature)|
 |imageResultsArray|NSArray|A list of image results returned from the server.|
 |reqId|NSString|A request id which can be used for tracking. More details can be found in [Section 7](#7-event-tracking) |
+|imId|NSString|An image id returned in the result which represents a image just uploaded. It can be re-used to do an upload search on the same image again. More details in [Upload Search](#43-upload-search)|
 
 You are encouraged to use the imageResultsArray, since **content** property may be deprecated in the future. Every image result is in the form of **ImageResult**. You can use following properties of a **ImageResult** to fulfill your own purpose.
 

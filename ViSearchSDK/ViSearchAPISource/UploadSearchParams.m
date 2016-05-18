@@ -11,7 +11,7 @@
 
 @implementation UploadSearchParams
 
-@synthesize imageUrl, imageFile, box, compressedImage;
+@synthesize imageUrl, imageFile, box, compressedImage, imId;
 
 #pragma mark Protected
 
@@ -36,6 +36,8 @@
         }
     }else if (imageUrl != nil) {
         [dict setValue:imageUrl forKey:@"im_url"];
+    }else if (imId) {
+        [dict setValue:imId forKey:@"im_id"];
     }
     return dict;
 }

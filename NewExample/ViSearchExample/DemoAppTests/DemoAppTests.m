@@ -45,7 +45,7 @@
         __block int count = 0;
         // Put the code you want to measure the time of here.
         for (int i = 1 ; i < 2; i++) {
-            NSBundle *bundle = [NSBundle bundleForClass:[self class]];
+            NSBundle *bundle = [NSBundle mainBundle];
             NSString *imagePath = [bundle pathForResource:[NSString stringWithFormat:@"%d",i] ofType:@"jpg"];
             UIImage *image = [UIImage imageWithContentsOfFile:imagePath];
             
@@ -56,6 +56,19 @@
             params.detection = @"all";
             [[ViSearchClient sharedInstance] searchWithImageData:params success:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
                 count++;
+                NSLog(@"%@",data.imId);
+                
+                UploadSearchParams *params = [UploadSearchParams new];
+                params.imId = data.imId;
+                params.settings = [ImageSettings highqualitySettings];
+                params.fl = @[@"im_url"];
+                params.detection = @"all";
+                
+                [[ViSearchClient sharedInstance] searchWithImageData:params success:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
+                    NSLog(@"%@",data.imId);
+                } failure:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
+                    
+                }];
                 
                 CGFloat longerSide = MAX(params.compressedImage.size.height, params.compressedImage.size.width);
                 assert(longerSide <= 1024);

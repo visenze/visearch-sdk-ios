@@ -17,6 +17,7 @@
 @synthesize content;
 @synthesize imageResultsArray = _imageResultsArray;
 @synthesize reqId = _reqId;
+@synthesize imId = _imId;
 @synthesize productTypes = _productTypes;
 @synthesize productTypesList = _productTypesList;
 
@@ -73,6 +74,10 @@
 
 - (NSString *)reqId {
     return [self.content objectForKey:@"X-Log-ID"];
+}
+
+- (NSString *)imId {
+    return [self.content objectForKey:@"im_id"];
 }
 
 - (NSArray*) productTypes {
