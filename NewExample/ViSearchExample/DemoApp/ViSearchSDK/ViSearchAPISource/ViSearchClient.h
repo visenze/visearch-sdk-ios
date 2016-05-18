@@ -11,6 +11,7 @@
 #import "ColorSearchParams.h"
 #import "UploadSearchParams.h"
 #import "ViSearchResult.h"
+#import "TrackParams.h"
 
 @class ViSearchClient;
 
@@ -36,5 +37,8 @@
 - (void)searchWithImageUrl:(UploadSearchParams *)params
                    success:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error))success
                    failure:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error))failure;
+
+- (void)track:(TrackParams *) trackParams
+     completion:(void (^)(BOOL success))completion;
 
 @end

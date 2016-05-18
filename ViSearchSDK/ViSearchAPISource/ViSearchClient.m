@@ -131,6 +131,9 @@
 }
 
 - (NSOperationQueue *)getOperationQ {
+    if (!self.operationQ) {
+        self.operationQ = [NSOperationQueue new];
+    }
     return self.operationQ;
 }
 @end

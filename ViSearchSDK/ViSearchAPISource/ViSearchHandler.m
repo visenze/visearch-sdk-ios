@@ -39,7 +39,7 @@
     NSError *jsonError = nil;
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:
             [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingAllowFragments error:&jsonError]];
-  
+    
     if (headers) {
         [dict addEntriesFromDictionary:headers];
     }
@@ -104,7 +104,7 @@
         }
     }
 
-    return [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    return urlString;
 }
 
 - (NSString *)getAuthParams {

@@ -18,6 +18,7 @@
 @property (nonatomic, readonly) NSDictionary *content;
 @property (nonatomic, readonly) NSArray *imageResultsArray;
 @property (nonatomic, readonly) NSString *reqId;
+@property (nonatomic, readonly) NSString *imId;
 @property (nonatomic, readonly) NSArray *productTypes;
 @property (nonatomic, readonly) NSArray *productTypesList;
 

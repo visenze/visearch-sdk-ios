@@ -9,6 +9,7 @@
 #import "ViSearchClient.h"
 #import "ViSearchBasicHandler.h"
 #import "ViSearchImageUploadHandler.h"
+#import "ViTrackHandler.h"
 
 @interface ViSearchClient()<ViSearchNetWorkDelegate>
 
@@ -40,6 +41,7 @@
         self.host = baseUrl;
         self.accessKey = accessKey;
         self.secretKey = secretKey;
+        self.operationQ = [NSOperationQueue new];
     }
     
     return self;
@@ -103,6 +105,15 @@
     handler.delegate = self;
 
     [handler handleWithParams:params success:success failure:failure];
+}
+
+#pragma makr Track
+- (void)track:(TrackParams *)trackParams completion:(void (^)(BOOL))completion {
+    ViSearchHandler *handler = [ViTrackHandler new];
+    handler.searchType = @"__aq.gif";
+    handler.delegate = self;
+    
+    [handler handleWithParams:trackParams completion:completion];
 }
 
 #pragma mark ViNetworkDelegate
