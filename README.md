@@ -33,9 +33,9 @@ ViSearch is an API that provides accurate, reliable and scalable image search. V
 
 The ViSearch iOS SDK is an open source software to provide easy integration of ViSearch Search API with your iOS applications. It provides three search methods based on the ViSearch Search API - pre-indexed search, color search and upload search. For source code and references, please visit the [Github Repository](https://github.com/visenze/visearch-sdk-ios).
 
->Current stable version: 1.0.9
+>Current stable version: 1.0.10
 
->Supported iOS version: iOS 6.x and higher 
+>Supported iOS version: iOS 6.x and higher
 
 
 ##2. Setup
@@ -58,7 +58,7 @@ You should change the access key and secret key to your own key pair before runn
 
     rectangles = [[NSMutableArray alloc] init];
     self.generalService = [GeneralServices sharedInstance];
-    
+
     //TODO: insert your own application keys
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
     [dict setValue:@"YOUR_ACCESS_KEY" forKey:@"access_key"];
@@ -89,7 +89,7 @@ Type a name for your project and press Next, here we use Demo as the project nam
 First you need to install the CocoaPods Ruby gem:
 
 ```
-[sudo] gem install cocoapods 
+[sudo] gem install cocoapods
 pod setup
 ```
 
@@ -102,9 +102,9 @@ pod init
 Edit the Podfile as follow:
 ```
 source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '7.0' 
+platform :ios, '7.0'
 ...
-pod 'ViSearch', '~>1.0.9'
+pod 'ViSearch', '~>1.0.10'
 ...
 ```
 
@@ -127,7 +127,7 @@ Then add it to your project
 
 
 ##3. Initialization
-`ViSearch` **must** be initialized with an accessKey/secretKey pair **before** it can be used. 
+`ViSearch` **must** be initialized with an accessKey/secretKey pair **before** it can be used.
 
 ```objectivec
 #import <ViSearch/VisearchAPI.h>
@@ -157,9 +157,9 @@ Search similar images based on the your indexed image by its unique identifier (
 ...
 SearchParams *searchParams = [[SearchParams alloc] init];
 searchParams.imName = @"imName-example";
-    
-[[ViSearchAPI defaultClient] 
-	searchWithProductId:searchParams 
+
+[[ViSearchAPI defaultClient]
+	searchWithProductId:searchParams
 	success:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
 	// Do something when request succeeds
 	} failure:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
@@ -177,15 +177,15 @@ Color search is to search images with similar color by providing a color code. T
 ColorSearchParams *colorSearchParams = [[ColorSearchParams alloc] init];
 colorSearchParams.color = @"012ACF";
 
-[[ViSearchAPI defaultClient] 
-	searchWithColor:colorSearchParams 
+[[ViSearchAPI defaultClient]
+	searchWithColor:colorSearchParams
 	success:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
     // Do something when request succeeds   
     } failure:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
-    // Do something when request fails 
+    // Do something when request fails
     }];
 ...
-``` 
+```
 
 ###4.3 Upload Search
 Upload search is used to search similar images by uploading an image or providing an image url. `Image` class is used to perform the image encoding and resizing. You should construct the `Image` object and pass it to `UploadSearchParams` to start a search.
@@ -200,9 +200,9 @@ UIImage *image = [UIImage imageNamed:@"example.jpg"];
 
 UploadSearchParams *uploadSearchParams = [[UploadSearchParams alloc] init];
 uploadSearchParams.imageFile = image
-    
-[[ViSearchAPI defaultClient] 
-	searchWithImageData:uploadSearchParams 
+
+[[ViSearchAPI defaultClient]
+	searchWithImageData:uploadSearchParams
 	success:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
 	// Do something when request succeeds
     } failure:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
@@ -212,36 +212,36 @@ uploadSearchParams.imageFile = image
 
 * Alternatively, you can pass an image url directly to `uploadSearchParams` to start the search :
 
-```objectivec 
+```objectivec
 #import <ViSearch/VisearchAPI.h>
 ...
 UploadSearchParams *uploadSearchParams = [[UploadSearchParams alloc] init];
 uploadSearchParams.imageUrl = @"http://example.com/example.jpg";
-    
-[[ViSearchAPI defaultClient] 
-	searchWithImageUrl:uploadSearchParams 
+
+[[ViSearchAPI defaultClient]
+	searchWithImageUrl:uploadSearchParams
 	success:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
 	// Do something when request succeeds
     } failure:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
-	// Do something when request fails 
+	// Do something when request fails
     }];
 ...
 ```
 
 * Once uploading an image, you will receive a im\_id attribute from the [Search Results](#5-search-results). If you want to search the same image again, you can save your bandwidth by specifying the im\_id in the params:
 
-```objectivec 
+```objectivec
 #import <ViSearch/VisearchAPI.h>
 ...
 UploadSearchParams *uploadSearchParams = [[UploadSearchParams alloc] init];
 uploadSearchParams.imId = visearchResult.imId;
-    
-[[ViSearchAPI defaultClient] 
-	searchWithImageUrl:uploadSearchParams 
+
+[[ViSearchAPI defaultClient]
+	searchWithImageUrl:uploadSearchParams
 	success:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
 	// Do something when request succeeds
     } failure:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
-	// Do something when request fails 
+	// Do something when request fails
     }];
 ...
 ```
@@ -264,7 +264,7 @@ uploadSearchParams.box = box;
 ```
 
 ####4.3.2 Resizing Settings
-When performing upload search, you may notice the increased search latency with increased image file size. This is due to the increased time spent in network transferring your images to the ViSearch server, and the increased time for processing larger image files in ViSearch. 
+When performing upload search, you may notice the increased search latency with increased image file size. This is due to the increased time spent in network transferring your images to the ViSearch server, and the increased time for processing larger image files in ViSearch.
 
 To reduce upload search latency, by default the uploadSearch method makes a copy of your image file and resizes the copy to 512x512 pixels if one of the original dimensions exceed 512 pixels. This is the optimized size to lower search latency while not sacrificing search accuracy for general use cases:
 
@@ -280,7 +280,7 @@ If your image contains fine details such as textile patterns and textures, you c
 ```objectivec
 // by default, the max width of the image is set to 512px, quality is 0.97
 UploadSearchParams *uploadSearchParams = [[UploadSearchParams alloc] init];
-// set the image with high quality settings. 
+// set the image with high quality settings.
 // Max width is 1024px, and the quality is 0.985. Note: Quality with 1.0 take hugespace
 uploadSearchParams.settings = [ImageSettings highqualitySettings];
 ```
@@ -289,7 +289,7 @@ Or, provide the customized resize settings. To make efficient use the of the mem
 
 ```objectivec
 //resize the image to 800 by 800 area using jpeg 0.9 quality
-uploadSearchParams.settings = [[ImageSettings alloc] 
+uploadSearchParams.settings = [[ImageSettings alloc]
 	initWithSize:CGSizeMake(800, 800) Quality:0.9];
 ```
 
@@ -316,18 +316,18 @@ You are encouraged to use the imageResultsArray, since **content** property may 
 |score|CGFloat|A float value ranging from 0.0 to 1.0. Refer to *Section 6.3 Result Score*.|
 |metadataDictionary|NSDictionary|Other metadata returned from server. Refer to *Section 6.1 Retrieving Metadata*.|
 ```objectivec
-// This is an example of image url search. 
-// The process of handling results by other kinds of search is similar. 
-[[ViSearchAPI defaultClient] 
-	searchWithImageUrl:uploadSearchParams 
+// This is an example of image url search.
+// The process of handling results by other kinds of search is similar.
+[[ViSearchAPI defaultClient]
+	searchWithImageUrl:uploadSearchParams
 	success:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
 		// Iterate all returned results
 		for (ImageResult *result in data.imageResultsArray) {
 			NSLog("%@", result.url);//log result's image url.
-			//Do something here 
+			//Do something here
 		}
     } failure:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
-		NSLog("%@", data.error.message);//log network and server error message 
+		NSLog("%@", data.error.message);//log network and server error message
     }];
 ```
 
@@ -373,11 +373,11 @@ success:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
 	// Iterate all returned results
 	for (ImageResult *result in data.imageResultsArray) {
 		NSLog("%@", result.metadataDictionary);//log result's metadata.
-		NSLog("%@", [result.metadataDictionary 
+		NSLog("%@", [result.metadataDictionary
 			objectForKey;@"price"]);//log price in metadata
-		//Do something here 
+		//Do something here
 	}
-} 
+}
 ```
 
 >Only metadata of type string, int, and float can be retrieved from ViSearch. Metadata of type text is not available for retrieval.
@@ -389,17 +389,17 @@ To filter search results based on metadata values, provide a map of metadata key
 ...
 UploadSearchParams *uploadSearchParams = [[UploadSearchParams alloc] init];
 
-// the type of "count" on db schema is int, 
+// the type of "count" on db schema is int,
 // so we can specify the value range, or do a value match
 [uploadSearchParams.fq setObject:@"0, 199" forKey:@"count"];
 [uploadSearchParams.fq setObject:@"199" forKey:@"count"];
 
-// the type of "price" on db schema is float, 
+// the type of "price" on db schema is float,
 // so we can specify the value range, or do a value match
 [uploadSearchParams.fq setObject:@"0.0, 199.0" forKey:@"price"];
 [uploadSearchParams.fq setObject:@"15.0" forKey:@"price"];
 
-// the type of "description" on db schema is string, so we can do a string match. 
+// the type of "description" on db schema is string, so we can do a string match.
 [uploadSearchParams.fq setObject:@"description" forKey:@"wooden"];
 
 // start searching
@@ -442,11 +442,11 @@ uplaodSearchParams.scoreMax = 0.8; // the maximum score is 0.8
 ```
 
 ###6.4 Automatic Object Recognition Beta
-With Automatic Object Recognition, ViSearch /uploadsearch API is smart to detect the objects present in the query image and suggest the best matched product type to run the search on. 
+With Automatic Object Recognition, ViSearch /uploadsearch API is smart to detect the objects present in the query image and suggest the best matched product type to run the search on.
 
-You can turn on the feature in upload search by setting the API parameter "detection=all". We are now able to detect various types of fashion items, including `Top`, `Dress`, `Bottom`, `Shoe`, `Bag`, `Watch` and `Indian Ethnic Wear`. The list is ever-expanding as we explore this feature for other categories. 
+You can turn on the feature in upload search by setting the API parameter "detection=all". We are now able to detect various types of fashion items, including `Top`, `Dress`, `Bottom`, `Shoe`, `Bag`, `Watch` and `Indian Ethnic Wear`. The list is ever-expanding as we explore this feature for other categories.
 
-Notice: This feature is currently available for fashion application type only. You will need to make sure your app type is configurated as "fashion" on [ViSenze dashboard](https://developers.visenze.com/setup/#Choose-Your-Application-Type). 
+Notice: This feature is currently available for fashion application type only. You will need to make sure your app type is configurated as "fashion" on [ViSenze dashboard](https://developers.visenze.com/setup/#Choose-Your-Application-Type).
 
 ```java
 params.detection = @"all";
@@ -463,7 +463,7 @@ Sample request to detect `bag` in an uploaded image:
 params.detection = @"bag";
 ```
 
-The detected product types are listed in `product_types` together with the match score and box area of the detected object. Multiple objects can be detected from the query image and they are ranked from the highest score to lowest. The full list of supported product types by our API will also be returned in `product_types_list`. 
+The detected product types are listed in `product_types` together with the match score and box area of the detected object. Multiple objects can be detected from the query image and they are ranked from the highest score to lowest. The full list of supported product types by our API will also be returned in `product_types_list`.
 
 ##7. Event Tracking
 
