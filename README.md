@@ -7,16 +7,18 @@
 ##Table of Contents
  1. [Overview](#1-overview)
  2. [Setup](#2-setup)
-      - 2.1 [Run the Demo](21-run-the-demo)
+      - 2.1 [Run the Demo](#21-run-the-demo)
       - 2.2 [Set up Xcode Project](#22-set-up-xcode-project)
       - 2.3 [Import ViSearch SDK](#23-import-visearch-sdk)
+      - 2.4 [Add Privacy Usage Description](#24-add-privacy-usage-description)
  3. [Initialization](#3-initialization)
- 4. [Searching Images](#4-searching-images)
-	  - 4.1 [Pre-indexed Search](#41-pre-indexed-search)
-	  - 4.2 [Color Search](#42-color-search)
-	  - 4.3 [Upload Search](#43-upload-search)
+ 4. [Solutions](#4-solutions)
+    - 4.1 [Find Similar](#41-find-similar)
+    - 4.2 [You May Also Like](#42-you-may-also-like)
+    - 4.3 [Search by Image](#43-search-by-image)
 	    - 4.3.1 [Selection Box](#431-selection-box)
 	    - 4.3.2 [Resizing Settings](#432-resizing-settings)
+    - 4.4 [Search by Color](#44-search-by-color)
  5. [Search Results](#5-search-results)
  6. [Advanced Search Parameters](#6-advanced-search-parameters)
 	  - 6.1 [Retrieving Metadata](#61-retrieving-metadata)
@@ -28,19 +30,20 @@
 ---
 
 
-##1. Overview
+## 1. Overview
+
 ViSearch is an API that provides accurate, reliable and scalable image search. ViSearch API provides two services (Data API and Search API) to let the developers prepare image database and perform image searches efficiently. ViSearch API can be easily integrated into your web and mobile applications. For more details, see [ViSearch API Documentation](http://www.visenze.com/docs/overview/introduction).
 
-The ViSearch iOS SDK is an open source software to provide easy integration of ViSearch Search API with your iOS applications. It provides three search methods based on the ViSearch Search API - pre-indexed search, color search and upload search. For source code and references, please visit the [Github Repository](https://github.com/visenze/visearch-sdk-ios).
+The ViSearch iOS SDK is an open source software to provide easy integration of ViSearch Search API with your iOS applications. It provides four search methods based on the ViSearch Solution APIs - Find Similar, You May Also Like, Search By Image and Search By Color. For source code and references, please visit the [Github Repository](https://github.com/visenze/visearch-sdk-ios).
 
->Current stable version: 1.0.10
+>Current stable version: 1.1.0
 
->Supported iOS version: iOS 6.x and higher
+>Supported iOS version: iOS 7.x and higher
 
 
-##2. Setup
+## 2. Setup
 
-###2.1 Run the Demo
+### 2.1 Run the Demo
 
 The source code of a demo application is provided together with the SDK ([demo](https://github.com/visenze/visearch-sdk-ios/tree/master/NewExample/ViSearchExample)). You can simply open **ViSearchExample** project in XCode and run the demo.
 
@@ -72,7 +75,7 @@ You can play around with our demo app to see how we build up the cool image sear
 ![ios_demo](./doc/ios_demo.png)
 
 
-###2.2 Set up Xcode project
+### 2.2 Set up Xcode project
 
 In Xcode, go to File > New > Project Select the Single View Application.
 
@@ -82,9 +85,9 @@ Type a name for your project and press Next, here we use Demo as the project nam
 
 ![screenshot](./doc/ios1.png)
 
-###2.3 Import ViSearch SDK
+### 2.3 Import ViSearch SDK
 
-####2.3.1 Using CocoaPods
+#### 2.3.1 Using CocoaPods
 
 First you need to install the CocoaPods Ruby gem:
 
@@ -104,7 +107,7 @@ Edit the Podfile as follow:
 source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '7.0'
 ...
-pod 'ViSearch', '~>1.0.10'
+pod 'ViSearch', '~>1.1.0'
 ...
 ```
 
@@ -125,8 +128,11 @@ Then add it to your project
 
 ![screenshot](./doc/ios3.png)
 
+### 2.4 Add Privacy Usage Description
 
-##3. Initialization
+iOS 10 now requires user permission to access camera and photo library. If your app requires these access, please add description for NSCameraUsageDescription, NSPhotoLibraryUsageDescription in the Info.plist. More details can be found [here](https://developer.apple.com/library/content/documentation/General/Reference/InfoPlistKeyReference/Articles/CocoaKeys.html#//apple_ref/doc/uid/TP40009251-SW24).
+
+## 3. Initialization
 `ViSearch` **must** be initialized with an accessKey/secretKey pair **before** it can be used.
 
 ```objectivec
@@ -147,10 +153,10 @@ ViSearchClient *client = [[ViSearchClient alloc] initWithBaseUrl:url
 ...
 ```
 
-##4. Searching Images
+## 4. Solutions
 
-###4.1 Pre-indexed Search
-Search similar images based on the your indexed image by its unique identifier (im_name):
+### 4.1 Find Similar
+**Find similar** solution is used to search for visually similar images in the image database giving an indexed image’s unique identifier (im_name).
 
 ```objectivec
 #import <ViSearch/VisearchAPI.h>
@@ -168,27 +174,27 @@ searchParams.imName = @"imName-example";
 ...
 ```
 
-###4.2 Color Search
-Color search is to search images with similar color by providing a color code. The color code should be in **Hexadecimal** and passed to `ColorSearchParams` as a `String`.
+### 4.2 You May Also Like
+**You may also like** solution is used to provide a list of recommended items from the indexed image database based on customizable rules giving an indexed image’s unique identifier (im_name).
 
 ```objectivec
 #import <ViSearch/VisearchAPI.h>
 ...
-ColorSearchParams *colorSearchParams = [[ColorSearchParams alloc] init];
-colorSearchParams.color = @"012ACF";
+SearchParams *searchParams = [[SearchParams alloc] init];
+searchParams.imName = @"imName-example";
 
 [[ViSearchAPI defaultClient]
-	searchWithColor:colorSearchParams
+	recommendWithImageId:searchParams
 	success:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
-    // Do something when request succeeds   
-    } failure:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
-    // Do something when request fails
-    }];
+	// Do something when request succeeds
+	} failure:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
+	// Do something when request fails
+	}];
 ...
 ```
 
-###4.3 Upload Search
-Upload search is used to search similar images by uploading an image or providing an image url. `Image` class is used to perform the image encoding and resizing. You should construct the `Image` object and pass it to `UploadSearchParams` to start a search.
+### 4.3 Search by Image
+**Search by image** solution is used to search similar images by uploading an image or providing an image url. `Image` class is used to perform the image encoding and resizing. You should construct the `Image` object and pass it to `UploadSearchParams` to start a search.
 
 
 * Using  UIImage
@@ -245,7 +251,7 @@ uploadSearchParams.imId = visearchResult.imId;
     }];
 ...
 ```
-####4.3.1 Selection Box
+#### 4.3.1 Selection Box
 If the object you wish to search for takes up only a small portion of your image, or other irrelevant objects exists in the same image, chances are the search result could become inaccurate. Use the Box parameter to refine the search area of the image to improve accuracy. The box coordinated is set with respect to the original size of the uploading image. Note: the coordinate system uses pixel as unit instead of point.
 
 ```objectivec
@@ -263,7 +269,7 @@ uploadSearchParams.box = box;
 ...
 ```
 
-####4.3.2 Resizing Settings
+#### 4.3.2 Resizing Settings
 When performing upload search, you may notice the increased search latency with increased image file size. This is due to the increased time spent in network transferring your images to the ViSearch server, and the increased time for processing larger image files in ViSearch.
 
 To reduce upload search latency, by default the uploadSearch method makes a copy of your image file and resizes the copy to 512x512 pixels if one of the original dimensions exceed 512 pixels. This is the optimized size to lower search latency while not sacrificing search accuracy for general use cases:
@@ -293,8 +299,26 @@ uploadSearchParams.settings = [[ImageSettings alloc]
 	initWithSize:CGSizeMake(800, 800) Quality:0.9];
 ```
 
+### 4.4 Search by Color
+**Search by color** solution is used to search images with similar color by providing a color code. The color code should be in **Hexadecimal** and passed to `ColorSearchParams` as a `String`.
 
-##5. Search Results
+```objectivec
+#import <ViSearch/VisearchAPI.h>
+...
+ColorSearchParams *colorSearchParams = [[ColorSearchParams alloc] init];
+colorSearchParams.color = @"012ACF";
+
+[[ViSearchAPI defaultClient]
+	searchWithColor:colorSearchParams
+	success:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
+    // Do something when request succeeds   
+    } failure:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
+    // Do something when request fails
+    }];
+...
+```
+
+## 5. Search Results
 
 After a successful search request, a list of results are passed to the callback function in the form of **ViSearchResult**.  You can use following properties from the result to fulfill your own purpose.
 
@@ -351,9 +375,9 @@ searchParams.limit = 30;
 ...
 ```
 
-##6. Advanced Search Parameters
+## 6. Advanced Search Parameters
 
-###6.1 Retrieving Metadata
+### 6.1 Retrieving Metadata
 To retrieve metadata of your search results, provide a list of metadata keys as the `fl` (field list) in the basic search property:
 
 ```objectivec
@@ -382,7 +406,7 @@ success:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
 
 >Only metadata of type string, int, and float can be retrieved from ViSearch. Metadata of type text is not available for retrieval.
 
-###6.2 Filtering Results
+### 6.2 Filtering Results
 To filter search results based on metadata values, provide a map of metadata key to filter value as the `fq` (filter query) property:
 
 ```objectivec
@@ -416,7 +440,7 @@ int | Metadata value can be either: <ul><li>exactly matched with the query value
 float | Metadata value can be either <ul><li>exactly matched with the query value</li><li>matched with a ranged query ```minValue,maxValue```, e.g. float value 1.0, 99.99, and 199.99 would match ranged query ```0.0,199.99``` but would not match ranged query ```200.0,300.0```</li></ul>
 
 
-###6.3 Result Score
+### 6.3 Result Score
 ViSearch image search results are ranked in descending order i.e. from the highest scores to the lowest, ranging from 1.0 to 0.0. By default, the score for each result is not returned. You can turn on the score parameter to retrieve the scores for each image result:
 
 ```java
@@ -441,7 +465,7 @@ uplaodSearchParams.scoreMax = 0.8; // the maximum score is 0.8
 ...
 ```
 
-###6.4 Automatic Object Recognition Beta
+### 6.4 Automatic Object Recognition Beta
 With Automatic Object Recognition, ViSearch /uploadsearch API is smart to detect the objects present in the query image and suggest the best matched product type to run the search on.
 
 You can turn on the feature in upload search by setting the API parameter "detection=all". We are now able to detect various types of fashion items, including `Top`, `Dress`, `Bottom`, `Shoe`, `Bag`, `Watch` and `Indian Ethnic Wear`. The list is ever-expanding as we explore this feature for other categories.
@@ -465,9 +489,9 @@ params.detection = @"bag";
 
 The detected product types are listed in `product_types` together with the match score and box area of the detected object. Multiple objects can be detected from the query image and they are ranked from the highest score to lowest. The full list of supported product types by our API will also be returned in `product_types_list`.
 
-##7. Event Tracking
+## 7. Event Tracking
 
-###Send Action For Tracking
+### Send Action For Tracking
 User action can be sent in this way:
 
 ```objectivec
@@ -487,7 +511,6 @@ The following fields could be used for tracking user events:
 
 Field | Description | Required
 --- | --- | ---
-cid| An identify assigned by visenze for each e-commerce provider | Require
 reqid| visearch request id of current search. This attribute can be accessed in ViSearchResult in [Section 5](#5-search-results) | Require
 action | action type, eg: view, click, buy, add_cart. Currently, we only support click event. More events will be supported in the future. | Require
 im_name | image id (im_name) for this behavior | Optional
