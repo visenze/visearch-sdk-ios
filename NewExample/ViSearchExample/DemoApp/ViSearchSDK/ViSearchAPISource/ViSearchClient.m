@@ -102,10 +102,22 @@
 {
     ViSearchHandler *handler = [ViSearchBasicHandler new];
     handler.searchType = @"search";
-    handler.delegate = self;
+    handler.delegate = self;    
 
     [handler handleWithParams:params success:success failure:failure];
 }
+
+- (void)recommendWithImageId:(SearchParams *)params
+                     success:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error)) success
+                     failure:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error)) failure
+{
+    ViSearchHandler *handler = [ViSearchBasicHandler new];
+    handler.searchType = @"recommendation";
+    handler.delegate = self;
+    
+    [handler handleWithParams:params success:success failure:failure];
+}
+
 
 #pragma makr Track
 - (void)track:(TrackParams *)trackParams completion:(void (^)(BOOL))completion {

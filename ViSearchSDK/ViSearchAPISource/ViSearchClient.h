@@ -41,4 +41,8 @@
 - (void)track:(TrackParams *) trackParams
      completion:(void (^)(BOOL success))completion;
 
+- (void)recommendWithImageId:(SearchParams *)params
+                  success:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error)) success
+                  failure:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error)) failure;
+
 @end
