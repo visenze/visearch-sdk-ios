@@ -13,7 +13,7 @@
 
 - (void)handleWithParams:(BaseSearchParams *)params completion:(void (^)(BOOL))completion {
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setTimeoutInterval:10];
+    [request setTimeoutInterval:self.timeoutInterval];
     [request setHTTPMethod:@"GET"];
     
     NSString *urlString = [self generateRequestUrlPrefixWithParams: params.toDict andDomainUrl:@"https://track.visenze.com"];

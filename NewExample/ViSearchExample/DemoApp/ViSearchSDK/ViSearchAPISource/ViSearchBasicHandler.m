@@ -15,7 +15,7 @@
                  failure:(void (^)(NSInteger, id, NSError *))failure
 {
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setTimeoutInterval:10];
+    [request setTimeoutInterval:self.timeoutInterval];
     
     NSString *urlString = [self generateRequestUrlPrefixWithParams: params.toDict];
     [request setURL: [NSURL URLWithString:urlString]];

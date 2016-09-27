@@ -23,6 +23,8 @@
 
 @property NSString *searchType;
 @property id<ViSearchNetWorkDelegate> delegate;
+@property (nonatomic, assign) int timeoutInterval; // add time out interval for search client, default to 10s
+
 /**
  Executing a searching operation
  

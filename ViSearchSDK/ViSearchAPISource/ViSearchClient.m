@@ -31,6 +31,7 @@
         sharedInstance = [[ViSearchClient alloc] init];
         sharedInstance.accessKey = @"";
         sharedInstance.secretKey = @"";
+        sharedInstance.timeoutInterval = 10;
     });
     
     return sharedInstance;
@@ -41,6 +42,7 @@
         self.host = baseUrl;
         self.accessKey = accessKey;
         self.secretKey = secretKey;
+        self.timeoutInterval = 10;
         self.operationQ = [NSOperationQueue new];
     }
     
@@ -68,6 +70,7 @@
                 failure:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error)) failure
 {
     ViSearchHandler *handler = [ViSearchBasicHandler new];
+    handler.timeoutInterval = self.timeoutInterval;
     handler.searchType = @"colorsearch";
     handler.delegate = self;
     
@@ -79,6 +82,7 @@
                     failure:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error)) failure;
 {
     ViSearchHandler *handler = [ViSearchImageUploadHandler new];
+    handler.timeoutInterval = self.timeoutInterval;
     handler.searchType = @"uploadsearch";
     handler.delegate = self;
 
@@ -90,6 +94,7 @@
                    failure:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error))failure
 {
     ViSearchHandler *handler = [ViSearchBasicHandler new];
+    handler.timeoutInterval = self.timeoutInterval;
     handler.searchType = @"uploadsearch";
     handler.delegate = self;
 
@@ -101,6 +106,7 @@
                   failure:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error)) failure
 {
     ViSearchHandler *handler = [ViSearchBasicHandler new];
+    handler.timeoutInterval = self.timeoutInterval;
     handler.searchType = @"search";
     handler.delegate = self;    
 
@@ -112,6 +118,7 @@
                      failure:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error)) failure
 {
     ViSearchHandler *handler = [ViSearchBasicHandler new];
+    handler.timeoutInterval = self.timeoutInterval;
     handler.searchType = @"recommendation";
     handler.delegate = self;
     
@@ -122,6 +129,7 @@
 #pragma makr Track
 - (void)track:(TrackParams *)trackParams completion:(void (^)(BOOL))completion {
     ViSearchHandler *handler = [ViTrackHandler new];
+    handler.timeoutInterval = self.timeoutInterval;
     handler.searchType = @"__aq.gif";
     handler.delegate = self;
     
