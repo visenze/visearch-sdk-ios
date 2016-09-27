@@ -120,18 +120,23 @@
                                   andDetection:@"all"
                                         andBox:nil
                                completionBlock:^(BOOL succeeded, ViSearchResult *result) {
-                                   if (!isCanceled) {
-                                       if (succeeded) {
-                                           self.searchResult = result;
-                                           [self hideLoadingView];
-                                           [self performSegueWithIdentifier:SEGUE_RESULT sender:self];
+                                   
+                                   dispatch_async(dispatch_get_main_queue(), ^{
+                                       if (!isCanceled) {
+                                           if (succeeded) {
+                                               self.searchResult = result;
+                                               [self hideLoadingView];
+                                               [self performSegueWithIdentifier:SEGUE_RESULT sender:self];
+                                           } else {
+                                               [self showAlertView];
+                                           }
                                        } else {
-                                           [self showAlertView];
+                                           [self hideLoadingView];
+                                           [self dismissViewControllerAnimated:YES completion:nil];
                                        }
-                                   } else {
-                                       [self hideLoadingView];
-                                       [self dismissViewControllerAnimated:YES completion:nil];
-                                   }
+                                   });
+                                   
+                                  
                                    
                                }];
 }

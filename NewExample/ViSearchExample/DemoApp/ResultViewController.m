@@ -472,25 +472,33 @@ typedef enum {
      andDetection:detection
      andBox:self.currentBox
      completionBlock:^(BOOL succeeded, ViSearchResult *result) {
-         uploadSearchCount--;
-         [self scrollViewButtonEnabled];
-         if (succeeded) {
-             if (uploadSearchCount == 0) {
-                 dispatch_async(dispatch_get_main_queue(), ^{
-                     [self hideLoadingView];
-                     [self.searchResultLabel setText:MSG_UP_SEARCH_RESULT];
-                     self.searchResults = result;
-                     
-                     if (isDynamicView) {
-                         [self showDynamicCollectionView];
-                     } else {
-                         [self hideDynamicCollectionView];
-                     }
-                 });
+         
+         dispatch_async(dispatch_get_main_queue(), ^{
+             uploadSearchCount--;
+             [self scrollViewButtonEnabled];
+             if (succeeded) {
+                 if (uploadSearchCount == 0) {
+                     dispatch_async(dispatch_get_main_queue(), ^{
+                         [self hideLoadingView];
+                         [self.searchResultLabel setText:MSG_UP_SEARCH_RESULT];
+                         self.searchResults = result;
+                         
+                         if (isDynamicView) {
+                             [self showDynamicCollectionView];
+                         } else {
+                             [self hideDynamicCollectionView];
+                         }
+                     });
+                 }
+             } else {
+                 [self showAlertView];
              }
-         } else {
-             [self showAlertView];
-         }
+         });
+         
+         
+        
+         
+         
      }];
 }
 
