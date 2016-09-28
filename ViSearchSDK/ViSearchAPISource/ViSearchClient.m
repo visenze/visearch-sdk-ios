@@ -65,6 +65,26 @@
 
 #pragma mark Search API
 
+// call the API and then track this end point
+- (void)handleAndTrackWithHandler: (ViSearchHandler*) handler
+                          params:(BaseSearchParams *)params
+                          success:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error)) successCallback
+                          failure:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error)) failure
+{
+    [handler handleWithParams:params
+                      success:^(NSInteger statusCode, ViSearchResult *data, NSError *error){
+                          successCallback(statusCode, data, error);
+                          
+                          // call the tracking API
+                          if(data.reqId!=nil)
+                          {
+                              TrackParams* params = [TrackParams createWithAccessKey:self.accessKey reqId:data.reqId andAction:handler.searchType];
+                              [self track:params completion:nil];
+                          }
+                       }
+                      failure:failure];
+}
+
 - (void)searchWithColor:(ColorSearchParams *)params
                 success:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error)) success
                 failure:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error)) failure
@@ -89,7 +109,7 @@
     handler.searchType = @"colorsearch";
     handler.delegate = self;
     
-    [handler handleWithParams:params success:success failure:failure];
+    [self handleAndTrackWithHandler:handler params:params success:success failure:failure];
 }
 
 - (void)searchWithImage:(UploadSearchParams *)params
@@ -109,7 +129,7 @@
     handler.searchType = @"uploadsearch";
     handler.delegate = self;
     
-    [handler handleWithParams:params success:success failure:failure];
+    [self handleAndTrackWithHandler:handler params:params success:success failure:failure];
 }
 
 - (void)searchWithImageData:(UploadSearchParams *)params
@@ -148,7 +168,7 @@
     handler.searchType = @"search";
     handler.delegate = self;    
 
-    [handler handleWithParams:params success:success failure:failure];
+    [self handleAndTrackWithHandler:handler params:params success:success failure:failure];
 }
 
 - (void)recommendWithImageName:(SearchParams *)params
@@ -164,11 +184,11 @@
     handler.searchType = @"recommendation";
     handler.delegate = self;
     
-    [handler handleWithParams:params success:success failure:failure];
+    [self handleAndTrackWithHandler:handler params:params success:success failure:failure];
 }
 
 
-#pragma makr Track
+#pragma mark Track
 - (void)track:(TrackParams *)trackParams completion:(void (^)(BOOL))completion {
     ViSearchHandler *handler = [ViTrackHandler new];
     handler.timeoutInterval = self.timeoutInterval;

@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *loadingLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *loadingView;
 @property ViSearchResult *searchResult;
+@property NSString *lastReqId;
 
 @end
 
@@ -124,6 +125,8 @@
                                    dispatch_async(dispatch_get_main_queue(), ^{
                                        if (!isCanceled) {
                                            if (succeeded) {
+                                               if(result.reqId!=nil)
+                                                   self.lastReqId = result.reqId;
                                                self.searchResult = result;
                                                [self hideLoadingView];
                                                [self performSegueWithIdentifier:SEGUE_RESULT sender:self];

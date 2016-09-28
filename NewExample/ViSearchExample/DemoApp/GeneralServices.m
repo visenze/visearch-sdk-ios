@@ -216,4 +216,11 @@
     }];
 }
 
+- (void)trackClickWithImgName:(NSString*)imageName
+             reqId:(NSString*) reqId
+{
+    TrackParams* params = [TrackParams createWithAccessKey:[ViSearchAPI defaultClient].accessKey reqId:reqId andAction:@"click"];
+    [[ViSearchAPI defaultClient] track:params completion:nil];
+}
+
 @end

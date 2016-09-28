@@ -473,10 +473,14 @@ typedef enum {
      andBox:self.currentBox
      completionBlock:^(BOOL succeeded, ViSearchResult *result) {
          
+        
          dispatch_async(dispatch_get_main_queue(), ^{
              uploadSearchCount--;
              [self scrollViewButtonEnabled];
              if (succeeded) {
+                 if(result.reqId!=nil)
+                     self.lastReqId = result.reqId;
+                 
                  if (uploadSearchCount == 0) {
                      dispatch_async(dispatch_get_main_queue(), ^{
                          [self hideLoadingView];
@@ -847,6 +851,11 @@ PanPostition getPosition(CGPoint position, CGFloat width, CGFloat height){
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:SEGUE_DETAIL]) {
         ImageResult *result = [self.searchResults.imageResultsArray objectAtIndex:self.selectedIndex];
+        // send click event
+        if(self.lastReqId!=nil)
+        {
+            [self.generalService trackClickWithImgName:result.im_name reqId:self.lastReqId];
+        }
         DetailViewController *vc = [segue destinationViewController];
         vc.imageResult = result;
     }

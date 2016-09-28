@@ -20,5 +20,6 @@
 @property UIImage *originalImage;
 @property ViSearchResult *searchResults;
 @property id<SearchViewProtocol> delegate;
+@property NSString *lastReqId;
 
 @end
