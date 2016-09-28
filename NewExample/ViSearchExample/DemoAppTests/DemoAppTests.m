@@ -8,6 +8,10 @@
 
 #import <XCTest/XCTest.h>
 #import "ViSearchAPI.h"
+#import "SearchParams.h"
+#import <Foundation/Foundation.h>
+#import <Foundation/NSObject.h>
+#import <Foundation/NSException.h>
 
 @interface DemoAppTests : XCTestCase
 
@@ -25,16 +29,96 @@
     [super tearDown];
 }
 
-- (void)testExample {
-    // This is an example of a functional test case.
-    // Use XCTAssert and related functions to verify your tests produce the correct results.
+- (void)testRequiredImgNameForSearch {
+    SearchParams *searchParams = [[SearchParams alloc] init];
+    searchParams.imName = @"";
+    
+    XCTAssertThrowsSpecificNamed(
+                            [[ViSearchAPI defaultClient] searchWithImageId:searchParams success:nil failure:nil] ,
+                            NSException, NSInvalidArgumentException ,
+                            @"image name is required"  );
 }
 
-- (void)testPerformanceExample {
-    // This is an example of a performance test case.
-    [self measureBlock:^{
-        // Put the code you want to measure the time of here.
-    }];
+- (void)testRequiredImgNameForRecommendation {
+    SearchParams *searchParams = [[SearchParams alloc] init];
+    searchParams.imName = @"";
+    
+    XCTAssertThrowsSpecificNamed(
+                                 [[ViSearchAPI defaultClient] recommendWithImageName:searchParams success:nil failure:nil] ,
+                                 NSException, NSInvalidArgumentException ,
+                                 @"image name is required"  );
+}
+
+- (void)testRequiredColorCodeForSearch {
+    ColorSearchParams *searchParams = [[ColorSearchParams alloc] init];
+    searchParams.color = @"";
+    
+    XCTAssertThrowsSpecificNamed(
+                                 [[ViSearchAPI defaultClient] searchWithColor:searchParams success:nil failure:nil] ,
+                                 NSException, NSInvalidArgumentException ,
+                                 @"color code is required"  );
+}
+
+- (void)testValidColorCodeForSearch {
+    ColorSearchParams *searchParams = [[ColorSearchParams alloc] init];
+    searchParams.color = @"12345";
+    
+    XCTAssertThrowsSpecificNamed(
+                                 [[ViSearchAPI defaultClient] searchWithColor:searchParams success:nil failure:nil] ,
+                                 NSException, NSInvalidArgumentException ,
+                                 @"color code must be 6 characters"  );
+    
+    
+    searchParams.color = @"A2345M";
+    
+    XCTAssertThrowsSpecificNamed(
+                                 [[ViSearchAPI defaultClient] searchWithColor:searchParams success:nil failure:nil] ,
+                                 NSException, NSInvalidArgumentException ,
+                                 @"Invalid color code"  );
+    
+    searchParams.color = @"ABCDEg";
+    
+    XCTAssertThrowsSpecificNamed(
+                                 [[ViSearchAPI defaultClient] searchWithColor:searchParams success:nil failure:nil] ,
+                                 NSException, NSInvalidArgumentException ,
+                                 @"Invalid color code"  );
+    
+    searchParams.color = @"FFAA2K";
+    
+    XCTAssertThrowsSpecificNamed(
+                                 [[ViSearchAPI defaultClient] searchWithColor:searchParams success:nil failure:nil] ,
+                                 NSException, NSInvalidArgumentException ,
+                                 @"Invalid color code"  );
+}
+
+
+- (void)testRequiredImgUrlForUploadSearch {
+    UploadSearchParams *searchParams = [[UploadSearchParams alloc] init];
+    searchParams.imageUrl = @"";
+    
+    XCTAssertThrowsSpecificNamed(
+                                 [[ViSearchAPI defaultClient] searchWithImageUrl:searchParams success:nil failure:nil] ,
+                                 NSException, NSInvalidArgumentException ,
+                                 @"image url is required"  );
+}
+
+- (void)testRequiredImgDataForUploadSearch {
+    UploadSearchParams *searchParams = [[UploadSearchParams alloc] init];
+    searchParams.imageFile = nil;
+    
+    XCTAssertThrowsSpecificNamed(
+                                 [[ViSearchAPI defaultClient] searchWithImageData:searchParams success:nil failure:nil] ,
+                                 NSException, NSInvalidArgumentException ,
+                                 @"image file is required"  );
+}
+
+- (void)testRequiredImgParameterForUploadSearch {
+    UploadSearchParams *searchParams = [[UploadSearchParams alloc] init];
+
+    XCTAssertThrowsSpecificNamed(
+                                 [[ViSearchAPI defaultClient] searchWithImage:searchParams success:nil failure:nil] ,
+                                 NSException, NSInvalidArgumentException ,
+                                 @"image parameter is required"  );
 }
 
 - (void)testPerformanceImageUploadExample {

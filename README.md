@@ -165,7 +165,7 @@ SearchParams *searchParams = [[SearchParams alloc] init];
 searchParams.imName = @"imName-example";
 
 [[ViSearchAPI defaultClient]
-	searchWithProductId:searchParams
+	searchWithImageId:searchParams
 	success:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
 	// Do something when request succeeds
 	} failure:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
@@ -184,7 +184,7 @@ SearchParams *searchParams = [[SearchParams alloc] init];
 searchParams.imName = @"imName-example";
 
 [[ViSearchAPI defaultClient]
-	recommendWithImageId:searchParams
+	recommendWithImageName:searchParams
 	success:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
 	// Do something when request succeeds
 	} failure:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
@@ -243,7 +243,7 @@ UploadSearchParams *uploadSearchParams = [[UploadSearchParams alloc] init];
 uploadSearchParams.imId = visearchResult.imId;
 
 [[ViSearchAPI defaultClient]
-	searchWithImageUrl:uploadSearchParams
+	searchWithImage:uploadSearchParams
 	success:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
 	// Do something when request succeeds
     } failure:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
