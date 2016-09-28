@@ -97,6 +97,30 @@
     [controller presentViewController:alert animated:YES completion:nil];
 }
 
+- (void) showErrAlertViewOnViewController:(UIViewController*)controller
+                            withButton:(NSString*)button
+                            withDismiss:(BOOL)dismiss
+                            withSearchResult:(ViSearchResult *)data
+                            {
+    UIAlertController * alert=   [UIAlertController
+                                  alertControllerWithTitle:@"Error"
+                                  message:(data.error == nil ? @"An error has occured" : [NSString stringWithFormat:@"An error has occured: \n%@", data.error.message ])
+                                  preferredStyle:UIAlertControllerStyleAlert];
+                                
+    UIAlertAction *action = [UIAlertAction
+                             actionWithTitle:button
+                             style:UIAlertActionStyleDefault
+                             handler:^(UIAlertAction * action) {
+                                 [alert dismissViewControllerAnimated:YES completion:nil];
+                                 if (dismiss) {
+                                     [controller dismissViewControllerAnimated:YES completion:nil];
+                                 }
+                             }];
+    
+    [alert addAction:action];
+    [controller presentViewController:alert animated:YES completion:nil];
+}
+
 - (UIImage*) rotateImage:(UIImage *)image withAngle :(CGFloat)rotationAngle {
     int index = ([orientations indexOfObject:[NSNumber numberWithUnsignedInt:image.imageOrientation]] + 1) % 4;
     UIImageOrientation orient = [[orientations objectAtIndex:index] integerValue];

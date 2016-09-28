@@ -31,6 +31,12 @@
                             withButton:(NSString*)button
                            withDismiss:(BOOL)dismiss;
 
+// show error
+- (void) showErrAlertViewOnViewController:(UIViewController*)controller
+                               withButton:(NSString*)button
+                              withDismiss:(BOOL)dismiss
+                         withSearchResult:(ViSearchResult *)data;
+
 // Image process
 - (UIImage*) rotateImage:(UIImage*)image withAngle:(CGFloat)rotationAngle;
 - (UIImage *) defaultImage;

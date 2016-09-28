@@ -29,8 +29,20 @@
 }
 
 +(id) checkErrorFromJSONDictionary:(NSDictionary*) dict andHttpStatusCode:(int)httpCode{
-    if (dict[@"error_code"] != nil)
-        return [ViSearchError errorWithErrorMsg:dict[@"error"] andHttpStatusCode:httpCode andErrorCode:[dict[@"error_code"] intValue]];
+    if([dict[@"status"] isEqualToString:@"OK"]){
+        return nil;
+    }
+    
+    if( dict[@"error"]!=nil){
+        NSArray* errArr = dict[@"error"];
+        NSString* errMsg = [errArr componentsJoinedByString:@","];
+        int errCode = -1; // may not available
+        if(dict[@"error_code"]!= nil){
+            errCode = [dict[@"error_code"] intValue];
+        }
+        return [ViSearchError errorWithErrorMsg:errMsg andHttpStatusCode:httpCode andErrorCode:errCode];
+    }
+    
     
     return nil;
 }

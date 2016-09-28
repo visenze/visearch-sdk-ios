@@ -16,7 +16,7 @@
 @property int httpStatusCode;
 
 /*!
- *  @brief error code which defined by ViSearch API
+ *  @brief error code which defined by ViSearch API, may not be availble
  */
 @property int errorCode;
 

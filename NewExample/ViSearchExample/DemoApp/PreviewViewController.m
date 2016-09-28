@@ -128,7 +128,8 @@
                                                [self hideLoadingView];
                                                [self performSegueWithIdentifier:SEGUE_RESULT sender:self];
                                            } else {
-                                               [self showAlertView];
+                                               [self showErrAlertView:result];
+                                               
                                            }
                                        } else {
                                            [self hideLoadingView];
@@ -141,14 +142,11 @@
                                }];
 }
 
-- (void) showAlertView {
+- (void) showErrAlertView:(ViSearchResult*) result {
     [self hideLoadingView];
     
-    [self.generalService showAlertViewOnViewController:self
-                                             withTitle:@"A problem occurs"
-                                           withMessage:@"Please try later"
-                                            withButton:@"Cancel"
-                                           withDismiss:YES];
+    [self.generalService showErrAlertViewOnViewController:self withButton:@"Cancel" withDismiss:YES withSearchResult:result];
+    
 }
 
 #pragma mark - Navigation

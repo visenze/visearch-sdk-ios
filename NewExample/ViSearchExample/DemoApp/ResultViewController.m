@@ -491,7 +491,7 @@ typedef enum {
                      });
                  }
              } else {
-                 [self showAlertView];
+                 [self showErrAlertView:result];
              }
          });
          
@@ -511,15 +511,12 @@ typedef enum {
     [self.dynamicCollectionView reloadData];
 }
 
-- (void) showAlertView {
+- (void) showErrAlertView: (ViSearchResult*) result {
     dispatch_async(dispatch_get_main_queue(), ^{
         [self hideLoadingView];
         
-        [self.generalService showAlertViewOnViewController:self
-                                                 withTitle:@"A problem occurs"
-                                               withMessage:@"Please try later"
-                                                withButton:@"Cancel"
-                                                 withSegue:nil];
+        [self.generalService showErrAlertViewOnViewController:self withButton:@"Cancel" withDismiss:YES withSearchResult:result];
+        
     });
 }
 
