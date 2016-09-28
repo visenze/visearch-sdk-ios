@@ -220,6 +220,7 @@
              reqId:(NSString*) reqId
 {
     TrackParams* params = [TrackParams createWithAccessKey:[ViSearchAPI defaultClient].accessKey reqId:reqId andAction:@"click"];
+    [params withImName:imageName];
     [[ViSearchAPI defaultClient] track:params completion:nil];
 }
 

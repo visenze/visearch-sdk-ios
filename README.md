@@ -329,7 +329,7 @@ After a successful search request, a list of results are passed to the callback 
 |content|NSDictionary|The complete json data returned from the server.(This property may be deprecated in the feature)|
 |imageResultsArray|NSArray|A list of image results returned from the server.|
 |reqId|NSString|A request id which can be used for tracking. More details can be found in [Section 7](#7-event-tracking) |
-|imId|NSString|An image id returned in the result which represents a image just uploaded. It can be re-used to do an upload search on the same image again. More details in [Upload Search](#43-upload-search)|
+|imId|NSString|An image id returned in the result which represents a image just uploaded. It can be re-used to do an upload search on the same image again. More details in [Search by image](#43-search-by-image)|
 
 You are encouraged to use the imageResultsArray, since **content** property may be deprecated in the future. Every image result is in the form of **ImageResult**. You can use following properties of a **ImageResult** to fulfill your own purpose.
 
@@ -495,8 +495,10 @@ The detected product types are listed in `product_types` together with the match
 User action can be sent in this way:
 
 ```objectivec
-TrackParams *params = [TrackParams createWithCID:@"1234567" ReqId:reqId andAction:@"click"];
+
 ViSearchClient *client = [ViSearchAPI defaultClient];
+TrackParams* params = [TrackParams createWithAccessKey:client.accessKey reqId:reqId andAction:@"click"];
+
 // ... client setup
 
 // You can also append an im_name field

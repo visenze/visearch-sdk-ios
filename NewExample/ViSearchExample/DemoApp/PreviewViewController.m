@@ -172,6 +172,7 @@
         vc.originalImage = self.uploadImage;
         vc.searchResults = self.searchResult;
         vc.delegate = self;
+        vc.lastReqId = self.lastReqId;
     }
 }
 

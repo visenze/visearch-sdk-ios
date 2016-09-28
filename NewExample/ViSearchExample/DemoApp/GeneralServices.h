@@ -51,6 +51,6 @@
               completionBlock:(void (^)(BOOL succeeded, ViSearchResult *result))completionBlock;
 
 - (void)trackClickWithImgName:(NSString*)imageName
-             reqId:(NSString*) reqId;
+                        reqId:(NSString*) reqId;
 
 @end
