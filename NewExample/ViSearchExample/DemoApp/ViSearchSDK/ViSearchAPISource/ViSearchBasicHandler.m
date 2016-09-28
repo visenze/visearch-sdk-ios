@@ -15,7 +15,7 @@
                  failure:(void (^)(NSInteger, id, NSError *))failure
 {
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setTimeoutInterval:10];
+    [request setTimeoutInterval:self.timeoutInterval];
     
     NSString *urlString = [self generateRequestUrlPrefixWithParams: params.toDict];
     [request setURL: [NSURL URLWithString:urlString]];
@@ -27,11 +27,13 @@
         completionHandler:^(NSURLResponse *response, NSData *data, NSError *error){
             NSInteger statusCode = ((NSHTTPURLResponse *)response).statusCode;
             
-            ViSearchResult *result = [self generateResultWithResponseData:data error:error httpStatusCode:(int)statusCode];
+            ViSearchResult *result = [self generateResultWithResponseData:data error:error httpStatusCode:(int)statusCode httpHeaders: ((NSHTTPURLResponse *)response).allHeaderFields];
             if (!error) {//error not nil
-                success(statusCode, result, error);
+                if(success!=nil)
+                    success(statusCode, result, error);
             } else {
-                failure(statusCode, result, error);
+                if(failure!=nil)
+                    failure(statusCode, result, error);
             }
     }];
 }

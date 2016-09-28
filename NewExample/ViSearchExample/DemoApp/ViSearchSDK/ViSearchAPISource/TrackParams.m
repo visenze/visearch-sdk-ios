@@ -12,7 +12,6 @@
 
 @interface TrackParams()
 
-- (NSString *)cuid;
 - (TrackParams *)initWithCID:(NSString *)cid ReqId:(NSString *)reqId andAction:(NSString *)action;
 
 @end
@@ -35,6 +34,7 @@
     return self;
 }
 
+
 - (TrackParams *)withImName:(NSString *)imName {
     _imName = imName;
     
@@ -45,6 +45,23 @@
     return [[TrackParams new] initWithCID:cid ReqId:reqId andAction:action];
 }
 
++ (TrackParams *)createWithAccessKey:(NSString *)accessKey reqId:(NSString *)reqId andAction:(NSString *)action
+{
+    if( accessKey == nil || [accessKey length] == 0 ){
+        [NSException raise:NSInvalidArgumentException format:@"*** -[%@ %@]: Missing parameter: accessKey",  NSStringFromClass([self class]), NSStringFromSelector(_cmd)] ;
+    }
+    
+    if( reqId == nil || [reqId length] == 0 ){
+        [NSException raise:NSInvalidArgumentException format:@"*** -[%@ %@]: Missing parameter: reqId",  NSStringFromClass([self class]), NSStringFromSelector(_cmd)] ;
+    }
+    
+    if( action == nil || [action length] == 0 ){
+        [NSException raise:NSInvalidArgumentException format:@"*** -[%@ %@]: Missing parameter: action",  NSStringFromClass([self class]), NSStringFromSelector(_cmd)] ;
+    }
+
+    return [[TrackParams new] initWithCID:accessKey ReqId:reqId andAction:action];
+}
+
 - (NSDictionary *)toDict {
     NSMutableDictionary *dic = [NSMutableDictionary new];
     
@@ -52,14 +69,10 @@
     [dic setValue:self.imName forKey:@"im_name"];
     [dic setValue:self.reqId forKey:@"reqid"];
     [dic setValue:self.cid forKey:@"cid"];
-    
-    [dic setValue:[self cuid] forKey:@"cuid"];
+    [dic setValue:self.cuid forKey:@"cuid"];
     
     return dic;
 }
 
-- (NSString *)cuid {
-    return [UIDevice.currentDevice.identifierForVendor UUIDString];
-}
 
 @end

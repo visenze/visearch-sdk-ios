@@ -31,6 +31,7 @@
         sharedInstance = [[ViSearchClient alloc] init];
         sharedInstance.accessKey = @"";
         sharedInstance.secretKey = @"";
+        sharedInstance.timeoutInterval = 10;
     });
     
     return sharedInstance;
@@ -41,6 +42,7 @@
         self.host = baseUrl;
         self.accessKey = accessKey;
         self.secretKey = secretKey;
+        self.timeoutInterval = 10;
         self.operationQ = [NSOperationQueue new];
     }
     
@@ -63,53 +65,133 @@
 
 #pragma mark Search API
 
+// call the API and then track this end point
+- (void)handleAndTrackWithHandler: (ViSearchHandler*) handler
+                          params:(BaseSearchParams *)params
+                          success:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error)) successCallback
+                          failure:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error)) failure
+{
+    [handler handleWithParams:params
+                      success:^(NSInteger statusCode, ViSearchResult *data, NSError *error){
+                          successCallback(statusCode, data, error);
+                          
+                          // call the tracking API
+                          if(data.reqId!=nil)
+                          {
+                              TrackParams* params = [TrackParams createWithAccessKey:self.accessKey reqId:data.reqId andAction:handler.searchType];
+                              [self track:params completion:nil];
+                          }
+                       }
+                      failure:failure];
+}
+
 - (void)searchWithColor:(ColorSearchParams *)params
                 success:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error)) success
                 failure:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error)) failure
 {
+    if( params.color == nil || [params.color length] == 0 ){
+        [NSException raise:NSInvalidArgumentException format:@"*** -[%@ %@]: Missing parameter: color code",  NSStringFromClass([self class]), NSStringFromSelector(_cmd)] ;
+    }
+    
+    if( [params.color length] != 6 ){
+        [NSException raise:NSInvalidArgumentException format:@"*** -[%@ %@]: Color code parameter length must be 6",  NSStringFromClass([self class]), NSStringFromSelector(_cmd)] ;
+    }
+    
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"[^a-fA-F|0-9]" options:0 error:NULL];
+    NSUInteger noOfMatches = [regex numberOfMatchesInString:params.color  options:NSMatchingReportCompletion range:NSMakeRange(0, [params.color length])];
+    
+    if (noOfMatches != 0) {
+        [NSException raise:NSInvalidArgumentException format:@"*** -[%@ %@]: Invalid color code",  NSStringFromClass([self class]), NSStringFromSelector(_cmd)] ;
+    }
+    
     ViSearchHandler *handler = [ViSearchBasicHandler new];
+    handler.timeoutInterval = self.timeoutInterval;
     handler.searchType = @"colorsearch";
     handler.delegate = self;
     
-    [handler handleWithParams:params success:success failure:failure];
+    [self handleAndTrackWithHandler:handler params:params success:success failure:failure];
+}
+
+- (void)searchWithImage:(UploadSearchParams *)params
+                success:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error)) success
+                failure:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error)) failure
+{
+    // verify that one of img id, image data or image url is required
+    if( (params.imageFile == nil) &&
+        ( params.imageUrl == nil || [params.imageUrl length] == 0 ) &&
+         ( params.imId == nil || [params.imId length] == 0 )
+       ){
+        [NSException raise:NSInvalidArgumentException format:@"*** -[%@ %@]: image file or image url or image id must be provided",  NSStringFromClass([self class]), NSStringFromSelector(_cmd)] ;
+    }
+    
+    ViSearchHandler *handler = [ViSearchImageUploadHandler new];
+    handler.timeoutInterval = self.timeoutInterval;
+    handler.searchType = @"uploadsearch";
+    handler.delegate = self;
+    
+    [self handleAndTrackWithHandler:handler params:params success:success failure:failure];
 }
 
 - (void)searchWithImageData:(UploadSearchParams *)params
                     success:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error)) success
                     failure:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error)) failure;
 {
-    ViSearchHandler *handler = [ViSearchImageUploadHandler new];
-    handler.searchType = @"uploadsearch";
-    handler.delegate = self;
-
-    [handler handleWithParams:params success:success failure:failure];
+    if( params.imageFile == nil ){
+        [NSException raise:NSInvalidArgumentException format:@"*** -[%@ %@]: Missing image file",  NSStringFromClass([self class]), NSStringFromSelector(_cmd)] ;
+    }
+    
+    [self searchWithImage:params success:success failure:failure];
 }
+
 
 - (void)searchWithImageUrl:(UploadSearchParams *)params
                    success:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error))success
                    failure:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error))failure
 {
-    ViSearchHandler *handler = [ViSearchBasicHandler new];
-    handler.searchType = @"uploadsearch";
-    handler.delegate = self;
+    if( params.imageUrl == nil || [params.imageUrl length] == 0 ){
+        [NSException raise:NSInvalidArgumentException format:@"*** -[%@ %@]: Missing parameter: image url",  NSStringFromClass([self class]), NSStringFromSelector(_cmd)] ;
+    }
 
-    [handler handleWithParams:params success:success failure:failure];
+    [self searchWithImage:params success:success failure:failure];
 }
 
 - (void)searchWithImageId:(SearchParams *)params
                   success:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error)) success
                   failure:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error)) failure
 {
+    if( params.imName == nil || [params.imName length] == 0 ){
+        [NSException raise:NSInvalidArgumentException format:@"*** -[%@ %@]: Missing parameter: image name",  NSStringFromClass([self class]), NSStringFromSelector(_cmd)] ;
+    }
+    
     ViSearchHandler *handler = [ViSearchBasicHandler new];
+    handler.timeoutInterval = self.timeoutInterval;
     handler.searchType = @"search";
-    handler.delegate = self;
+    handler.delegate = self;    
 
-    [handler handleWithParams:params success:success failure:failure];
+    [self handleAndTrackWithHandler:handler params:params success:success failure:failure];
 }
 
-#pragma makr Track
+- (void)recommendWithImageName:(SearchParams *)params
+                     success:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error)) success
+                     failure:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error)) failure
+{
+    if( params.imName == nil || [params.imName length] == 0 ){
+        [NSException raise:NSInvalidArgumentException format:@"*** -[%@ %@]: Missing parameter: image name",  NSStringFromClass([self class]), NSStringFromSelector(_cmd)] ;
+    }
+    
+    ViSearchHandler *handler = [ViSearchBasicHandler new];
+    handler.timeoutInterval = self.timeoutInterval;
+    handler.searchType = @"recommendation";
+    handler.delegate = self;
+    
+    [self handleAndTrackWithHandler:handler params:params success:success failure:failure];
+}
+
+
+#pragma mark Track
 - (void)track:(TrackParams *)trackParams completion:(void (^)(BOOL))completion {
     ViSearchHandler *handler = [ViTrackHandler new];
+    handler.timeoutInterval = self.timeoutInterval;
     handler.searchType = @"__aq.gif";
     handler.delegate = self;
     

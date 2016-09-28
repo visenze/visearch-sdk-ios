@@ -8,22 +8,28 @@
 
 #import <Foundation/Foundation.h>
 #import "ViTrackHandler.h"
+#import "UidHelper.h"
 
 @implementation ViTrackHandler
 
 - (void)handleWithParams:(BaseSearchParams *)params completion:(void (^)(BOOL))completion {
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setTimeoutInterval:10];
+    [request setTimeoutInterval:self.timeoutInterval];
     [request setHTTPMethod:@"GET"];
     
     NSString *urlString = [self generateRequestUrlPrefixWithParams: params.toDict andDomainUrl:@"https://track.visenze.com"];
     [request setURL: [NSURL URLWithString:urlString]];
     [request addValue:self.getAuthParams forHTTPHeaderField:@"Authorization"];
+    NSString* deviceUid = [UidHelper uniqueDeviceUid] ;
+    [request addValue:[NSString stringWithFormat:@"uid=%@", deviceUid ] forHTTPHeaderField:@"Cookie"];
     
     NSOperationQueue *queue = [self.delegate getOperationQ];
     
     [NSURLConnection sendAsynchronousRequest:request queue:queue
                            completionHandler:^(NSURLResponse *response, NSData *data, NSError *error){
+                               if(completion == nil)
+                                   return;
+                               
                                NSInteger statusCode = ((NSHTTPURLResponse *)response).statusCode;
                                if (!error && statusCode == 200) {//error not nil
                                    completion(YES);

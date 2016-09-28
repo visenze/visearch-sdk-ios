@@ -29,6 +29,7 @@
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
     [dict setValue:@"YOUR_ACCESS_KEY" forKey:@"access_key"];
     [dict setValue:@"YOUR_SECRET_KEY" forKey:@"secret_key"];
+  
     [[CoreDataModel sharedInstance] insertApplication:dict];
 }
 
@@ -98,7 +99,7 @@
 -(void)alertNoNetwork {
     [self.generalService showAlertViewOnViewController:self
                                              withTitle:@"No Network Available"
-                                           withMessage:@"Please select a newtwork"
+                                           withMessage:@"Please select a network"
                                             withButton:@"OK"
                                              withSegue:nil];
 }

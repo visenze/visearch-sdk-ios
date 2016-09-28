@@ -391,7 +391,7 @@
                                            });
                                        }
                                    } else {
-                                       [self showAlertView];
+                                       [self showErrAlertView:result];
                                    }
                                }];
 }
@@ -405,7 +405,7 @@
     [self.collectionView reloadData];
 }
 
-- (void) showAlertView {
+- (void) showErrAlertView: (ViSearchResult *)result {
     dispatch_async(dispatch_get_main_queue(), ^{
         [self hideLoadingView];
         isLoadingImage = NO;
@@ -414,11 +414,8 @@
             [self backButtonPressed:nil];
         }
         
-        [self.generalService showAlertViewOnViewController:self
-                                                 withTitle:@"A problem occurs"
-                                               withMessage:@"Please try later"
-                                                withButton:@"Cancel"
-                                               withDismiss:YES];
+        [self.generalService showErrAlertViewOnViewController:self withButton:@"Cancel" withDismiss:YES withSearchResult:result];
+        
     });
 }
 

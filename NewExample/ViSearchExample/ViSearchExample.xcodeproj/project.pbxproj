@@ -58,6 +58,7 @@
 		50FAF6191C117892009C7C04 /* Applications.m in Sources */ = {isa = PBXBuildFile; fileRef = 50FAF6171C117892009C7C04 /* Applications.m */; };
 		A9EB720B1CEC398300D26276 /* TrackParams.m in Sources */ = {isa = PBXBuildFile; fileRef = A9EB720A1CEC398300D26276 /* TrackParams.m */; };
 		A9EB720E1CEC398E00D26276 /* ViTrackHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = A9EB720D1CEC398E00D26276 /* ViTrackHandler.m */; };
+		BD42F35B1D9BA82E00CE704D /* UidHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = BD42F35A1D9BA82E00CE704D /* UidHelper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -171,6 +172,8 @@
 		A9EB720A1CEC398300D26276 /* TrackParams.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrackParams.m; sourceTree = "<group>"; };
 		A9EB720C1CEC398E00D26276 /* ViTrackHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViTrackHandler.h; sourceTree = "<group>"; };
 		A9EB720D1CEC398E00D26276 /* ViTrackHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViTrackHandler.m; sourceTree = "<group>"; };
+		BD42F3591D9BA82E00CE704D /* UidHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UidHelper.h; sourceTree = "<group>"; };
+		BD42F35A1D9BA82E00CE704D /* UidHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UidHelper.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -293,6 +296,8 @@
 				50AFF9331C1582EB00DCC80A /* ViSearchHandler.m */,
 				50AFF9341C1582EB00DCC80A /* ViSearchImageUploadHandler.h */,
 				50AFF9351C1582EB00DCC80A /* ViSearchImageUploadHandler.m */,
+				BD42F3591D9BA82E00CE704D /* UidHelper.h */,
+				BD42F35A1D9BA82E00CE704D /* UidHelper.m */,
 			);
 			path = ViSearchAPISource;
 			sourceTree = "<group>";
@@ -517,7 +522,7 @@
 				TargetAttributes = {
 					50FAF5B51C113499009C7C04 = {
 						CreatedOnToolsVersion = 7.1.1;
-						DevelopmentTeam = Y532GX4NWP;
+						DevelopmentTeam = NKN6QECX9M;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
@@ -623,6 +628,7 @@
 				50FAF6131C117688009C7C04 /* CoreDataModel.m in Sources */,
 				50AFF94A1C1582EB00DCC80A /* ViSearchError.m in Sources */,
 				501333CC1C1E99AB008E2EA6 /* ScaleUIView.m in Sources */,
+				BD42F35B1D9BA82E00CE704D /* UidHelper.m in Sources */,
 				50AFF9471C1582EB00DCC80A /* ViSearchHandler.m in Sources */,
 				A9EB720B1CEC398300D26276 /* TrackParams.m in Sources */,
 				50AFF9181C1574EC00DCC80A /* SearchResultCollectionViewCell.m in Sources */,
@@ -773,6 +779,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = NKN6QECX9M;
 				INFOPLIST_FILE = DemoApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -791,6 +798,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = NKN6QECX9M;
 				INFOPLIST_FILE = DemoApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

@@ -15,9 +15,17 @@
 
 @implementation ViSearchHandler
 
+-(id)init {
+    if (self = [super init])  {
+        self.timeoutInterval = 10;
+    }
+    return self;
+}
+
 #pragma mark abstract method
 
 - (void)handleWithParams:(BaseSearchParams *)params success:(void (^)(NSInteger, id, NSError *))success failure:(void (^)(NSInteger, id, NSError *))failure {}
+- (void)handleWithParams:(BaseSearchParams *)params completion:(void (^)(BOOL))completion {}
 
 #pragma mark Preprocess Network Help Functions
 - (ViSearchResult*)generateResultWithResponseData:(NSData*)responseData error:(NSError*)error httpStatusCode:(int)httpStatusCode {
@@ -117,6 +125,5 @@
     return authEncodeString;
 }
 
-- (void)handleWithParams:(BaseSearchParams *)params completion:(void (^)(BOOL))completion {}
 
 @end

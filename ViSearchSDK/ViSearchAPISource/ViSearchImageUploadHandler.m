@@ -26,7 +26,8 @@
     // create request
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setHTTPMethod:@"POST"];
-    [request setTimeoutInterval:10];
+    [request setTimeoutInterval:self.timeoutInterval];
+   
     [request addValue:self.getAuthParams forHTTPHeaderField:@"Authorization"];
     
     // set Content-Type in HTTP header
@@ -48,9 +49,11 @@
             ViSearchResult *result = [self generateResultWithResponseData:data error:error httpStatusCode:(int)statusCode httpHeaders:res.allHeaderFields];
           
             if (!error) {//error not nil
-                success(statusCode, result, error);
+                if(success!=nil)
+                    success(statusCode, result, error);
            } else {
-               failure(statusCode, result, error);
+                if(failure!=nil)
+                    failure(statusCode, result, error);
            }
         }];
 }

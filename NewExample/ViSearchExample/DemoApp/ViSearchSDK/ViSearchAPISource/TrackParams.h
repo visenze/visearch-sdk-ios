@@ -15,15 +15,18 @@
 @interface TrackParams : BaseSearchParams
 
 @property (nonatomic, readonly) NSString * action;
-@property (nonatomic, readonly) NSString * imName;
+@property (nonatomic) NSString * imName;
 @property (nonatomic, readonly) NSString * reqId;
-@property (nonatomic, readonly) NSString * cid;
+@property (nonatomic, readonly) NSString * cid; // set to access key
+@property (nonatomic) NSString * cuid;
+
 
 - (id) init __unavailable;
 
 - (TrackParams *)withImName:(NSString *)imName;
 
-+ (TrackParams *)createWithCID:(NSString *)cid ReqId:(NSString *)reqId andAction:(NSString *)action;
++ (TrackParams *)createWithCID:(NSString *)cid ReqId:(NSString *)reqId andAction:(NSString *)action __deprecated_msg("use createWithAccessKey:accessKey:reqId:andAction method instead");
++ (TrackParams *)createWithAccessKey:(NSString *)accessKey reqId:(NSString *)reqId andAction:(NSString *)action;
 
 @end
 

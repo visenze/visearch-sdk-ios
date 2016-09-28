@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *loadingLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *loadingView;
 @property ViSearchResult *searchResult;
+@property NSString *lastReqId;
 
 @end
 
@@ -120,30 +121,35 @@
                                   andDetection:@"all"
                                         andBox:nil
                                completionBlock:^(BOOL succeeded, ViSearchResult *result) {
-                                   if (!isCanceled) {
-                                       if (succeeded) {
-                                           self.searchResult = result;
-                                           [self hideLoadingView];
-                                           [self performSegueWithIdentifier:SEGUE_RESULT sender:self];
+                                   
+                                   dispatch_async(dispatch_get_main_queue(), ^{
+                                       if (!isCanceled) {
+                                           if (succeeded) {
+                                               if(result.reqId!=nil)
+                                                   self.lastReqId = result.reqId;
+                                               self.searchResult = result;
+                                               [self hideLoadingView];
+                                               [self performSegueWithIdentifier:SEGUE_RESULT sender:self];
+                                           } else {
+                                               [self showErrAlertView:result];
+                                               
+                                           }
                                        } else {
-                                           [self showAlertView];
+                                           [self hideLoadingView];
+                                           [self dismissViewControllerAnimated:YES completion:nil];
                                        }
-                                   } else {
-                                       [self hideLoadingView];
-                                       [self dismissViewControllerAnimated:YES completion:nil];
-                                   }
+                                   });
+                                   
+                                  
                                    
                                }];
 }
 
-- (void) showAlertView {
+- (void) showErrAlertView:(ViSearchResult*) result {
     [self hideLoadingView];
     
-    [self.generalService showAlertViewOnViewController:self
-                                             withTitle:@"A problem occurs"
-                                           withMessage:@"Please try later"
-                                            withButton:@"Cancel"
-                                           withDismiss:YES];
+    [self.generalService showErrAlertViewOnViewController:self withButton:@"Cancel" withDismiss:YES withSearchResult:result];
+    
 }
 
 #pragma mark - Navigation
@@ -166,6 +172,7 @@
         vc.originalImage = self.uploadImage;
         vc.searchResults = self.searchResult;
         vc.delegate = self;
+        vc.lastReqId = self.lastReqId;
     }
 }
 
