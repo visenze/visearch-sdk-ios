@@ -20,6 +20,12 @@
     NSString *urlString = [self generateRequestUrlPrefixWithParams: params.toDict andDomainUrl:@"https://track.visenze.com"];
     [request setURL: [NSURL URLWithString:urlString]];
     [request addValue:self.getAuthParams forHTTPHeaderField:@"Authorization"];
+    
+    if(self.userAgent != nil )
+        [request addValue:self.userAgent forHTTPHeaderField:kVisenzeUserAgentHeader];
+    else
+        [request addValue:kVisenzeUserAgentValue forHTTPHeaderField:kVisenzeUserAgentHeader];
+    
     NSString* deviceUid = [UidHelper uniqueDeviceUid] ;
     [request addValue:[NSString stringWithFormat:@"uid=%@", deviceUid ] forHTTPHeaderField:@"Cookie"];
     

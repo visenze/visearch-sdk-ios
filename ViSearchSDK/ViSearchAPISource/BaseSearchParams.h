@@ -7,6 +7,9 @@
 //
 #import <Foundation/Foundation.h>
 
+#define kVisenzeUserAgentHeader @"X-Requested-With"
+#define kVisenzeUserAgentValue @"ViSenze-OC-SDK/1.1.1"
+
 @interface BaseSearchParams: NSObject
 
 @property (atomic) int limit;
