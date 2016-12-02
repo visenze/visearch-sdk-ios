@@ -32,6 +32,7 @@
         sharedInstance.accessKey = @"";
         sharedInstance.secretKey = @"";
         sharedInstance.timeoutInterval = 10;
+        sharedInstance.userAgent = kVisenzeUserAgentValue ;
     });
     
     return sharedInstance;
@@ -44,6 +45,7 @@
         self.secretKey = secretKey;
         self.timeoutInterval = 10;
         self.operationQ = [NSOperationQueue new];
+        self.userAgent = kVisenzeUserAgentValue ;
     }
     
     return self;
@@ -71,6 +73,8 @@
                           success:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error)) successCallback
                           failure:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error)) failure
 {
+    handler.userAgent = self.userAgent ;
+    
     [handler handleWithParams:params
                       success:^(NSInteger statusCode, ViSearchResult *data, NSError *error){
                           successCallback(statusCode, data, error);
@@ -194,6 +198,7 @@
     handler.timeoutInterval = self.timeoutInterval;
     handler.searchType = @"__aq.gif";
     handler.delegate = self;
+    handler.userAgent = self.userAgent;
     
     [handler handleWithParams:trackParams completion:completion];
 }

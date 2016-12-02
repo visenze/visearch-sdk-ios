@@ -17,6 +17,11 @@
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setTimeoutInterval:self.timeoutInterval];
     
+    if(self.userAgent != nil )
+        [request addValue:self.userAgent forHTTPHeaderField:kVisenzeUserAgentHeader];
+    else
+        [request addValue:kVisenzeUserAgentValue forHTTPHeaderField:kVisenzeUserAgentHeader];
+    
     NSString *urlString = [self generateRequestUrlPrefixWithParams: params.toDict];
     [request setURL: [NSURL URLWithString:urlString]];
     [request addValue:self.getAuthParams forHTTPHeaderField:@"Authorization"];

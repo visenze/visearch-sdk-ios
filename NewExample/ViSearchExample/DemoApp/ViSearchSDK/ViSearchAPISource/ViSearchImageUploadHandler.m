@@ -34,6 +34,12 @@
     NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundary];
     [request setValue:contentType forHTTPHeaderField: @"Content-Type"];
     
+    if(self.userAgent != nil )
+        [request addValue:self.userAgent forHTTPHeaderField:kVisenzeUserAgentHeader];
+    else
+        [request addValue:kVisenzeUserAgentValue forHTTPHeaderField:kVisenzeUserAgentHeader];
+
+    
     // setting the body of the post to the reqeust
     [request setHTTPBody:[params httpPostBodyWithObject:@{@"boundary":boundary}]];
     NSString *urlString = [self generateRequestUrlPrefixWithParams:params.toDict];

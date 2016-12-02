@@ -22,6 +22,8 @@
 @property(readonly) NSString *host;
 @property (nonatomic, assign) int timeoutInterval; // add time out interval for search client, default to 10s
 
+@property NSString *userAgent;
+
 + (ViSearchClient *)sharedInstance;
 
 - (ViSearchClient *)initWithBaseUrl:(NSString *)baseUrl accessKey:(NSString *)accessKey secretKey:(NSString *) secretKey;

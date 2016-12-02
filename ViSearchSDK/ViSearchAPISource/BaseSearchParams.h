@@ -6,6 +6,7 @@
 //
 //
 #import <Foundation/Foundation.h>
+#import "ViVersion.h"
 
 @interface BaseSearchParams: NSObject
 
