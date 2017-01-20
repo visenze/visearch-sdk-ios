@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9057" systemVersion="14F1021" minimumToolsVersion="Automatic">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="15G1212" minimumToolsVersion="Xcode 7.3" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
     <entity name="Applications" representedClassName="Applications" syncable="YES">
         <attribute name="access_key" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="account_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="account_id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="account_name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="app_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="app_id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="app_key" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="app_name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="is_in_use" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
-        <attribute name="is_new" optional="YES" attributeType="Boolean" defaultValueString="YES" syncable="YES"/>
+        <attribute name="is_in_use" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="is_new" optional="YES" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="secret_key" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Applications" positionX="-63" positionY="-18" width="128" height="165"/>
+        <element name="Applications" positionX="-63" positionY="-18" width="128" height="180"/>
     </elements>
 </model>

@@ -27,8 +27,13 @@
     
     //TODO: insert your own application keys
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-    [dict setValue:@"YOUR_ACCESS_KEY" forKey:@"access_key"];
-    [dict setValue:@"YOUR_SECRET_KEY" forKey:@"secret_key"];
+    
+    // new way of authenticate. only need app key
+    [dict setValue:@"YOUR_APP_KEY" forKey:@"app_key"];
+    
+    // old way of authentication which need access and secret key
+//    [dict setValue:@"YOUR_ACCESS_KEY" forKey:@"access_key"];
+//    [dict setValue:@"YOUR_SECRET_KEY" forKey:@"secret_key"];
     
     [[CoreDataModel sharedInstance] insertApplication:dict];
 }

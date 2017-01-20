@@ -36,7 +36,7 @@ ViSearch is an API that provides accurate, reliable and scalable image search. V
 
 The ViSearch iOS SDK is an open source software to provide easy integration of ViSearch Search API with your iOS applications. It provides four search methods based on the ViSearch Solution APIs - Find Similar, You May Also Like, Search By Image and Search By Color. For source code and references, please visit the [Github Repository](https://github.com/visenze/visearch-sdk-ios).
 
->Current stable version: 1.1.0
+>Current stable version: 1.2.0
 
 >Supported iOS version: iOS 7.x and higher
 
@@ -64,8 +64,14 @@ You should change the access key and secret key to your own key pair before runn
 
     //TODO: insert your own application keys
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-    [dict setValue:@"YOUR_ACCESS_KEY" forKey:@"access_key"];
-    [dict setValue:@"YOUR_SECRET_KEY" forKey:@"secret_key"];
+    
+    // new way of authenticate. only need app key
+    [dict setValue:@"YOUR_APP_KEY" forKey:@"app_key"];
+    
+    // old way of authentication which need access and secret key
+//    [dict setValue:@"YOUR_ACCESS_KEY" forKey:@"access_key"];
+//    [dict setValue:@"YOUR_SECRET_KEY" forKey:@"secret_key"];
+    
     [[CoreDataModel sharedInstance] insertApplication:dict];
 }
 ```
@@ -133,23 +139,35 @@ Then add it to your project
 iOS 10 now requires user permission to access camera and photo library. If your app requires these access, please add description for NSCameraUsageDescription, NSPhotoLibraryUsageDescription in the Info.plist. More details can be found [here](https://developer.apple.com/library/content/documentation/General/Reference/InfoPlistKeyReference/Articles/CocoaKeys.html#//apple_ref/doc/uid/TP40009251-SW24).
 
 ## 3. Initialization
-`ViSearch` **must** be initialized with an accessKey/secretKey pair **before** it can be used.
+`ViSearch` **must** be initialized with an `appKey` or `accessKey`/`secretKey` pair **before** it can be used.
 
 ```objectivec
 #import <ViSearch/VisearchAPI.h>
 ...
 // using default ViSearch client. The client, by default,
 // connects to Visenze's server
+
+// 1. new way of init ViSearch client with only app key
+static NSString * const appKey = @"your_app_key";
+
+
+[ViSearchAPI setupAppKey:appKey];
+ViSearchClient *client = [ViSearch defaultClient];
+
+
+// 2. OR old way of init ViSearch client with access and secret key
 static NSString * const accessKey = @"your_access_key";
 static NSString * const privateKey = @"your_secret_key";
 
 [ViSearchAPI setupAccessKey:accessKey andSecretKey:secretKey];
 ViSearchClient *client = [ViSearch defaultClient];
 ...
-// or using customized client, which connects to your own server
+
+
+// OR using customized client, which connects to your own server
 static NSString * const privateKey = @"your_url";
 ViSearchClient *client = [[ViSearchClient alloc] initWithBaseUrl:url
-	accessKey:accessKey secretKey:secretKey];
+	appKey:appKey];
 ...
 ```
 
@@ -497,7 +515,7 @@ User action can be sent in this way:
 ```objectivec
 
 ViSearchClient *client = [ViSearchAPI defaultClient];
-TrackParams* params = [TrackParams createWithAccessKey:client.accessKey reqId:reqId andAction:@"click"];
+TrackParams* params = [TrackParams createWithReqId:reqId andAction:@"click" ];
 
 // ... client setup
 

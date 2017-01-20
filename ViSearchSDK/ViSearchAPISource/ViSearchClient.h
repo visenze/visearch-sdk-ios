@@ -19,6 +19,7 @@
 
 @property NSString *accessKey;
 @property NSString *secretKey;
+@property BOOL isAppKeyEnabled;
 @property(readonly) NSString *host;
 @property (nonatomic, assign) int timeoutInterval; // add time out interval for search client, default to 10s
 
@@ -27,6 +28,8 @@
 + (ViSearchClient *)sharedInstance;
 
 - (ViSearchClient *)initWithBaseUrl:(NSString *)baseUrl accessKey:(NSString *)accessKey secretKey:(NSString *) secretKey;
+- (ViSearchClient *)initWithBaseUrl:(NSString *)baseUrl appKey:(NSString *)appKey ;
+
 
 - (void)searchWithImageId:(SearchParams *)params
                   success:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error)) success

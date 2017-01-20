@@ -31,6 +31,7 @@
         sharedInstance = [[ViSearchClient alloc] init];
         sharedInstance.accessKey = @"";
         sharedInstance.secretKey = @"";
+        sharedInstance.isAppKeyEnabled = YES;
         sharedInstance.timeoutInterval = 10;
         sharedInstance.userAgent = kVisenzeUserAgentValue ;
     });
@@ -43,6 +44,21 @@
         self.host = baseUrl;
         self.accessKey = accessKey;
         self.secretKey = secretKey;
+        self.timeoutInterval = 10;
+        self.operationQ = [NSOperationQueue new];
+        self.userAgent = kVisenzeUserAgentValue ;
+        self.isAppKeyEnabled = NO;
+    }
+    
+    return self;
+}
+
+- (ViSearchClient *)initWithBaseUrl:(NSString *)baseUrl appKey:(NSString *)appKey {
+    if (self = [super init]) {
+        self.host = baseUrl;
+        self.accessKey = appKey;
+        self.secretKey = @"";
+        self.isAppKeyEnabled = YES;
         self.timeoutInterval = 10;
         self.operationQ = [NSOperationQueue new];
         self.userAgent = kVisenzeUserAgentValue ;
@@ -199,6 +215,7 @@
     handler.searchType = @"__aq.gif";
     handler.delegate = self;
     handler.userAgent = self.userAgent;
+    trackParams.cid = self.accessKey;
     
     [handler handleWithParams:trackParams completion:completion];
 }
@@ -206,6 +223,13 @@
 #pragma mark ViNetworkDelegate
 
 - (NSString *)getAccessKey {
+    return self.accessKey;
+}
+
+- (NSString *)getAppKey {
+    if (!self.isAppKeyEnabled)
+        return nil;
+    
     return self.accessKey;
 }
 

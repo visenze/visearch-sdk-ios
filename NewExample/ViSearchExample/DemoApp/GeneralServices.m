@@ -214,14 +214,18 @@
     } failure:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
         completionBlock(NO, data);
     }];
+    
+   
 }
 
 - (void)trackClickWithImgName:(NSString*)imageName
              reqId:(NSString*) reqId
 {
-    TrackParams* params = [TrackParams createWithAccessKey:[ViSearchAPI defaultClient].accessKey reqId:reqId andAction:@"click"];
+    TrackParams* params = [TrackParams createWithReqId:reqId andAction:@"click" ];
     [params withImName:imageName];
-    [[ViSearchAPI defaultClient] track:params completion:nil];
+    [[ViSearchAPI defaultClient] track:params completion:^( BOOL complete){
+        NSLog(@"track done");
+    }];
 }
 
 @end

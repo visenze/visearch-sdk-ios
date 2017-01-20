@@ -61,7 +61,13 @@
 
 - (void) initApplication {
     self.applicationInUse = [[CoreDataModel sharedInstance] getApplicationInUse];
-    [ViSearchAPI setupAccessKey:self.applicationInUse.access_key andSecretKey:self.applicationInUse.secret_key];
+    
+    // old way of init with both access and secret
+//    [ViSearchAPI setupAccessKey:self.applicationInUse.access_key andSecretKey:self.applicationInUse.secret_key];
+    
+    // new way of init with only app key
+    [ViSearchAPI setupAppKey:self.applicationInUse.app_key];
+    
 }
 
 - (void)initBackgroundView {

@@ -19,7 +19,9 @@
     
     NSString *urlString = [self generateRequestUrlPrefixWithParams: params.toDict andDomainUrl:@"https://track.visenze.com"];
     [request setURL: [NSURL URLWithString:urlString]];
-    [request addValue:self.getAuthParams forHTTPHeaderField:@"Authorization"];
+    
+    // this is not needed
+    //[request addValue:self.getAuthParams forHTTPHeaderField:@"Authorization"];
     
     if(self.userAgent != nil )
         [request addValue:self.userAgent forHTTPHeaderField:kVisenzeUserAgentHeader];

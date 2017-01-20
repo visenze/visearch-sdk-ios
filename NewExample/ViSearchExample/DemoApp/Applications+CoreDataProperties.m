@@ -21,5 +21,6 @@
 @dynamic is_in_use;
 @dynamic secret_key;
 @dynamic is_new;
+@dynamic app_key;
 
 @end

@@ -16,6 +16,10 @@
     [ViSearchClient sharedInstance].secretKey = secretKey;
 }
 
++ (void)setupAppKey:(NSString *)appKey {
+    [ViSearchClient sharedInstance].accessKey = appKey ;
+}
+
 + (ViSearchClient *)defaultClient {
     return [ViSearchClient sharedInstance];
 }

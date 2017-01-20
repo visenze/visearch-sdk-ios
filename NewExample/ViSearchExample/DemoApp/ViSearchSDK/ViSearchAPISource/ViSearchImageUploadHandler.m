@@ -28,7 +28,23 @@
     [request setHTTPMethod:@"POST"];
     [request setTimeoutInterval:self.timeoutInterval];
    
-    [request addValue:self.getAuthParams forHTTPHeaderField:@"Authorization"];
+    // old way of authentication
+    NSMutableDictionary* paramDict = [[params toDict] mutableCopy];
+    
+    if(self.delegate!=nil && [self.delegate getAppKey] == nil)
+    {
+        [request addValue:self.getAuthParams forHTTPHeaderField:@"Authorization"];
+    }
+    else {
+        
+        // add in the access key
+        paramDict[@"access_key"] = [self.delegate getAppKey];
+    }
+    
+    NSString *urlString = [self generateRequestUrlPrefixWithParams: paramDict];
+    
+    [request setURL: [NSURL URLWithString:urlString]];
+
     
     // set Content-Type in HTTP header
     NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundary];
@@ -42,7 +58,6 @@
     
     // setting the body of the post to the reqeust
     [request setHTTPBody:[params httpPostBodyWithObject:@{@"boundary":boundary}]];
-    NSString *urlString = [self generateRequestUrlPrefixWithParams:params.toDict];
     
     // set URL
     [request setURL: [NSURL URLWithString:urlString]];
