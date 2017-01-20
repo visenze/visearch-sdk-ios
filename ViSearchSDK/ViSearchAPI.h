@@ -13,6 +13,7 @@
 @interface ViSearchAPI : NSObject
 
 + (void)setupAccessKey:(NSString*) accessKey andSecretKey:(NSString*)secretKey;
++ (void)setupAppKey:(NSString *)appKey;
 + (ViSearchClient *) defaultClient;
 
 @end

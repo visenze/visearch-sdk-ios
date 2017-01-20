@@ -17,7 +17,7 @@
 @property (nonatomic, readonly) NSString * action;
 @property (nonatomic) NSString * imName;
 @property (nonatomic, readonly) NSString * reqId;
-@property (nonatomic, readonly) NSString * cid; // set to access key
+@property (nonatomic) NSString * cid; // set to access key
 @property (nonatomic) NSString * cuid;
 
 
@@ -27,6 +27,9 @@
 
 + (TrackParams *)createWithCID:(NSString *)cid ReqId:(NSString *)reqId andAction:(NSString *)action __deprecated_msg("use createWithAccessKey:accessKey:reqId:andAction method instead");
 + (TrackParams *)createWithAccessKey:(NSString *)accessKey reqId:(NSString *)reqId andAction:(NSString *)action;
++ (TrackParams *)createWithAppKey:(NSString *)appKey reqId:(NSString *)reqId andAction:(NSString *)action;
++ (TrackParams *)createWithReqId:(NSString *)reqId andAction:(NSString *)action;
+
 
 @end
 

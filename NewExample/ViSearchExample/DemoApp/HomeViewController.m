@@ -29,7 +29,7 @@
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
     
     // new way of authenticate. only need app key
-    [dict setValue:@"YOUR_ACCESS_KEY" forKey:@"app_key"];
+    [dict setValue:@"YOUR_APP_KEY" forKey:@"app_key"];
     
     // old way of authentication which need access and secret key
 //    [dict setValue:@"YOUR_ACCESS_KEY" forKey:@"access_key"];

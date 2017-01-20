@@ -10,6 +10,6 @@
 #define ViVersion_h
 
 #define kVisenzeUserAgentHeader @"X-Requested-With"
-#define kVisenzeUserAgentValue @"visearch-oc-sdk/1.1.2"
+#define kVisenzeUserAgentValue @"visearch-oc-sdk/1.2.0"
 
 #endif /* ViVersion_h */

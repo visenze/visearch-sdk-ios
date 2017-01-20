@@ -22,10 +22,25 @@
     else
         [request addValue:kVisenzeUserAgentValue forHTTPHeaderField:kVisenzeUserAgentHeader];
     
-    NSString *urlString = [self generateRequestUrlPrefixWithParams: params.toDict];
+    
+    
+    NSMutableDictionary* paramDict = [[params toDict] mutableCopy];
+    
+    // old way of authentication
+    if(self.delegate!=nil && [self.delegate getAppKey] == nil)
+    {
+        [request addValue:self.getAuthParams forHTTPHeaderField:@"Authorization"];
+    }
+    else {
+        // add in the access key
+        paramDict[@"access_key"] = [self.delegate getAppKey];
+    }
+    
+    NSString *urlString = [self generateRequestUrlPrefixWithParams: paramDict];
+    
     [request setURL: [NSURL URLWithString:urlString]];
-    [request addValue:self.getAuthParams forHTTPHeaderField:@"Authorization"];
-
+    
+    
     NSOperationQueue *queue = [self.delegate getOperationQ];
     
     [NSURLConnection sendAsynchronousRequest:request queue:queue

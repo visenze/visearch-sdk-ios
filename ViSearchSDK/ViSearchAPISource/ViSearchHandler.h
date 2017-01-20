@@ -14,6 +14,7 @@
 
 - (NSString *)getAccessKey;
 - (NSString *)getSecretKey;
+- (NSString *)getAppKey;
 - (NSString *)getHost;
 - (NSOperationQueue *)getOperationQ;
 
