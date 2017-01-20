@@ -45,11 +45,17 @@
 - (void) insertApplication:(NSDictionary*)json {
     if (json) {
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:ENTITY_NAME];
-        [request setPredicate:[NSPredicate predicateWithFormat:@"access_key = %@ and secret_key = %@", [json objectForKey:@"access_key"],[json objectForKey:@"secret_key"]]];
+        
+//        [request setPredicate:[NSPredicate predicateWithFormat:@"access_key = %@ and secret_key = %@", [json objectForKey:@"access_key"],[json objectForKey:@"secret_key"]]];
+        
+        [request setPredicate:[NSPredicate predicateWithFormat:@"app_key = %@", [json objectForKey:@"app_key"] ]];
+        
+        
         [request setFetchLimit:1];
         
         NSError *error;
         NSUInteger count = [self.managedObjectContext countForFetchRequest:request error:&error];
+        
         
         if (count == NSNotFound) { // some error occurred
             NSLog(@"Has error: %@", [error localizedDescription]);
@@ -65,6 +71,10 @@
             app.app_name = [json objectForKey:@"app_name"];
             app.secret_key = [json objectForKey:@"secret_key"];
             
+            app.app_key = [json objectForKey:@"app_key"];
+            
+            NSLog(@"app_key : %@" , app.app_key);
+            
             [self updateUseStatus:[self getApplicationInUse] withBool:NO];
             [self updateUseStatus:app withBool:YES];
             
@@ -78,7 +88,10 @@
 - (void) updateUseStatus:(Applications*)app withBool:(BOOL)val{
     if (app) {
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:ENTITY_NAME];
-        [request setPredicate:[NSPredicate predicateWithFormat:@"access_key = %@ and secret_key = %@", app.access_key, app.secret_key]];
+//        [request setPredicate:[NSPredicate predicateWithFormat:@"access_key = %@ and secret_key = %@", app.access_key, app.secret_key]];
+        
+        [request setPredicate:[NSPredicate predicateWithFormat:@"app_key = %@", app.app_key ]];
+        
         
         NSError *error;
         fetchedObjects = [self.managedObjectContext executeFetchRequest:request error:&error];

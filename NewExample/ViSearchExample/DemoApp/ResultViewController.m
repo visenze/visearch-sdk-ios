@@ -98,7 +98,11 @@ typedef enum {
 - (void) initValues {
     self.generalService = [GeneralServices sharedInstance];
     self.imageCache = [[NSMutableDictionary alloc] init];
-    self.productType = [self.searchResults.productTypes objectAtIndex:0];
+    
+    if (self.searchResults.productTypes.count > 0)
+        self.productType = [self.searchResults.productTypes objectAtIndex:0];
+   
+    
     self.image = self.originalImage;
     self.loadedCell = [[NSMutableSet alloc] init];
     

@@ -15,6 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Applications (CoreDataProperties)
 
+
+@property (nullable, nonatomic, retain) NSString *app_key;
+
 @property (nullable, nonatomic, retain) NSString *access_key;
 @property (nullable, nonatomic, retain) NSNumber *account_id;
 @property (nullable, nonatomic, retain) NSString *account_name;
