@@ -22,7 +22,7 @@
 @property (atomic) BOOL getAllFl;
 @property (atomic) NSString *detection;
 
-@property (atomic) NSMutableArray *facets;
+@property (atomic) NSArray *facets;
 @property (atomic) int facetsLimit;
 @property (atomic) BOOL facetShowCount;
 
