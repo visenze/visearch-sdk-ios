@@ -25,6 +25,7 @@
 	  - 6.2 [Filtering Results](#62-filtering-results)
 	  - 6.3 [Result Score](#63-result-score)
 	  - 6.4 [Automatic Object Recognition Beta](#64-automatic-object-recognition-beta)
+	  - 6.5 [Facets Filtering](#65-facets-filtering)
  7. [Event Tracking](#7-event-tracking)
 
 ---
@@ -506,6 +507,37 @@ params.detection = @"bag";
 ```
 
 The detected product types are listed in `product_types` together with the match score and box area of the detected object. Multiple objects can be detected from the query image and they are ranked from the highest score to lowest. The full list of supported product types by our API will also be returned in `product_types_list`.
+
+### 6.5 Facets Filtering
+
+You can get the facet results by sending a list of fields to enable faceting on. Here are some limitations on the request:
+
+- Facet fields need to be marked as `searchable` on ViSenze dashboard.
+Text field is not supported as facet field even it is `searchable`.
+System will return value range, the min, max value for numerical fields which are in ‘int’, ‘float’ type.
+
+- Only facet values that exist in current search results will be returned. For example, if your search results contain 10 unique brands, then the facet filters will return the value for these 10 brands.
+ 
+- Facet value list is ordered by the item count descendingly.
+When the value is set to all (facets = *), all the searchable fields will be used as facet fields.
+
+Name | Type | Description
+--- | --- | --- |
+facets | array | List of fields to enable faceting.
+facets_limit | Int | Limit of the number of facet values to be returned. Only for non-numerical fields.
+facets_show_count | Boolean | Option to show the facets count in the response.
+
+```objectivec
+
+searchParams.facets = @[@"brand" , @"price"];
+searchParams.facetShowCount = YES;
+searchParams.facetsLimit = 10;
+
+// view facet results
+ViSearchResult.facets
+
+
+```
 
 ## 7. Event Tracking
 
