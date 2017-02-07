@@ -203,6 +203,10 @@
     searchParams.limit = IMG_QUERY_LIMIT;
     searchParams.score = YES;
     
+//    searchParams.facets = @[@"brand" , @"price"];
+//    searchParams.facetShowCount = YES;
+//    searchParams.facetsLimit = 5;
+    
     [[ViSearchAPI defaultClient] searchWithImageId:searchParams success:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
         
         NSString *status = [data.content objectForKey:@"status"];
@@ -211,6 +215,7 @@
         } else {
             completionBlock(NO, data);
         }
+        
     } failure:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
         completionBlock(NO, data);
     }];

@@ -20,6 +20,7 @@
 @synthesize imId = _imId;
 @synthesize productTypes = _productTypes;
 @synthesize productTypesList = _productTypesList;
+@synthesize facets = _facets;
 
 - (id)initWithSuccess: (BOOL) succ withError: (ViSearchError*) err {
     return [self initWithSuccess:succ withError:err andContent:nil];
@@ -129,5 +130,14 @@
     
     return _productTypesList;
 }
+
+- (NSArray*) facets {
+    if (!_facets) {
+        _facets = [self.content objectForKey:@"facets"];
+    }
+    
+    return _facets;
+}
+
 
 @end
