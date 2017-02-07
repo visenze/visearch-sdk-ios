@@ -21,6 +21,7 @@
 @property (nonatomic, readonly) NSString *imId;
 @property (nonatomic, readonly) NSArray *productTypes;
 @property (nonatomic, readonly) NSArray *productTypesList;
+@property (nonatomic, readonly) NSArray *facets;
 
 -(id) initWithSuccess: (BOOL) success withError: (ViSearchError*) error;
 -(id) initWithSuccess:(BOOL)success withError:(ViSearchError *)error andContent:(NSDictionary *)content;

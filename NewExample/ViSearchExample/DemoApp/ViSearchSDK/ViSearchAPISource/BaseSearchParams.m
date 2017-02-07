@@ -12,7 +12,7 @@
     NSArray *VALUES_DETECTION;
 }
 
-@synthesize limit, page, facet, facetSize, facetField, score, fq, fl, queryInfo, custom, scoreMax, scoreMin, getAllFl, detection;
+@synthesize limit, page, score, fq, fl, queryInfo, custom, scoreMax, scoreMin, getAllFl, detection , facets, facetShowCount, facetsLimit;
 
 - (id)init
 {
@@ -20,9 +20,6 @@
     {
         self.limit = 10;
         self.page = 1;
-        self.facet = false;
-        self.facetSize = 10;
-        self.facetField = nil;
         self.score = false;
         self.fq = [NSMutableDictionary dictionary];
         self.fl = nil;
@@ -32,6 +29,11 @@
         self.scoreMax = 1;
         self.getAllFl = false;
         self.detection = nil;
+        
+        self.facets = nil ;
+        self.facetsLimit = 10;
+        self.facetShowCount = false;
+        
     }
     return self;
 }
@@ -46,13 +48,6 @@
         [dict setValue:[NSString stringWithFormat:@"%d", page] forKey:@"page"];
     }
     
-    if (facet && facetSize > 0) {
-        [dict setValue:facet? @"true":@"false" forKey:@"facet"];
-        [dict setValue:[NSString stringWithFormat:@"%d", facetSize] forKey:@"facet_size"];
-        if (facetField!= nil) {
-            [dict setValue:facetField forKey:@"facet_field"];
-        }
-    }
     
     if (score > 0) {
         [dict setValue:@"true" forKey:@"score"];
@@ -88,6 +83,12 @@
                 [builder appendString:@","];
         }
         [dict setValue:builder forKey:@"fl"];
+    }
+    
+    if (self.facets != nil) {
+        dict[@"facets"] = [self.facets componentsJoinedByString:@"," ];
+        dict[@"facets_limit"] = [NSString stringWithFormat:@"%d", self.facetsLimit]  ;
+        dict[@"facets_show_count"] = self.facetShowCount ? @"true" : @"false" ;
     }
     
     if (queryInfo) {

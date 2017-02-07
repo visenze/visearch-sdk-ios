@@ -12,9 +12,6 @@
 
 @property (atomic) int limit;
 @property (atomic) int page;
-@property (atomic) BOOL facet;
-@property (atomic) int facetSize;
-@property (atomic) NSArray *facetField;
 @property (atomic) BOOL score;
 @property (atomic) NSMutableDictionary *fq;
 @property (atomic) NSArray *fl;
@@ -24,6 +21,11 @@
 @property (atomic) float scoreMax;
 @property (atomic) BOOL getAllFl;
 @property (atomic) NSString *detection;
+
+@property (atomic) NSMutableArray *facets;
+@property (atomic) int facetsLimit;
+@property (atomic) BOOL facetShowCount;
+
 
 
 - (id)init;
