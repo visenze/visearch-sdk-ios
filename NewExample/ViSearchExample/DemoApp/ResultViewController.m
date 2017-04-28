@@ -118,6 +118,8 @@ typedef enum {
     imageCount = 0;
     uploadSearchCount = 0;
     
+//    NSLog(@"image size: %f, %f", self.image.size.width , self.image.size.height );
+    
     if (self.productType.box) {
         [self initProductType];
     } else {
@@ -125,9 +127,11 @@ typedef enum {
         self.detectionType = DEFAULT_TYPE;
         [self.imageCache setValue:self.searchResults forKey:self.detectionType];
     }
+    
 }
 
 - (void) initProductType {
+    
     CGFloat ratio;
     if (self.image.size.height > self.image.size.width) {
         ratio = self.image.size.height / COMPRESSED_IMAGE_SIZE;
@@ -471,10 +475,25 @@ typedef enum {
 
     NSString *detection = self.detectionType;
     
+    CGFloat ratio;
+    if (self.image.size.height > self.image.size.width) {
+        ratio = self.image.size.height / COMPRESSED_IMAGE_SIZE;
+    } else {
+        ratio = self.image.size.width / COMPRESSED_IMAGE_SIZE;
+    }
+    
+    ratio = ratio < 1 ? 1: ratio;
+    
+    Box* resizeBox = [[Box alloc]init];
+    resizeBox.x1 = self.currentBox.x1 / ratio ;
+    resizeBox.x2 = self.currentBox.x2 / ratio ;
+    resizeBox.y1 = self.currentBox.y1 / ratio ;
+    resizeBox.y2 = self.currentBox.y2 / ratio ;
+    
     [self.generalService
      uploadSearchWithImage:self.image
      andDetection:detection
-     andBox:self.currentBox
+     andBox:resizeBox
      completionBlock:^(BOOL succeeded, ViSearchResult *result) {
          
         
