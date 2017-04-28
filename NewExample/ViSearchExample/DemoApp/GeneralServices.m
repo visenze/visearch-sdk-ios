@@ -179,6 +179,10 @@
     
     if (box) {
         uploadParams.box = box;
+        
+        NSLog(@"image w,h: %f,%f", image.size.width, image.size.height);
+        NSLog(@"box %d,%d,%d,%d: ", box.x1, box.y1, box.x2, box.y2);
+        
     }
     
     [[ViSearchClient sharedInstance] searchWithImageData:uploadParams success:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
