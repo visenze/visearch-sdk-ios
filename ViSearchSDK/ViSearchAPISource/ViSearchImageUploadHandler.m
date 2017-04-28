@@ -27,7 +27,10 @@
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setHTTPMethod:@"POST"];
     [request setTimeoutInterval:self.timeoutInterval];
-   
+    
+    // setting the body of the post to the reqeust
+    [request setHTTPBody:[params httpPostBodyWithObject:@{@"boundary":boundary}]];
+    
     // old way of authentication
     NSMutableDictionary* paramDict = [[params toDict] mutableCopy];
     
@@ -55,10 +58,6 @@
     else
         [request addValue:kVisenzeUserAgentValue forHTTPHeaderField:kVisenzeUserAgentHeader];
 
-    
-    // setting the body of the post to the reqeust
-    [request setHTTPBody:[params httpPostBodyWithObject:@{@"boundary":boundary}]];
-    
     // set URL
     [request setURL: [NSURL URLWithString:urlString]];
     NSOperationQueue *queue = [self.delegate getOperationQ];
