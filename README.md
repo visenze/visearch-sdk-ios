@@ -113,7 +113,7 @@ Edit the Podfile as follow:
 source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '7.0'
 ...
-pod 'ViSearch', '~>1.1.0'
+pod 'ViSearch', '~>1.3.1'
 ...
 ```
 
@@ -161,6 +161,7 @@ static NSString * const privateKey = @"your_secret_key";
 
 [ViSearchAPI setupAccessKey:accessKey andSecretKey:secretKey];
 ViSearchClient *client = [ViSearch defaultClient];
+client.isAppKeyEnabled = NO;
 ...
 
 
