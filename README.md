@@ -161,6 +161,7 @@ static NSString * const privateKey = @"your_secret_key";
 
 [ViSearchAPI setupAccessKey:accessKey andSecretKey:secretKey];
 ViSearchClient *client = [ViSearch defaultClient];
+client.isAppKeyEnabled = NO;
 ...
 
 
