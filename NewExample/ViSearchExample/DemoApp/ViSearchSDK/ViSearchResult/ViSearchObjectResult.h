@@ -18,5 +18,6 @@
 @property NSString *type;
 @property (nonatomic, assign) int total;
 @property (nonatomic, strong) NSArray *imageResultsArray;
+@property (nonatomic, strong) NSArray *facets;
 
 @end

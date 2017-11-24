@@ -188,6 +188,8 @@
                                                    y2:[[coordinates objectAtIndex:3] intValue]];
             }
             
+            object.facets =  [data objectForKey:@"facets"];
+        
             [r addObject:object];
         }
         
