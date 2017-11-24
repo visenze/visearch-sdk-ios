@@ -37,6 +37,7 @@
 - (void)searchWithColor:(ColorSearchParams *)params
                 success:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error)) success
                 failure:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error)) failure;
+
 - (void)searchWithImageData:(UploadSearchParams *)params
                     success:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error)) success
                     failure:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error)) failure;
@@ -55,5 +56,17 @@
 - (void)track:(TrackParams *) trackParams
      completion:(void (^)(BOOL success))completion;
 
+// discover search
+- (void)discoverSearchWithImageData:(UploadSearchParams *)params
+                    success:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error)) success
+                    failure:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error)) failure;
+
+- (void)discoverSearchWithImageUrl:(UploadSearchParams *)params
+                   success:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error))success
+                   failure:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error))failure;
+
+- (void)discoverSearchWithImage:(UploadSearchParams *)params
+                success:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error)) success
+                failure:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error)) failure;
 
 @end
