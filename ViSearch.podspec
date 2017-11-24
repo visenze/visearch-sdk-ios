@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "ViSearch"
-  s.version          = "1.3.1"
+  s.version          = "1.4.0"
   s.summary          = "A Visual Search API solution."
   s.description      = <<-DESC
                         ViSearch is a Visual Recognition Service API developed by ViSenze Pte. Ltd.

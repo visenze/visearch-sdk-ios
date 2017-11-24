@@ -19,4 +19,10 @@
 @property (atomic) UIImage *compressedImage;
 @property (atomic) ImageSettings *settings;
 
+// discover search
+@property (nonatomic, assign) int detectionLimit;
+@property (nonatomic, assign) int resultLimit;
+@property (nonatomic, strong) NSString *detectionSensitivity;
+
+
 @end

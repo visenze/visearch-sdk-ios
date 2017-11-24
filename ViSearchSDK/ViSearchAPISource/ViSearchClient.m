@@ -191,6 +191,49 @@
     [self handleAndTrackWithHandler:handler params:params success:success failure:failure];
 }
 
+- (void)discoverSearchWithImageUrl:(UploadSearchParams *)params
+                           success:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error))success
+                           failure:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error))failure
+{
+    if( params.imageUrl == nil || [params.imageUrl length] == 0 ){
+        [NSException raise:NSInvalidArgumentException format:@"*** -[%@ %@]: Missing parameter: image url",  NSStringFromClass([self class]), NSStringFromSelector(_cmd)] ;
+    }
+    
+    [self discoverSearchWithImage:params success:success failure:failure];
+}
+
+- (void)discoverSearchWithImageData:(UploadSearchParams *)params
+                            success:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error)) success
+                            failure:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error)) failure
+{
+    if( params.imageFile == nil ){
+        [NSException raise:NSInvalidArgumentException format:@"*** -[%@ %@]: Missing image file",  NSStringFromClass([self class]), NSStringFromSelector(_cmd)] ;
+    }
+    
+    [self discoverSearchWithImage:params success:success failure:failure];
+}
+
+- (void)discoverSearchWithImage:(UploadSearchParams *)params
+                        success:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error)) success
+                        failure:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error)) failure
+{
+    // verify that one of img id, image data or image url is required
+    if( (params.imageFile == nil) &&
+       ( params.imageUrl == nil || [params.imageUrl length] == 0 ) &&
+       ( params.imId == nil || [params.imId length] == 0 )
+       ){
+        [NSException raise:NSInvalidArgumentException format:@"*** -[%@ %@]: image file or image url or image id must be provided",  NSStringFromClass([self class]), NSStringFromSelector(_cmd)] ;
+    }
+    
+    ViSearchHandler *handler = [ViSearchImageUploadHandler new];
+    handler.timeoutInterval = self.timeoutInterval;
+    handler.searchType = @"discoversearch";
+    handler.delegate = self;
+    
+    [self handleAndTrackWithHandler:handler params:params success:success failure:failure];
+}
+
+
 - (void)recommendWithImageName:(SearchParams *)params
                      success:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error)) success
                      failure:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error)) failure

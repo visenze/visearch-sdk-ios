@@ -59,6 +59,8 @@
 		A9EB720B1CEC398300D26276 /* TrackParams.m in Sources */ = {isa = PBXBuildFile; fileRef = A9EB720A1CEC398300D26276 /* TrackParams.m */; };
 		A9EB720E1CEC398E00D26276 /* ViTrackHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = A9EB720D1CEC398E00D26276 /* ViTrackHandler.m */; };
 		BD42F35B1D9BA82E00CE704D /* UidHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = BD42F35A1D9BA82E00CE704D /* UidHelper.m */; };
+		BD815AA11FC7CA9100E8DA76 /* ViSearchObjectType.m in Sources */ = {isa = PBXBuildFile; fileRef = BD815AA01FC7CA9100E8DA76 /* ViSearchObjectType.m */; };
+		BD815AA41FC7CC7800E8DA76 /* ViSearchObjectResult.m in Sources */ = {isa = PBXBuildFile; fileRef = BD815AA31FC7CC7800E8DA76 /* ViSearchObjectResult.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -174,6 +176,10 @@
 		A9EB720D1CEC398E00D26276 /* ViTrackHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViTrackHandler.m; sourceTree = "<group>"; };
 		BD42F3591D9BA82E00CE704D /* UidHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UidHelper.h; sourceTree = "<group>"; };
 		BD42F35A1D9BA82E00CE704D /* UidHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UidHelper.m; sourceTree = "<group>"; };
+		BD815A9F1FC7CA9100E8DA76 /* ViSearchObjectType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViSearchObjectType.h; sourceTree = "<group>"; };
+		BD815AA01FC7CA9100E8DA76 /* ViSearchObjectType.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViSearchObjectType.m; sourceTree = "<group>"; };
+		BD815AA21FC7CC7800E8DA76 /* ViSearchObjectResult.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViSearchObjectResult.h; sourceTree = "<group>"; };
+		BD815AA31FC7CC7800E8DA76 /* ViSearchObjectResult.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViSearchObjectResult.m; sourceTree = "<group>"; };
 		BD81A6701DF1294900E79249 /* ViVersion.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViVersion.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -315,6 +321,10 @@
 				50AFF93C1C1582EB00DCC80A /* ViSearchResult.m */,
 				50B5F28C1C3B954300684FAA /* ViSearchProductType.h */,
 				50B5F28D1C3B954300684FAA /* ViSearchProductType.m */,
+				BD815A9F1FC7CA9100E8DA76 /* ViSearchObjectType.h */,
+				BD815AA01FC7CA9100E8DA76 /* ViSearchObjectType.m */,
+				BD815AA21FC7CC7800E8DA76 /* ViSearchObjectResult.h */,
+				BD815AA31FC7CC7800E8DA76 /* ViSearchObjectResult.m */,
 			);
 			path = ViSearchResult;
 			sourceTree = "<group>";
@@ -604,6 +614,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				50B5F28E1C3B954300684FAA /* ViSearchProductType.m in Sources */,
+				BD815AA11FC7CA9100E8DA76 /* ViSearchObjectType.m in Sources */,
 				50AFF9411C1582EB00DCC80A /* ColorSearchParams.m in Sources */,
 				50AFF94B1C1582EB00DCC80A /* ViSearchResult.m in Sources */,
 				507DF67C1C2B92A200937F78 /* GeneralServices.m in Sources */,
@@ -622,6 +633,7 @@
 				50FAF6191C117892009C7C04 /* Applications.m in Sources */,
 				A9EB720E1CEC398E00D26276 /* ViTrackHandler.m in Sources */,
 				50984D501C2AA0B00057446D /* Reachability.m in Sources */,
+				BD815AA41FC7CC7800E8DA76 /* ViSearchObjectResult.m in Sources */,
 				50AFF9431C1582EB00DCC80A /* SearchParams.m in Sources */,
 				50FAF6181C117892009C7C04 /* Applications+CoreDataProperties.m in Sources */,
 				50AFF9401C1582EB00DCC80A /* Box.m in Sources */,

@@ -18,6 +18,7 @@
 	    - 4.2.1 [Selection Box](#421-selection-box)
 	    - 4.2.2 [Resizing Settings](#422-resizing-settings)
     - 4.3 [Search by Color](#43-search-by-color)
+    - 4.4 [Multiple Products Search](#44-multiple-products-search)
  5. [Search Results](#5-search-results)
  6. [Advanced Search Parameters](#6-advanced-search-parameters)
 	  - 6.1 [Retrieving Metadata](#61-retrieving-metadata)
@@ -36,7 +37,7 @@ ViSearch is an API that provides accurate, reliable and scalable image search. V
 
 The ViSearch iOS SDK is an open source software to provide easy integration of ViSearch Search API with your iOS applications. It provides four search methods based on the ViSearch Solution APIs - Find Similar, You May Also Like, Search By Image and Search By Color. For source code and references, please visit the [Github Repository](https://github.com/visenze/visearch-sdk-ios).
 
->Current stable version: 1.3.1
+>Current stable version: 1.4.0
 
 >Supported iOS version: iOS 7.x and higher
 
@@ -327,6 +328,68 @@ colorSearchParams.color = @"012ACF";
     }];
 ...
 ```
+
+### 4.4 Multiple Products Search
+
+POST /discoversearch
+
+**Multiple Product Search** solution is to search similar images by uploading an image or providing an image url, similar to **Search by Image**. Multiple Product Search is able to detect all objects in the image and return similar images for each at one time.
+
+* Using  UIImage
+
+```objectivec
+#import <ViSearch/VisearchAPI.h>
+...
+UIImage *image = [UIImage imageNamed:@"example.jpg"];
+
+UploadSearchParams *uploadSearchParams = [[UploadSearchParams alloc] init];
+uploadSearchParams.imageFile = image
+
+[[ViSearchAPI defaultClient]
+	discoverSearchWithImageData:uploadSearchParams
+	success:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
+	// Do something when request succeeds
+    } failure:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
+	// Do something when request fails
+    }];
+```
+
+* Alternatively, you can pass an image url directly to `uploadSearchParams` to start the search :
+
+```objectivec
+#import <ViSearch/VisearchAPI.h>
+...
+UploadSearchParams *uploadSearchParams = [[UploadSearchParams alloc] init];
+uploadSearchParams.imageUrl = @"http://example.com/example.jpg";
+
+[[ViSearchAPI defaultClient]
+	discoverSearchWithImageUrl:uploadSearchParams
+	success:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
+	// Do something when request succeeds
+    } failure:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
+	// Do something when request fails
+    }];
+...
+```
+
+* Once uploading an image, you will receive a im\_id attribute from the [Search Results](#5-search-results). If you want to search the same image again, you can save your bandwidth by specifying the im\_id in the params:
+
+```objectivec
+#import <ViSearch/VisearchAPI.h>
+...
+UploadSearchParams *uploadSearchParams = [[UploadSearchParams alloc] init];
+uploadSearchParams.imId = visearchResult.imId;
+
+[[ViSearchAPI defaultClient]
+	discoverSearchWithImage:uploadSearchParams
+	success:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
+	// Do something when request succeeds
+    } failure:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
+	// Do something when request fails
+    }];
+...
+```
+
 
 ## 5. Search Results
 

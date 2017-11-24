@@ -11,7 +11,7 @@
 
 @implementation UploadSearchParams
 
-@synthesize imageUrl, imageFile, box, compressedImage, imId;
+@synthesize imageUrl, imageFile, box, compressedImage, imId, detectionLimit, detectionSensitivity, resultLimit;
 
 #pragma mark Protected
 
@@ -39,6 +39,19 @@
     }else if (imId) {
         [dict setValue:imId forKey:@"im_id"];
     }
+    
+    if (detectionLimit > 0) {
+        [dict setValue:[NSString stringWithFormat:@"%d", detectionLimit] forKey:@"detection_limit"];
+    }
+    
+    if (resultLimit > 0) {
+        [dict setValue:[NSString stringWithFormat:@"%d", resultLimit] forKey:@"result_limit"];
+    }
+    
+    if (detectionSensitivity!=nil) {
+        [dict setValue:detectionSensitivity forKey:@"detection_sensitivity"] ;
+    }
+    
     return dict;
 }
 

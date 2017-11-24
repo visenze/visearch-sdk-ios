@@ -10,6 +10,8 @@
 #import "ViSearchError.h"
 #import "ImageResult.h"
 #import "ViSearchProductType.h"
+#import "ViSearchObjectType.h"
+#import "ViSearchObjectResult.h"
 
 @interface ViSearchResult : NSObject
 
@@ -22,6 +24,10 @@
 @property (nonatomic, readonly) NSArray *productTypes;
 @property (nonatomic, readonly) NSArray *productTypesList;
 @property (nonatomic, readonly) NSArray *facets;
+
+// discover search
+@property (nonatomic, readonly) NSArray *objectTypesList;
+@property (nonatomic, readonly) NSArray *objects;
 
 -(id) initWithSuccess: (BOOL) success withError: (ViSearchError*) error;
 -(id) initWithSuccess:(BOOL)success withError:(ViSearchError *)error andContent:(NSDictionary *)content;
