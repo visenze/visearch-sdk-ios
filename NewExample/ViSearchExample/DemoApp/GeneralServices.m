@@ -176,7 +176,7 @@
     uploadParams.detection = detection;
     uploadParams.score = YES;
     uploadParams.settings = [ImageSettings highqualitySettings];
-    
+
     if (box) {
         uploadParams.box = box;
         //NSLog(@"image w,h: %f,%f", image.size.width, image.size.height);

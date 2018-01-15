@@ -25,6 +25,7 @@
 @property (atomic) NSArray *facets;
 @property (atomic) int facetsLimit;
 @property (atomic) BOOL facetShowCount;
+@property (atomic) BOOL dedup;
 
 
 
