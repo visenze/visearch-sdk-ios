@@ -12,7 +12,7 @@
     NSArray *VALUES_DETECTION;
 }
 
-@synthesize limit, page, score, fq, fl, queryInfo, custom, scoreMax, scoreMin, getAllFl, detection , facets, facetShowCount, facetsLimit;
+@synthesize limit, page, score, fq, fl, queryInfo, custom, scoreMax, scoreMin, getAllFl, detection , facets, facetShowCount, facetsLimit, dedup;
 
 - (id)init
 {
@@ -33,6 +33,7 @@
         self.facets = nil ;
         self.facetsLimit = 10;
         self.facetShowCount = false;
+        self.dedup = false;
         
     }
     return self;
@@ -95,8 +96,12 @@
         [dict setValue:@"true" forKey:@"qinfo"];
     }
     
+    if (self.dedup) {
+        [dict setValue:@"true" forKey:@"dedup"];
+    }
+    
     for (NSString* key in custom.allKeys) {
-        [dict setValue:[NSMutableString stringWithFormat: @"%@:%@",key, [custom objectForKey:key]] forKey:key];
+        [dict setValue:[NSMutableString stringWithFormat: @"%@", [custom objectForKey:key]] forKey:key];
     }
     
     return dict;
