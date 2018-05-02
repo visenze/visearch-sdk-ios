@@ -173,6 +173,14 @@ ViSearchClient *client = [[ViSearchClient alloc] initWithBaseUrl:url
 ...
 ```
 
+Please init ViSearch client in this way if you connect to another endpoint rather than default (https://visearch.visenze.com)
+
+```
+static NSString * const privateKey = @"your_url";
+ViSearchClient *client = [[ViSearchClient alloc] initWithBaseUrl:url
+	appKey:appKey];
+```
+
 ## 4. Solution APIs
 
 ### 4.1 Visually Similar Recommendations
