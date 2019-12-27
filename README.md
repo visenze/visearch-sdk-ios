@@ -626,5 +626,5 @@ The following fields could be used for tracking user events:
 Field | Description | Required
 --- | --- | ---
 reqid| visearch request id of current search. This attribute can be accessed in ViSearchResult in [Section 5](#5-search-results) | Require
-action | action type, eg: view, click, buy, add_cart. Currently, we only support click event. More events will be supported in the future. | Require
+action | The type of the action. Currently we only support three types, `click`, `add_to_cart`, and `add_to_wishlist`. | Require
 im_name | image id (im_name) for this behavior | Optional
