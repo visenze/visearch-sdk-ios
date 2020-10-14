@@ -56,8 +56,6 @@
 		50FAF6131C117688009C7C04 /* CoreDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 50FAF6121C117688009C7C04 /* CoreDataModel.m */; };
 		50FAF6181C117892009C7C04 /* Applications+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 50FAF6151C117892009C7C04 /* Applications+CoreDataProperties.m */; };
 		50FAF6191C117892009C7C04 /* Applications.m in Sources */ = {isa = PBXBuildFile; fileRef = 50FAF6171C117892009C7C04 /* Applications.m */; };
-		A9EB720B1CEC398300D26276 /* TrackParams.m in Sources */ = {isa = PBXBuildFile; fileRef = A9EB720A1CEC398300D26276 /* TrackParams.m */; };
-		A9EB720E1CEC398E00D26276 /* ViTrackHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = A9EB720D1CEC398E00D26276 /* ViTrackHandler.m */; };
 		BD42F35B1D9BA82E00CE704D /* UidHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = BD42F35A1D9BA82E00CE704D /* UidHelper.m */; };
 		BD815AA11FC7CA9100E8DA76 /* ViSearchObjectType.m in Sources */ = {isa = PBXBuildFile; fileRef = BD815AA01FC7CA9100E8DA76 /* ViSearchObjectType.m */; };
 		BD815AA41FC7CC7800E8DA76 /* ViSearchObjectResult.m in Sources */ = {isa = PBXBuildFile; fileRef = BD815AA31FC7CC7800E8DA76 /* ViSearchObjectResult.m */; };
@@ -170,10 +168,6 @@
 		50FAF6161C117892009C7C04 /* Applications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Applications.h; sourceTree = "<group>"; };
 		50FAF6171C117892009C7C04 /* Applications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Applications.m; sourceTree = "<group>"; };
 		50FAF61A1C1189B3009C7C04 /* constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
-		A9EB72091CEC398300D26276 /* TrackParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrackParams.h; sourceTree = "<group>"; };
-		A9EB720A1CEC398300D26276 /* TrackParams.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrackParams.m; sourceTree = "<group>"; };
-		A9EB720C1CEC398E00D26276 /* ViTrackHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViTrackHandler.h; sourceTree = "<group>"; };
-		A9EB720D1CEC398E00D26276 /* ViTrackHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViTrackHandler.m; sourceTree = "<group>"; };
 		BD42F3591D9BA82E00CE704D /* UidHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UidHelper.h; sourceTree = "<group>"; };
 		BD42F35A1D9BA82E00CE704D /* UidHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UidHelper.m; sourceTree = "<group>"; };
 		BD815A9F1FC7CA9100E8DA76 /* ViSearchObjectType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViSearchObjectType.h; sourceTree = "<group>"; };
@@ -279,10 +273,6 @@
 		50AFF9211C1582EB00DCC80A /* ViSearchAPISource */ = {
 			isa = PBXGroup;
 			children = (
-				A9EB720C1CEC398E00D26276 /* ViTrackHandler.h */,
-				A9EB720D1CEC398E00D26276 /* ViTrackHandler.m */,
-				A9EB72091CEC398300D26276 /* TrackParams.h */,
-				A9EB720A1CEC398300D26276 /* TrackParams.m */,
 				50AFF9221C1582EB00DCC80A /* BaseSearchParams.h */,
 				50AFF9231C1582EB00DCC80A /* BaseSearchParams.m */,
 				50AFF9241C1582EB00DCC80A /* Box.h */,
@@ -632,7 +622,6 @@
 				50AFF93F1C1582EB00DCC80A /* BaseSearchParams.m in Sources */,
 				50FAF5C71C113499009C7C04 /* DemoApp.xcdatamodeld in Sources */,
 				50FAF6191C117892009C7C04 /* Applications.m in Sources */,
-				A9EB720E1CEC398E00D26276 /* ViTrackHandler.m in Sources */,
 				50984D501C2AA0B00057446D /* Reachability.m in Sources */,
 				BD815AA41FC7CC7800E8DA76 /* ViSearchObjectResult.m in Sources */,
 				50AFF9431C1582EB00DCC80A /* SearchParams.m in Sources */,
@@ -645,7 +634,6 @@
 				501333CC1C1E99AB008E2EA6 /* ScaleUIView.m in Sources */,
 				BD42F35B1D9BA82E00CE704D /* UidHelper.m in Sources */,
 				50AFF9471C1582EB00DCC80A /* ViSearchHandler.m in Sources */,
-				A9EB720B1CEC398300D26276 /* TrackParams.m in Sources */,
 				50AFF9181C1574EC00DCC80A /* SearchResultCollectionViewCell.m in Sources */,
 				50AFF9441C1582EB00DCC80A /* UploadSearchParams.m in Sources */,
 				501333CF1C1E9A65008E2EA6 /* CalculateOverlay.m in Sources */,

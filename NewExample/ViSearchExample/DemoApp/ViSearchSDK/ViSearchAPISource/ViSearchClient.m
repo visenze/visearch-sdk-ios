@@ -9,7 +9,6 @@
 #import "ViSearchClient.h"
 #import "ViSearchBasicHandler.h"
 #import "ViSearchImageUploadHandler.h"
-#import "ViTrackHandler.h"
 
 @interface ViSearchClient()<ViSearchNetWorkDelegate>
 
@@ -95,12 +94,6 @@
                       success:^(NSInteger statusCode, ViSearchResult *data, NSError *error){
                           successCallback(statusCode, data, error);
                           
-                          // call the tracking API
-                          if(data.reqId!=nil)
-                          {
-                              TrackParams* params = [TrackParams createWithAccessKey:self.accessKey reqId:data.reqId andAction:handler.searchType];
-                              [self track:params completion:nil];
-                          }
                        }
                       failure:failure];
 }
@@ -250,18 +243,6 @@
     [self handleAndTrackWithHandler:handler params:params success:success failure:failure];
 }
 
-
-#pragma mark Track
-- (void)track:(TrackParams *)trackParams completion:(void (^)(BOOL))completion {
-    ViSearchHandler *handler = [ViTrackHandler new];
-    handler.timeoutInterval = self.timeoutInterval;
-    handler.searchType = @"__aq.gif";
-    handler.delegate = self;
-    handler.userAgent = self.userAgent;
-    trackParams.cid = self.accessKey;
-    
-    [handler handleWithParams:trackParams completion:completion];
-}
 
 #pragma mark ViNetworkDelegate
 
