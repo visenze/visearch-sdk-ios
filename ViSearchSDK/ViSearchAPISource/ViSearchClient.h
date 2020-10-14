@@ -19,7 +19,16 @@
 @property NSString *accessKey;
 @property NSString *secretKey;
 @property BOOL isAppKeyEnabled;
+
 @property(readonly) NSString *host;
+
+@property NSString *osv;
+@property NSString *appId;
+@property NSString *appName;
+@property NSString *appVersion;
+
+
+
 @property (nonatomic, assign) int timeoutInterval; // add time out interval for search client, default to 10s
 
 @property NSString *userAgent;

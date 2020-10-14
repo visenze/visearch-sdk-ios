@@ -9,6 +9,8 @@
 #import "ViSearchClient.h"
 #import "ViSearchBasicHandler.h"
 #import "ViSearchImageUploadHandler.h"
+#import "UidHelper.h"
+#import "StringUtils.h"
 
 @interface ViSearchClient()<ViSearchNetWorkDelegate>
 
@@ -19,6 +21,7 @@
 
 @implementation ViSearchClient
 @synthesize host = _host;
+@synthesize osv, appId, appName, appVersion;
 
 #pragma mark LifeCycle
 
@@ -33,6 +36,8 @@
         sharedInstance.isAppKeyEnabled = YES;
         sharedInstance.timeoutInterval = 10;
         sharedInstance.userAgent = kVisenzeUserAgentValue ;
+        [sharedInstance setupAnalyticsParam];
+        
     });
     
     return sharedInstance;
@@ -47,6 +52,7 @@
         self.operationQ = [NSOperationQueue new];
         self.userAgent = kVisenzeUserAgentValue ;
         self.isAppKeyEnabled = NO;
+        [self setupAnalyticsParam];
     }
     
     return self;
@@ -61,9 +67,24 @@
         self.timeoutInterval = 10;
         self.operationQ = [NSOperationQueue new];
         self.userAgent = kVisenzeUserAgentValue ;
+        [self setupAnalyticsParam];
     }
     
     return self;
+}
+
+- (void) setupAnalyticsParam {
+    NSOperatingSystemVersion osv = [[NSProcessInfo processInfo] operatingSystemVersion];
+    
+    self.osv = [NSString stringWithFormat:@"%d.%d.%d", osv.majorVersion, osv.minorVersion, osv.patchVersion];
+    
+    NSString* bundleId = [[[NSBundle mainBundle] infoDictionary] objectForKey:(id)kCFBundleIdentifierKey];
+    self.appId = [StringUtils limitMaxString:bundleId limit:32];
+    self.appName = [[[NSBundle mainBundle] infoDictionary] objectForKey:(id)kCFBundleNameKey];
+    self.appName = [StringUtils limitMaxString:self.appName limit:32];
+      
+    self.appVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    self.appVersion = [StringUtils limitMaxString:self.appVersion limit:32];
 }
 
 #pragma mark Customized Accessors
@@ -71,7 +92,7 @@
 - (NSString *)host{
     if (_host) {
         return _host;
-    }else {
+    } else {
         return @"https://visearch.visenze.com";
     }
 }
@@ -90,6 +111,32 @@
 {
     handler.userAgent = self.userAgent ;
     
+    // add analytics params
+    if (params.uid == nil) {
+        params.uid = [UidHelper uniqueDeviceUid];
+    }
+    
+    if (params.sid == nil) {
+        params.sid = [UidHelper getSessionId];
+    }
+    
+    params.platform = @"Mobile" ;
+    params.deviceBrand = @"Apple";
+    params.os = @"iOS";
+    params.osv = self.osv;
+    
+    params.appId = self.appId;
+    params.appName = self.appName;
+    params.appVersion = self.appVersion;
+    
+    if (params.deviceModel == nil) {
+        params.deviceModel = [StringUtils limitMaxString:[[UIDevice currentDevice] model]  limit:32 ];
+    }
+    
+    if (params.language == nil) {
+        params.language = [[NSLocale currentLocale] languageCode] ;
+    }
+    
     [handler handleWithParams:params
                       success:^(NSInteger statusCode, ViSearchResult *data, NSError *error){
                           successCallback(statusCode, data, error);
@@ -97,6 +144,7 @@
                        }
                       failure:failure];
 }
+
 
 - (void)searchWithColor:(ColorSearchParams *)params
                 success:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error)) success

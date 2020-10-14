@@ -12,7 +12,7 @@
     NSArray *VALUES_DETECTION;
 }
 
-@synthesize limit, page, score, fq, fl, queryInfo, custom, scoreMax, scoreMin, getAllFl, detection , facets, facetShowCount, facetsLimit, dedup;
+@synthesize limit, page, score, fq, fl, queryInfo, custom, scoreMax, scoreMin, getAllFl, detection , facets, facetShowCount, facetsLimit, dedup, uid, sid, os, osv, source, platform, deviceBrand, deviceModel, language, appId, appName, appVersion;
 
 - (id)init
 {
@@ -61,6 +61,55 @@
     
     if (detection) {
         [dict setValue:detection forKey:@"detection"];
+    }
+    
+    // analytics
+    if (self.uid) {
+        [dict setValue:self.uid forKey:@"va_uid"];
+    }
+    
+    if (self.sid) {
+        [dict setValue:self.sid forKey:@"va_sid"];
+    }
+    
+    if (self.source) {
+        [dict setValue:self.source forKey:@"va_source"];
+    }
+    
+    if (self.platform) {
+        [dict setValue:self.platform forKey:@"va_platform"];
+    }
+    
+    if (self.os) {
+        [dict setValue:self.os forKey:@"va_os"];
+    }
+    
+    if (self.osv) {
+        [dict setValue:self.osv forKey:@"va_osv"];
+    }
+    
+    if (self.appId) {
+        [dict setValue:self.appId forKey:@"va_app_bundle_id"];
+    }
+    
+    if (self.appName) {
+        [dict setValue:self.appName forKey:@"va_app_name"];
+    }
+    
+    if (self.appVersion) {
+        [dict setValue:self.appVersion forKey:@"va_app_version"];
+    }
+    
+    if (self.deviceBrand) {
+        [dict setValue:self.deviceBrand forKey:@"va_device_brand"];
+    }
+    
+    if (self.deviceModel) {
+        [dict setValue:self.deviceModel forKey:@"va_device_model"];
+    }
+    
+    if (self.language) {
+        [dict setValue:self.language forKey:@"va_language"];
     }
     
     if (fq) {
