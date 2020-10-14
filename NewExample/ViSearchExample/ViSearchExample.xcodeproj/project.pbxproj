@@ -59,6 +59,7 @@
 		BD42F35B1D9BA82E00CE704D /* UidHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = BD42F35A1D9BA82E00CE704D /* UidHelper.m */; };
 		BD815AA11FC7CA9100E8DA76 /* ViSearchObjectType.m in Sources */ = {isa = PBXBuildFile; fileRef = BD815AA01FC7CA9100E8DA76 /* ViSearchObjectType.m */; };
 		BD815AA41FC7CC7800E8DA76 /* ViSearchObjectResult.m in Sources */ = {isa = PBXBuildFile; fileRef = BD815AA31FC7CC7800E8DA76 /* ViSearchObjectResult.m */; };
+		BDA338AD2537090800D4E74A /* StringUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA338AC2537090800D4E74A /* StringUtils.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -175,6 +176,8 @@
 		BD815AA21FC7CC7800E8DA76 /* ViSearchObjectResult.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViSearchObjectResult.h; sourceTree = "<group>"; };
 		BD815AA31FC7CC7800E8DA76 /* ViSearchObjectResult.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViSearchObjectResult.m; sourceTree = "<group>"; };
 		BD81A6701DF1294900E79249 /* ViVersion.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViVersion.h; sourceTree = "<group>"; };
+		BDA338AB2537090800D4E74A /* StringUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StringUtils.h; sourceTree = "<group>"; };
+		BDA338AC2537090800D4E74A /* StringUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StringUtils.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -296,6 +299,8 @@
 				BD42F3591D9BA82E00CE704D /* UidHelper.h */,
 				BD42F35A1D9BA82E00CE704D /* UidHelper.m */,
 				BD81A6701DF1294900E79249 /* ViVersion.h */,
+				BDA338AB2537090800D4E74A /* StringUtils.h */,
+				BDA338AC2537090800D4E74A /* StringUtils.m */,
 			);
 			path = ViSearchAPISource;
 			sourceTree = "<group>";
@@ -604,6 +609,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BDA338AD2537090800D4E74A /* StringUtils.m in Sources */,
 				50B5F28E1C3B954300684FAA /* ViSearchProductType.m in Sources */,
 				BD815AA11FC7CA9100E8DA76 /* ViSearchObjectType.m in Sources */,
 				50AFF9411C1582EB00DCC80A /* ColorSearchParams.m in Sources */,

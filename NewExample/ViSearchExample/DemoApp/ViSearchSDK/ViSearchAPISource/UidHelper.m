@@ -9,7 +9,8 @@
 #import "UidHelper.h"
 #import <UIKit/UIKit.h>
 
-#define kViSearchUidKey @"visearch_uid"
+#define kViSearchUidKey @"visenze_uid"
+#define kViSearchSidKey @"visenze_sid"
 
 @implementation UidHelper
 
@@ -46,9 +47,14 @@
     return storedUid;
 }
 
++ (NSString*) getSessionId {
+    return [self getSettingProp:kViSearchSidKey];
+}
+
 + (void) updateStoreDeviceUid:(NSString*)newUid
 {
      [self setSettingProp:kViSearchUidKey newValue:newUid];
 }
+
 
 @end
