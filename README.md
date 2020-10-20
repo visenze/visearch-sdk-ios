@@ -114,7 +114,7 @@ Edit the Podfile as follow:
 source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '7.0'
 ...
-pod 'ViSearch', '~>1.3.1'
+pod 'ViSearch', '~>1.5.0'
 ...
 ```
 
