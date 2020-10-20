@@ -229,11 +229,14 @@
 - (void)trackClickWithImgName:(NSString*)imageName
              reqId:(NSString*) reqId
 {
-    TrackParams* params = [TrackParams createWithReqId:reqId andAction:@"click" ];
+    
+    /*TrackParams* params = [TrackParams createWithReqId:reqId andAction:@"click" ];
     [params withImName:imageName];
     [[ViSearchAPI defaultClient] track:params completion:^( BOOL complete){
         NSLog(@"track done");
     }];
+    */
+    
 }
 
 @end

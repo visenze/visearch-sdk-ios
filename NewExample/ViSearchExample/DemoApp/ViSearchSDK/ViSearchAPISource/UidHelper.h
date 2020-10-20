@@ -16,4 +16,7 @@
 // update if necessary
 + (void) updateStoreDeviceUid:(NSString*)newUid;
 
+// for Analytics
++ (NSString*) getSessionId;
+
 @end

@@ -7,11 +7,13 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "ViSearchAPI.h"
-#import "SearchParams.h"
 #import <Foundation/Foundation.h>
 #import <Foundation/NSObject.h>
 #import <Foundation/NSException.h>
+#import "ViSearchAPI.h"
+#import "SearchParams.h"
+#import "StringUtils.h"
+#import "ViSearchClient.h"
 
 @interface DemoAppTests : XCTestCase
 
@@ -27,6 +29,28 @@
 - (void)tearDown {
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
+}
+
+- (void) testSubstringLimit {
+    //StringUtils limit
+    XCTAssertEqualObjects(@"123", [StringUtils limitMaxString:@"123" limit:3]);
+    XCTAssertEqualObjects(@"123", [StringUtils limitMaxString:@"123" limit:4]);
+    
+    XCTAssertEqualObjects(@"12", [StringUtils limitMaxString:@"123" limit:2]);
+    XCTAssertEqualObjects(@"1", [StringUtils limitMaxString:@"123" limit:1]);
+    XCTAssertEqualObjects(@"", [StringUtils limitMaxString:@"123" limit:0]);
+}
+
+- (void) testAnalyticsParams {
+    NSLog(@"osv: %@", [ViSearchClient sharedInstance].osv);
+    NSLog(@"lang: %@", [[NSLocale currentLocale] languageCode]);
+    NSLog(@"model: %@", [StringUtils limitMaxString:[[UIDevice currentDevice] model]  limit:32 ]);
+    NSLog(@"app name: %@", [[[NSBundle mainBundle] infoDictionary] objectForKey:(id)kCFBundleNameKey]);
+    
+    NSLog(@"app bundle: %@", [ViSearchClient sharedInstance].appId);
+    NSLog(@"app version: %@", [ViSearchClient sharedInstance].appVersion);
+    
+   
 }
 
 - (void)testRequiredImgNameForSearch {

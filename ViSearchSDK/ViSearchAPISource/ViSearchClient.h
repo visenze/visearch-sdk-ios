@@ -11,7 +11,6 @@
 #import "ColorSearchParams.h"
 #import "UploadSearchParams.h"
 #import "ViSearchResult.h"
-#import "TrackParams.h"
 
 @class ViSearchClient;
 
@@ -20,7 +19,16 @@
 @property NSString *accessKey;
 @property NSString *secretKey;
 @property BOOL isAppKeyEnabled;
+
 @property(readonly) NSString *host;
+
+@property NSString *osv;
+@property NSString *appId;
+@property NSString *appName;
+@property NSString *appVersion;
+
+
+
 @property (nonatomic, assign) int timeoutInterval; // add time out interval for search client, default to 10s
 
 @property NSString *userAgent;
@@ -52,9 +60,6 @@
 - (void)recommendWithImageName:(SearchParams *)params
                        success:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error)) success
                        failure:(void (^)(NSInteger statusCode, ViSearchResult *data, NSError *error)) failure;
-
-- (void)track:(TrackParams *) trackParams
-     completion:(void (^)(BOOL success))completion;
 
 // discover search
 - (void)discoverSearchWithImageData:(UploadSearchParams *)params

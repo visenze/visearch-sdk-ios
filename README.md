@@ -37,7 +37,7 @@ ViSearch is an API that provides accurate, reliable and scalable image search. V
 
 The ViSearch iOS SDK is an open source software to provide easy integration of ViSearch Search API with your iOS applications. It provides four search methods based on the ViSearch Solution APIs - Find Similar, You May Also Like, Search By Image and Search By Color. For source code and references, please visit the [Github Repository](https://github.com/visenze/visearch-sdk-ios).
 
->Current stable version: 1.4.3
+>Current stable version: 1.5.0
 
 >Supported iOS version: iOS 7.x and higher
 
@@ -603,28 +603,74 @@ ViSearchResult.facets
 
 ## 7. Event Tracking
 
-### Send Action For Tracking
-User action can be sent in this way:
+To improve search performance and gain useful data insights, it is recommended to send user interactions (actions) with our visual search results. Our tracking SDK (Swift) is located at [https://github.com/visenze/visenze-tracking-swift](https://github.com/visenze/visenze-tracking-swift).
 
-```objectivec
+### 7.1 Setup Tracking
 
-ViSearchClient *client = [ViSearchAPI defaultClient];
-TrackParams* params = [TrackParams createWithReqId:reqId andAction:@"click" ];
+You can initiliase ViSenze tracker with a tracking ID (code) by logging to ViSenze dashboard. There are two different endpoints for tracker (1 for China and another for the rest of the world). If the SDK is intended to be used outside of China, please set forCn parameter to false
 
-// ... client setup
 
-// You can also append an im_name field
-parmas.withImName(@"12345678");
+```swift
+import ViSenzeAnalytics
+...
 
-[client track:params completion:^(BOOL success) {
-	  // ... Your code here
- }];
+
+let tracker = ViSenzeAnalytics.sharedInstance.newTracker(code: "your-code", forCn: false)
 
 ```
-The following fields could be used for tracking user events:
+
+### 7.2  Send Events
+
+Currently we support the following event actions: `click`, `view`, `product_click`, `product_view`, `add_to_cart`, and `transaction`. The `action` parameter can be an arbitrary string and custom events can be sent.
+
+To send events, first retrieve the search query ID found in the search results call back:
+
+```
+
+success:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
+		NSString* queryId = [data reqId];
+
+``` 
+
+Then the events can be sent as follows:
+
+
+```
+# send product click
+let productClickEvent = VaEvent.newProductClickEvent(queryId: "ViSearch reqid in API response", pid: "product ID", imgUrl: "product image URL", pos: 3)
+tracker.sendEvent(productClickEvent) { (eventResponse, networkError) in
+   
+}
+
+# send product impression
+let impressionEvent = VaEvent.newProductImpressionEvent(queryId: "ViSearch reqid in API response", pid: "product ID", imgUrl: "product image URL", pos: 3)
+tracker.sendEvent(impressionEvent)
+
+# send Transaction event e.g order purchase of $300
+let transEvent = VaEvent.newTransactionEvent(queryId: "xxx", transactionId:"your trans id", value: 300)
+tracker.sendEvent(transEvent)
+
+# send Add to Cart Event
+let add2Cart = VaEvent.newAdd2CartEvent(queryId: "ViSearch reqid in API response", pid: "product ID", imgUrl: "product image URL", pos: 3)
+tracker.sendEvent(add2Cart)
+ 
+```
+
+Finally send the event via the tracker:
+
+```
+tracker.sendEvent(event);
+```
+
+
+Below are the brief description for various parameters:
 
 Field | Description | Required
 --- | --- | ---
-reqid| visearch request id of current search. This attribute can be accessed in ViSearchResult in [Section 5](#5-search-results) | Require
-action | The type of the action. Currently we only support three types, `click`, `add_to_cart`, and `add_to_wishlist`. | Require
-im_name | image id (im_name) for this behavior | Optional
+queryId| The request id of the search request. This reqid can be obtained from the search response handler:```ViSearchResult .reqId``` | Yes
+action | Event action. Currently we support the following event actions: `click`, `view`, `product_click`, `product_view`, `add_to_cart`, and `transaction`. | Yes
+pid | Product ID ( generally this is the `im_name`) for this product. Can be retrieved via `ImageResult.im_name` | Required for product view, product click and add to cart events
+imgUrl | Image URL ( generally this is the `im_url`) for this product. Can be retrieved via `ImageResult.url ` | Required for product view, product click and add to cart events
+pos | Position of the product in Search Results e.g. click position/ view position. Note that this start from 1 , not 0. | Required for product view, product click and add to cart events
+transactionId | Transaction ID | Required for transaction event.
+value | Transaction value e.g. order value | Required for transaction event.
