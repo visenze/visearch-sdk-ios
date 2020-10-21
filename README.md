@@ -114,7 +114,7 @@ Edit the Podfile as follow:
 source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '7.0'
 ...
-pod 'ViSearch', '~>1.3.1'
+pod 'ViSearch', '~>1.5.0'
 ...
 ```
 
@@ -632,7 +632,7 @@ success:^(NSInteger statusCode, ViSearchResult *data, NSError *error) {
 
 ``` 
 
-Then the events can be sent as follows:
+Then the linked events can be sent as follows:
 
 
 ```
@@ -655,13 +655,6 @@ let add2Cart = VaEvent.newAdd2CartEvent(queryId: "ViSearch reqid in API response
 tracker.sendEvent(add2Cart)
  
 ```
-
-Finally send the event via the tracker:
-
-```
-tracker.sendEvent(event);
-```
-
 
 Below are the brief description for various parameters:
 
