@@ -181,7 +181,7 @@
             object.total = [[data objectForKey:@"total"] intValue];
             
             NSArray *coordinates = [data objectForKey:@"box"];
-            if (coordinates!=nil && coordinates.count > 3) {
+            if (coordinates != nil && [coordinates isKindOfClass:[NSArray class]] && coordinates.count > 3) {
                 object.box = [[Box alloc] initWithX1:[[coordinates objectAtIndex:0] intValue]
                                                    y1:[[coordinates objectAtIndex:1] intValue]
                                                    x2:[[coordinates objectAtIndex:2] intValue]
