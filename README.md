@@ -1,10 +1,12 @@
+This SDK is deprecated. Please use [https://github.com/visenze/visearch-sdk-swift](https://github.com/visenze/visearch-sdk-swift) instead.
+
 # ViSearch iOS SDK and Demo Source Code
 
 [![Build Status](https://travis-ci.org/visenze/visearch-sdk-ios.svg)](https://travis-ci.org/visenze/visearch-sdk-ios)
 
 ---
 
-##Table of Contents
+## Table of Contents
  1. [Overview](#1-overview)
  2. [Setup](#2-setup)
       - 2.1 [Run the Demo](#21-run-the-demo)
